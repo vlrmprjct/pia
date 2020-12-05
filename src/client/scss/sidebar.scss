@@ -1,0 +1,36 @@
+nav {
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: var(--accent);
+    width: 100%;
+    z-index:2;
+    position: relative;
+
+    ul.uk-nav-default > li > a {
+        padding: 16px 16px 16px 22px;
+        border-left: 4px solid transparent;
+        transition: all 0.15s ease-out;
+        display: block;
+        width: 100%;
+
+        &.active {
+            color: #FFF;
+            border-left: 4px solid #FFF;
+        }
+    }
+
+    ul.uk-nav-default li.uk-nav-header {
+	    padding:  20px 20px 8px 20px;
+    }
+
+    ul.uk-nav-default > li > a:hover,
+    ul.uk-nav-default > li.uk-open > a {
+        border-left: 4px solid rgba(255,255,255,0.2);
+        color: #FFF;
+        background: rgba(0,0,0,0.1);
+    }
+
+    ul.uk-nav-default li .uk-nav-sub {
+	    padding-left: 34px;
+    }
+}

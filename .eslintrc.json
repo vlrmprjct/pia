@@ -1,0 +1,117 @@
+
+{
+    "parser": "babel-eslint",
+    "root": true,
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "extends": [
+        "airbnb",
+        "eslint:recommended"
+    ],
+    "globals": {
+        "window": true,
+        "document": true,
+        "afterEach": true,
+        "beforeEach": true,
+        "beforeAll": true,
+        "page": true,
+        "expect": true,
+        "localStorage": true,
+        "fetch": true
+    },
+    "rules": {
+        "no-console": "off",
+        "comma-dangle": "off",
+        "semi": [
+            2,
+            "always"
+        ],
+        "indent": [
+            "error",
+            4,
+            {
+                "VariableDeclarator": 2,
+                "SwitchCase": 1,
+                "MemberExpression": 1,
+                "ArrayExpression": "first"
+            }
+        ],
+        "react/jsx-indent": [
+            2,
+            4
+        ],
+        "react/jsx-indent-props": [
+            2,
+            4
+        ],
+        "react/jsx-boolean-value": [
+            0
+        ],
+        "react/prop-types": 0,
+        "babel/new-cap": 0,
+        "babel/arrow-parens": 0,
+        "react/destructuring-assignment": 0,
+        "react/prop-type": 0,
+        "switch-colon-spacing": [
+            "error",
+            {
+                "after": true,
+                "before": false
+            }
+        ],
+        "react/jsx-filename-extension": [
+            1,
+            {
+                "extensions": [
+                    ".js",
+                    ".jsx"
+                ]
+            }
+        ],
+        "max-len": [
+            "error",
+            {
+                "code": 120,
+                "comments": 120,
+                "ignoreTrailingComments": true,
+                "ignoreUrls": true,
+                "ignoreRegExpLiterals": true,
+                "tabWidth": 4
+            }
+        ],
+        "react/button-has-type": ["error",
+            {
+                "button": true,
+                "submit": true,
+                "reset": true
+            }
+        ],
+        "arrow-body-style": 0,
+        "import/no-extraneous-dependencies": 0,
+        "import/no-unresolved": 0,
+        "import/no-useless-path-segments": 0,
+        "import/extensions": 0,
+        "one-var": 0,
+        "import/prefer-default-export": 0,
+        "no-underscore-dangle": 0,
+        "global-require": 0,
+        "import/first": 0,
+        "react/forbid-prop-types": 0,
+        "no-confusing-arrow": 0,
+        "react/require-default-props": 0,
+        "no-nested-ternary": 0,
+        "react/no-unused-prop-types": 0,
+        "no-mixed-operators": 2,
+        "import/no-dynamic-require": 0,
+        "camelcase": 0,
+        "func-names": 0,
+        "prefer-arrow-callback": 0,
+        "no-case-declarations": 0,
+        "quote-props": "off"
+    }
+}

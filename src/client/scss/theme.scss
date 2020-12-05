@@ -1,0 +1,48 @@
+@import './utils.scss';
+
+$horizon: (
+    "--accent": #4167A4,
+    "--background-primary": #FFFFFF,
+    "--background-secondary": #F8F8F8,
+    "--border-default": #E5E5E5,
+    "--border-dark": #CCCCCC,
+
+    "--text-primary": #666666,
+
+    "--themePrimary": #e95378,
+    "--themeLighterAlt": #090305,
+    "--themeLighter": #250d13,
+    "--themeLight": #461924,
+    "--themeTertiary": #8b3248,
+    "--themeSecondary": #cc4a6a,
+    "--themeDarkAlt": #ea6385,
+    "--themeDark": #ee7a97,
+    "--themeDarker": #f29bb1,
+    "--neutralLighterAlt": #1c1d25,
+    "--neutralLighter": #1b1d25,
+    "--neutralLight": #1a1c23,
+    "--neutralQuaternaryAlt": #181a21,
+    "--neutralQuaternary": #17191f,
+    "--neutralTertiaryAlt": #16181e,
+    "--neutralTertiary": #c8c8c8,
+    "--neutralSecondary": #d0d0d0,
+    "--neutralPrimaryAlt": #dadada,
+    "--neutralPrimary": #ffffff,
+    "--neutralDark": #f4f4f4,
+    "--black": #f8f8f8,
+    "--white": #1c1e26,
+);
+
+:root {
+    @each $key, $value in $horizon {
+        // {$key}: unquote($value);
+        #{$key}: $value;
+    }
+}
+
+:export {
+    @each $key, $value in $horizon {
+        #{str-replace($key, '--', '')}: $value;
+    }
+}
+

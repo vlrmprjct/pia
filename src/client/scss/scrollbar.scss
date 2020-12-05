@@ -1,0 +1,40 @@
+div * {
+    scrollbar-width: none; /* Firefox */
+    ::-webkit-scrollbar-track {
+        box-shadow: none;
+        background: transparent;
+    }
+    ::-webkit-scrollbar {
+        width: 6px;
+        background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: transparent;
+        border-radius: 1px;
+    }
+}
+
+.on-scrollbar{
+    scrollbar-width: thin;
+
+    &::-webkit-scrollbar-track {
+        box-shadow: none;
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar {
+        width: 6px;
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: rgba(172, 172, 172, .5);
+
+        &:hover{
+            background: rgba(172, 172, 172, .7);
+        }
+        &:active{
+            background: rgba(172, 172, 172, 1);
+        }
+    }
+}

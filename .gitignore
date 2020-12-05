@@ -1,0 +1,9 @@
+.vscode
+.idea
+node_modules
+dist
+build
+db/*.db
+*.log
+*.bck
+*.local

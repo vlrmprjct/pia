@@ -1,0 +1,40 @@
+
+// Global
+$global-font-family:            ProximaNova, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$global-font-size:              14px;
+$global-border:                 #{var(--border-default)};
+
+// Inverse
+$inverse-global-color:          #{var(--black)};
+$inverse-global-emphasis-color: #{var(--black)};
+
+// Base
+$base-code-font-family:         Consolas, mono-spaced;
+$base-code-font-size:           1.2rem;
+$base-heading-font-weight:      300;
+$base-pre-font-size:            1.2rem;
+$base-pre-padding:              2.5rem;
+$base-pre-border-width:         0;
+$base-pre-border-radius:        0.3rem;
+
+// // Nav
+// $nav-default-item-color:        $inverse-global-color;
+// $nav-default-item-hover-color:  $inverse-global-emphasis-color;
+$nav-header-font-size:          1.2rem;
+
+// Table
+$table-header-cell-font-size:   1rem;
+
+// Label
+$label-font-size:               1.2rem;
+
+// Notifications
+$notification-message-background:   #{var(--themeDark)};
+
+// Form
+$form-background:                   #{var(--neutralPrimary)};
+$form-color:                        #{var(--neutralTertiaryAlt)};
+$form-focus-color:                  #{var(--accent)};
+
+// Icon Image
+$icon-image-size:               1.6rem;

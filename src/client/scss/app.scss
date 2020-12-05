@@ -1,0 +1,127 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+[data-root] {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template:
+        [header] "header main" 5rem [header]
+        [main] "nav main" 1fr [main]
+        [footer] "footer main" fit-content(0) [footer]
+        / 5rem 1fr;
+}
+
+header {
+    grid-area: header;
+    background: var(--accent);
+}
+
+nav {
+    grid-area: nav;
+    transition: all 0.25s ease-out;
+    overflow: hidden;
+    padding: 0;
+    background: #F6F6F8;
+}
+
+footer {
+    grid-area: footer;
+    background: var(--accent);
+}
+
+main {
+    display: grid;
+    grid-area: main;
+    grid-gap: 1.5rem;
+    overflow: hidden;
+    height: 100vh;
+}
+
+
+.home {
+    display: grid;
+    grid-template:
+        [main] "data item" 1fr [main]
+        / 3fr auto;
+    height: 100vh;
+
+    .parts {
+        display: grid;
+        grid-area: data;
+        grid-template:
+            [toolbar] "toolbar" 6rem [toolbar]
+            [main] "data" 1fr [main]
+        / 1fr;
+        padding: 2rem;
+    }
+
+    .item {
+        grid-area: item;
+        width: 0px;
+        overflow: auto;
+        opacity: 0;
+        padding: 0 1.5rem;
+        transition: all .3s ease-out;
+        box-shadow: 0 0px 5px 5px #DDD;
+    }
+
+    &.open {
+        .item {
+            opacity: 1;
+            width: 40rem;
+        }
+    }
+}
+
+.parts .toolbar {
+    grid-area: toolbar;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: grid;
+    grid-gap: 1.5rem;
+    grid-template:
+        [row1] "filter pageselector pagesize pagination actions" fit-content(0) [row1]
+        / 1fr auto auto auto;
+
+    .filter {
+        grid-area: filter;
+    }
+    .pagination {
+        grid-area: pagination;
+    }
+
+    .pagesize {
+        grid-area: pagesize;
+    }
+
+    .pageselector {
+        grid-area: pageselector;
+    }
+
+    .actions {
+        grid-area: actions;
+    }
+}
+
+.parts .data {
+    grid-area: data;
+    height: calc(100vH - 10rem);
+    overflow: auto;
+    overflow-y: scroll;
+    border: 1px solid #e5e5e5;
+    border-radius: 3px;
+}
+
+
+.logo {
+    width: 15rem;
+    height: 100%;
+    line-height: 5rem;
+    padding-left: 15px;
+}

@@ -1,0 +1,20 @@
+// App variables and color settings
+@import 'vars.scss';
+@import 'theme.scss';
+
+// UIKit default variables and available mixins
+@import '~uikit/src/scss/variables';
+@import '~uikit/src/scss/mixins';
+
+// UIKit App hooks
+@import 'mixins.scss';
+
+// UIkit
+@import '~uikit/src/scss/uikit';
+
+// App
+@import 'app.scss';
+@import 'font.scss';
+@import 'scrollbar.scss';
+@import 'sidebar.scss';
+@import 'item.scss';
