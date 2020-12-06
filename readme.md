@@ -7,7 +7,9 @@ with a huge overkill about functions or server configurations.
 What I need is a lightweight system running local or everywhere with a fast lightning search and easy to extend.
 
 ## Screenshot
-![Parts View](https://raw.githubusercontent.com/vlrmprjct/pia/develop/doc/view-parts.png?token=AAOF7KO5LXKFYLGYIPLNVFS7ZPX2U)
+<p>
+    <img src="https://raw.githubusercontent.com/vlrmprjct/pia/develop/doc/view-parts.png?token=AAOF7KO5LXKFYLGYIPLNVFS7ZPX2U" width="666" alt="Parts View"/>
+</p>
 
 ---
 
