@@ -2,6 +2,9 @@
 @import 'vars.scss';
 @import 'theme.scss';
 
+// Browsers reset
+@import '~@csstools/normalize.css';
+
 // UIKit default variables and available mixins
 @import '~uikit/src/scss/variables';
 @import '~uikit/src/scss/mixins';
