@@ -80,14 +80,14 @@ main {
 
 .parts .toolbar {
     grid-area: toolbar;
-    position: sticky;
-    top: 0;
-    z-index: 10;
+    // position: sticky;
+    // top: 0;
+    // z-index: 10;
     display: grid;
     grid-gap: 1.5rem;
     grid-template:
         [row1] "filter pageselector pagesize pagination actions" fit-content(0) [row1]
-        / 1fr auto auto auto;
+        / 1fr auto auto auto auto;
 
     .filter {
         grid-area: filter;
@@ -124,4 +124,10 @@ main {
     height: 100%;
     line-height: 5rem;
     padding-left: 15px;
+}
+
+.external-search {
+    overflow: scroll;
+    display: block;
+    height: 65vh;
 }

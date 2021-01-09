@@ -3,10 +3,12 @@
 $global-font-family:            ProximaNova, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 $global-font-size:              14px;
 $global-border:                 #{var(--border-default)};
+$global-primary-background:     #{var(--accent)};
 
 // Inverse
 $inverse-global-color:          #{var(--black)};
 $inverse-global-emphasis-color: #{var(--black)};
+$global-inverse-color:  	    #fff !default;
 
 // Base
 $base-code-font-family:         Consolas, mono-spaced;
@@ -16,6 +18,13 @@ $base-pre-font-size:            1.2rem;
 $base-pre-padding:              2.5rem;
 $base-pre-border-width:         0;
 $base-pre-border-radius:        0.3rem;
+
+$alert-primary-background:          #{var(--themeTertiary)};
+
+$button-primary-active-background:  #{var(--accent)};
+$button-primary-hover-background:   #{var(--accent)};
+
+$card-primary-hover-background:     #{var(--accent)};
 
 // // Nav
 // $nav-default-item-color:        $inverse-global-color;
@@ -35,6 +44,16 @@ $notification-message-background:   #{var(--themeDark)};
 $form-background:                   #{var(--neutralPrimary)};
 $form-color:                        #{var(--neutralTertiaryAlt)};
 $form-focus-color:                  #{var(--accent)};
+$form-radio-checked-focus-background:#{var(--accent)};
 
 // Icon Image
 $icon-image-size:               1.6rem;
+
+
+
+// $button-primary-background: $global-primary-background !default;
+// $button-primary-color: $global-inverse-color !default;
+// // $button-primary-hover-background: darken($button-primary-background, 5%) !default;
+// $button-primary-hover-color: $global-inverse-color !default;
+// // $button-primary-active-background: darken($button-primary-background, 10%) !default;
+// $button-primary-active-color: $global-inverse-color !default;
