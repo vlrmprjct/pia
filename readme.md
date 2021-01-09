@@ -6,11 +6,13 @@ There a many ready to use Inventory-Systems or -Applications written in PHP or o
 with a huge overkill about functions or server configurations.
 What I need is a lightweight system running local or everywhere with a fast lightning search and easy to extend.
 
-## Screenshot
+## Screenshots
 <p>
-    <img src="doc\view-parts.png" width="666" alt="Parts View"/>
+    <img src="doc\view-parts-1.png" width="100%" alt="Parts View Table"/>
 </p>
-
+<p>
+    <img src="doc\view-parts-2.png" width="100%" alt="Parts View with Parts Single View"/>
+</p>
 ---
 
   - [Introduction](#introduction)
