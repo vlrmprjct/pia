@@ -8,7 +8,7 @@ What I need is a lightweight system running local or everywhere with a fast ligh
 
 ## Screenshot
 <p>
-    <img src="https://raw.githubusercontent.com/vlrmprjct/pia/develop/doc/view-parts.png?token=AAOF7KJDSALLDUQACXVRPK27ZSWAI" width="666" alt="Parts View"/>
+    <img src="doc\view-parts.png" width="666" alt="Parts View"/>
 </p>
 
 ---
