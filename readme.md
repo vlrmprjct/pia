@@ -2,6 +2,11 @@
 ( means, proof of concept and not finishid yet )
 
 ---
+
+![GitHub License](https://img.shields.io/github/license/vlrmprjct/pia?style=flat-square)
+![GitHub Issues](https://img.shields.io/github/issues/vlrmprjct/pia?style=flat-square)
+
+![View](doc/view-parts-1.png)
 # ***PIA***  ( ***P***arts ***I***nventory ***A***ssistant )
 
 This is a ___working in progress___ Electronics Parts/component Inventory Application called PIA using SQLite, Express and Webpack and ReactJS but ___without___ [CRA](https://github.com/facebook/create-react-app).
@@ -13,6 +18,7 @@ What I need is a lightweight system running local or everywhere with a fast ligh
 ---
 
 ## Screenshots
+
 <p>
     <img src="doc\view-parts-1.png" width="100%" alt="Parts View Table"/>
 </p>
