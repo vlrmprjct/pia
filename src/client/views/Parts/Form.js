@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import React, { useState, useEffect, Fragment } from 'react';
 
 export const Form = ({
@@ -59,18 +58,29 @@ export const Form = ({
                 Object.keys(state).map(key => {
                     return (
                         <Fragment>
-                            { key === 'image' && <div htmlFor="image_2" className="item-form-image-2" style={{ backgroundImage: `url(${state[key]})` }} />}
-                        <label className="uk-form-label" key={key} htmlFor={key}>
-                            {key.replace('_', ' ')}
-                            <input
-                                {...config.default}
-                                {...config[key]}
-                                data-name={key}
-                                onChange={onChange}
-                                value={(config[key] && 'value' in config[key]) ? config[key].value : state[key] || ''}
-                                name={key}
-                            />
-                        </label>
+                            { key === 'image'
+                                &&
+                                (
+                                    <div
+                                        htmlFor="image_2"
+                                        className="item-form-image-2"
+                                        style={{ backgroundImage: `url(${state[key]})` }}
+                                    />
+                                )
+                            }
+                            <label className="uk-form-label" key={key} htmlFor={key}>
+                                {key.replace('_', ' ')}
+                                <input
+                                    {...config.default}
+                                    {...config[key]}
+                                    data-name={key}
+                                    onChange={onChange}
+                                    value={
+                                        (config[key] && 'value' in config[key]) ? config[key].value : state[key] || ''
+                                    }
+                                    name={key}
+                                />
+                            </label>
                         </Fragment>
                     );
                 })
