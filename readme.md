@@ -1,3 +1,7 @@
+# &#x26A0; WIP &#x26A0;
+( means, proof of concept and not finishid yet )
+
+---
 # ***PIA***  ( ***P***arts ***I***nventory ***A***ssistant )
 
 This is a ___working in progress___ Electronics Parts/component Inventory Application called PIA using SQLite, Express and Webpack and ReactJS but ___without___ [CRA](https://github.com/facebook/create-react-app).
@@ -6,6 +10,8 @@ There a many ready to use Inventory-Systems or -Applications written in PHP or o
 with a huge overkill about functions or server configurations.
 What I need is a lightweight system running local or everywhere with a fast lightning search and easy to extend.
 
+---
+
 ## Screenshots
 <p>
     <img src="doc\view-parts-1.png" width="100%" alt="Parts View Table"/>
@@ -13,6 +19,7 @@ What I need is a lightweight system running local or everywhere with a fast ligh
 <p>
     <img src="doc\view-parts-2.png" width="100%" alt="Parts View with Parts Single View"/>
 </p>
+
 ---
 
   - [Introduction](#introduction)
@@ -27,6 +34,7 @@ What I need is a lightweight system running local or everywhere with a fast ligh
     - [Express](#express)
     - [Concurrently](#concurrently)
     - [VSCode + ESLint + Prettier](#vscode--eslint--prettier)
+
 
 ---
 
