@@ -13,11 +13,6 @@ const Parts = () => {
 
         const loadItems = async () => {
             try {
-
-                const response2 = await fetch('/api/octopart/ECEA1CKS100');
-                const data2 = await response2.json();
-                console.log(data2);
-
                 const response = await fetch('/api/parts');
                 const data = await response.json();
                 setState({
