@@ -47,7 +47,7 @@ Another point is, we don't need all with CRA shipped packages.
 
 
 ### PIAs Future Tasks
-- DOT.ENV Support
+- DOT.ENV Support &#x2714;
 - Initial setup process
 - Build Process
 - Electron Wrapper
