@@ -9,7 +9,7 @@ if (!fs.existsSync(dbDirPath)) {
 }
 
 const databaseMiddleware = (req, res, next) => {
-    const env = process.env.NODE_ENV;
+    const env = process.env.DB_NAME;
     const db = new Sql(path.join(dbDirPath, `${env}.db`));
 
     db.prepare('CREATE TABLE IF NOT EXISTS parts (' +
