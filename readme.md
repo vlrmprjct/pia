@@ -48,8 +48,8 @@ Another point is, we don't need all with CRA shipped packages.
 
 ### PIAs Future Tasks
 - DOT.ENV Support &#x2714;
-- Initial setup process
-- Build Process
+- ~~Initial setup process~~
+- Build Process &#x2714;
 - Electron Wrapper
 - Octopart API Integration ( ? )
 - BOM Imports
