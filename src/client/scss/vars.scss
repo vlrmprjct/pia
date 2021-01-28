@@ -2,9 +2,11 @@
 // Global
 $global-font-family:            ProximaNova, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 $global-font-size:              14px;
+$global-link-color:             #{var(--accent)};
 $global-border:                 #{var(--border-default)};
 $global-primary-background:     #{var(--accent)};
 
+$border-rounded-border-radius:  3px;
 // Inverse
 $inverse-global-color:          #{var(--black)};
 $inverse-global-emphasis-color: #{var(--black)};
@@ -35,7 +37,7 @@ $nav-header-font-size:          1.2rem;
 $table-header-cell-font-size:   1rem;
 
 // Label
-$label-font-size:               1.2rem;
+// $label-font-size:               0.85rem;
 
 // Notifications
 $notification-message-background:   #{var(--themeDark)};

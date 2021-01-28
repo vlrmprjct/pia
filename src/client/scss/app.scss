@@ -4,6 +4,10 @@ body {
     overflow: hidden;
 }
 
+a[disabled] {
+    pointer-events: none;
+}
+
 [data-root] {
     position: fixed;
     width: 100vw;
@@ -124,8 +128,78 @@ main {
     text-align: center;
 }
 
-.external-search {
-    overflow: scroll;
-    display: block;
-    height: 65vh;
+.distributor {
+    display: grid;
+    grid-gap: 2rem;
+    row-gap: 0.5rem;
+    grid-template:
+        "filter result" 68vH
+        "status status" fit-content(0)
+        / 20rem 38rem;
+    width: 60rem;
+
+    &--result {
+        grid-area: result;
+        overflow: scroll;
+        display: block;
+        overflow-x: hidden;
+    }
+
+    &--filter {
+        grid-area: filter;
+        overflow: scroll;
+        display: block;
+        overflow-x: hidden;
+
+        span {
+            cursor: pointer;
+            margin-bottom: 1px;
+        }
+    }
+
+    &--status {
+        grid-area: status;
+    }
+
+    &--item {
+        display: grid;
+        grid-gap: 0.75rem;
+        grid-template:
+            "logo distributor" fit-content(0)
+            "image partnumber" fit-content(0)
+            "image description" fit-content(0)
+        / 4rem auto;
+    }
+
+    &--image {
+        grid-area: image;
+        	background-image: url('../assets/media/noimage.jpg');
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: contain;
+    }
+
+    &--partnumber {
+        grid-area: partnumber;
+        font-size: 1rem;
+        text-transform: uppercase;
+        color: #000;
+    }
+
+    &--description {
+        grid-area: description;
+        overflow-y: hidden;
+        text-overflow: ellipsis;
+        display: block;
+        height: fit-content;
+    }
+
+    &--name {
+        grid-area: distributor;
+    }
+
+    &--logo {
+        grid-area: logo;
+        height: 2rem;
+    }
 }

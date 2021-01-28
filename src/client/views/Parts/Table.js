@@ -15,6 +15,7 @@ import { GlobalFilter, DefaultColumnFilter, fuzzyTextFilter } from './../../util
 import { Pagination } from './../../components/Pagination';
 import { Pageselector } from './../../components/Pageselector';
 import { Pagesize } from './../../components/Pagesize';
+import { Add } from './Toolbar/Add';
 
 UIkit.use(Icons);
 fuzzyTextFilter.autoRemove = val => !val;
@@ -193,15 +194,9 @@ export const Table = ({
                     gotoPage={gotoPage}
                 />
 
-                <button
-                    type="button"
-                    className="actions uk-button uk-button-primary uk-button-small"
+                <Add
                     onClick={onAdd}
-                >
-                    <span uk-icon="icon: plus" />
-                    {' '}
-                    Add Part
-                </button>
+                />
 
             </section>
 
@@ -258,7 +253,6 @@ export const Table = ({
                     </tbody>
                 </table>
             </section>
-
 
         </Fragment>
     );

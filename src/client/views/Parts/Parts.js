@@ -13,6 +13,19 @@ const Parts = () => {
 
         const loadItems = async () => {
             try {
+
+                // const response2 = await fetch('/api/octopart/ECEA1CKS100');
+                // const data2 = await response2.json();
+                // console.log(data2);
+
+                // const response3 = await fetch('/api/mouser/attiny84');
+                // const data3 = await response3.json();
+                // console.log(data3);
+
+                // const response3 = await fetch('/api/oemsecret/attiny84');
+                // const data3 = await response3.json();
+                // console.log(data3);
+
                 const response = await fetch('/api/parts');
                 const data = await response.json();
                 setState({
@@ -158,7 +171,7 @@ const Parts = () => {
     return (
         <div className="home open">
 
-            <div className="item">
+            {/* <div className="item">
                 {state.isFormVisible && (
                     <Form
                         item={state.item}
@@ -166,7 +179,7 @@ const Parts = () => {
                         currentButtonName={state.current}
                     />
                 )}
-            </div>
+            </div> */}
 
             <div className="parts">
                 <Table
