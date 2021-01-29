@@ -85,4 +85,9 @@ apiRouter.post('/addpart', (req, res) => {
     res.status(200).send(addItem);
 });
 
+apiRouter.get('/latestentries', (req, res) => {
+    const entries = databaseClient.latestEntries(req.body);
+    res.status(200).send(entries);
+});
+
 export default apiRouter;

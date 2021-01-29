@@ -42,6 +42,50 @@ main {
     height: 100vh;
 }
 
+.dashboard {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    min-width: 100%;
+    min-height: 100%;
+
+    .welcome {
+        width: 90%;
+        max-width: 120rem;
+
+        h1 {
+            padding: 0;
+            margin: 0;
+            border: none;
+            font-weight: 400;
+            white-space: nowrap;
+        }
+
+        h2 {
+            font-weight: 200;
+            margin-top: 17px;
+            margin-bottom: 5px;
+            line-height: normal;
+        }
+
+        .title {
+            margin-top: 1em;
+            margin-bottom: 1em;
+            flex: 1 100%;
+        }
+        .subtitle {
+            margin-top: .8em;
+            display: block;
+        }
+        .row {
+            display: flex;
+            flex-flow: row;
+        }
+        .splash .section {
+            margin-bottom: 5em;
+        }
+    }
+}
 
 .home {
     display: grid;
