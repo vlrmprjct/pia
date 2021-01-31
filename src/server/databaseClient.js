@@ -22,6 +22,15 @@ const databaseClient = () => {
         return latestEntry;
     };
 
+    const latestEntries = () => {
+        const db = new Sql(dbPath);
+        const query = 'SELECT name, id FROM parts ORDER BY "id" DESC LIMIT 0, 5';
+        const entries = db.prepare(query).all();
+        db.close();
+
+        return entries;
+    };
+
     const listEntries = () => {
         const db = new Sql(dbPath);
         const query = 'SELECT * FROM parts ORDER BY datetime(date_created) DESC';
@@ -62,6 +71,7 @@ const databaseClient = () => {
 
     return {
         addEntry,
+        latestEntries,
         listEntries,
         getEntry,
         getPartColumns,

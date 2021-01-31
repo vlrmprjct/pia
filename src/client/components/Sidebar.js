@@ -6,7 +6,7 @@ const Sidebar = () => (
         <div className="left-nav-wrap">
             <ul className="uk-nav uk-nav-default uk-nav-parent-icon" data-uk-nav>
                 <li>
-                    <NavLink to="/dashboard" title="Dashboard" activeClassName="active">
+                    <NavLink to="/welcome" title="Welcome" activeClassName="active">
                         <span className="uk-margin-small-right" uk-icon="icon: home" />
                     </NavLink>
                 </li>

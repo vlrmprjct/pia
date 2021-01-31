@@ -3,7 +3,7 @@
 import React from 'react';
 import logo from './../../assets/media/logo.svg';
 
-const Login = () => {
+export const Login = () => {
     return (
         <div className="login uk-cover-container uk-background-secondary uk-flex uk-flex-center uk-flex-middle uk-height-viewport uk-overflow-hidden uk-light" data-uk-height-viewport>
 
@@ -80,5 +80,3 @@ const Login = () => {
         </div>
     );
 };
-
-export default Login;
