@@ -2,31 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import UIkit from 'uikit';
 import { octopartSearch } from '../../utils/octopart';
+import { fetchAPI } from '../../utils/api';
 import { Table } from './Table';
 import { Form } from './Form';
 
-const Parts = () => {
+export const Parts = () => {
     const [state, setState] = useState({});
     const history = useHistory();
 
     useEffect(() => {
 
-        const loadItems = async () => {
-            try {
-                const response = await fetch('/api/parts');
-                const data = await response.json();
-                setState({
-                    current: 'SAVE',
-                    items: data,
-                    item: null,
-                    isFormVisible: false
-                });
-            } catch (error) {
-                throw error;
-            }
-        };
-
-        loadItems();
+        fetchAPI('/api/parts', (data) => {
+            setState({
+                current: 'SAVE',
+                items: data,
+                item: null,
+                isFormVisible: false
+            });
+        });
 
     }, []);
 
@@ -180,5 +173,3 @@ const Parts = () => {
         </div>
     );
 };
-
-export default Parts;
