@@ -6,7 +6,7 @@ import {
     Parts,
     Error,
     Welcome
-} from './';
+} from './../';
 
 const Routes = (props) => {
     return (

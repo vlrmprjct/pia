@@ -5,19 +5,18 @@ import UIkit from 'uikit';
 import Icons from 'uikit/dist/js/uikit-icons';
 
 import Routes from './Routes';
+import Header from './Header';
+import Sidebar from './Sidebar';
+import Footer from './Footer';
 
-import Header from '../components/Header';
-import Sidebar from '../components/Sidebar';
-import Footer from '../components/Footer';
+import { scroll } from '../../utils/scrollbar';
+import { initLocalStorage } from '../../utils/localstorage';
 
-import { scroll } from './../utils/scrollbar';
-import { initLocalStorage } from './../utils/localstorage';
-
-import '../scss/index.scss';
+import './../../scss/index.scss';
 
 UIkit.use(Icons);
 
-const App = (props) => {
+export const App = withRouter((props) => {
 
     if (localStorage.getItem('pia') === null) {
         initLocalStorage();
@@ -37,6 +36,4 @@ const App = (props) => {
             <Footer />
         </>
     );
-};
-
-export default withRouter(App);
+});
