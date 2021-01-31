@@ -1,0 +1,19 @@
+.welcome {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    min-width: 100%;
+    min-height: 100%;
+
+    > div {
+        width: 90%;
+        max-width: 120rem;
+        .title {
+            flex: 1 100%;
+        }
+        .row {
+            display: flex;
+            flex-flow: row;
+        }
+    }
+}
