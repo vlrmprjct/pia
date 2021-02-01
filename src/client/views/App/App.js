@@ -23,14 +23,20 @@ export const App = withRouter((props) => {
     }
 
     useEffect(() => {
+        document.body
+            .querySelector('[data-root]')
+            .setAttribute('class', `app ${props.location.pathname.split('/')[1]}`);
+    }, [props.location]);
+
+    useEffect(() => {
         window.addEventListener('scroll', scroll, true);
     }, []);
-    console.log(props.location);
+
     return (
         <>
             <Header />
             <Sidebar />
-            <main className={props.location.pathname.split('/')[1]}>
+            <main>
                 <Routes {...props} />
             </main>
             <Footer />
