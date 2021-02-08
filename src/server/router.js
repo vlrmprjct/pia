@@ -1,10 +1,10 @@
+import 'dotenv-flow/config';
 import { Router } from 'express';
 import request from 'request';
 import os from 'os';
-import { config } from 'dotenv-flow';
 import databaseClientFactory from './databaseClient';
 
-config();
+
 
 const databaseClient = databaseClientFactory();
 const apiRouter = Router();

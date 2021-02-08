@@ -1,8 +1,6 @@
+import 'dotenv-flow/config';
 import path from 'path';
-import { config } from 'dotenv-flow';
 import Sql from 'better-sqlite3';
-
-config();
 
 const dbPath = path.join(__dirname, `../db/${process.env.DB_NAME}.db`);
 
