@@ -5,7 +5,7 @@ import logo from './../../assets/media/logo.svg';
 
 export const Login = () => {
     return (
-        <div className="login uk-cover-container uk-background-secondary uk-flex uk-flex-center uk-flex-middle uk-height-viewport uk-overflow-hidden uk-light" data-uk-height-viewport>
+        <div className="uk-cover-container uk-flex uk-flex-center uk-flex-middle uk-height-viewport uk-overflow-hidden uk-light" data-uk-height-viewport>
 
             <div className="uk-position-cover uk-overlay-primary" />
 

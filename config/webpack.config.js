@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const webpack = require('webpack');
+const DotenvFlow = require('dotenv-flow-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
@@ -9,6 +9,7 @@ const StylishReporter = require('webpack-stylish');
 const buildDir = '../dist';
 
 module.exports = env => {
+
     return [
         {
             name: 'server',
@@ -110,6 +111,7 @@ module.exports = env => {
                 }
             },
             plugins: [
+                new DotenvFlow(),
                 new MiniCssExtractPlugin({
                     moduleFilename: ({ name }) => `css/${name}.css`
                 }),

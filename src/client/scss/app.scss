@@ -18,6 +18,19 @@ a[disabled] {
         [main] "nav main" 1fr [main]
         [footer] "footer main" fit-content(0) [footer]
         / 5rem 1fr;
+
+        &.login{
+            grid-template:
+            [main] "main" 1fr [main]
+            / 1fr;
+
+            header,
+            nav,
+            footer {
+                display: none;
+            }
+
+        }
 }
 
 header {
