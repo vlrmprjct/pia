@@ -25,17 +25,17 @@ export const Search = ({
         selected: null,
     });
 
-    const mock = {
-        "link": "https://analytics.oemsecrets.com/main.php?p=MF-NSMF110-2&m=Bourns%20Electronics&q=0&n=Avnet%20Europe&table=api&media=buynow&source=lokalnetz&event_link=https%3A%2F%2Fwww.avnet.com%2Fshop%2Femea%2Fproducts%2Fbourns%2Fmf-nsmf110-2-3074457345629218657%3Fc%3DEUR%26r%3DEMEA%26CMP%3DEMEA_OEMSecrets_inventoryfeed_VSE",
-        "name": "PTC Resettable Fuse 100A 6V T/R",
-        "image": "https://www.avnet.com/opasdata/d120001/derivates/2/072/217/004/PF-5111023-Image_web.jpg",
-        "datasheet": "",
-        "supplier": "Avnet Europe",
-        "logo": "https://www.oemsecrets.com/images/logos/suppliers/avnet.png",
-        "manufacturer_nr": "MFNSMF1102",
-        "manufacturer": "Microchip Technology",
-        "supplier_nr": "3131874",
-    };
+    // const mock = {
+    //     "link": "https://analytics.oemsecrets.com/main.php?p=MF-NSMF110-2&m=Bourns%20Electronics&q=0&n=Avnet%20Europe&table=api&media=buynow&source=lokalnetz&event_link=https%3A%2F%2Fwww.avnet.com%2Fshop%2Femea%2Fproducts%2Fbourns%2Fmf-nsmf110-2-3074457345629218657%3Fc%3DEUR%26r%3DEMEA%26CMP%3DEMEA_OEMSecrets_inventoryfeed_VSE",
+    //     "name": "PTC Resettable Fuse 100A 6V T/R",
+    //     "image": "https://www.avnet.com/opasdata/d120001/derivates/2/072/217/004/PF-5111023-Image_web.jpg",
+    //     "datasheet": "",
+    //     "supplier": "Avnet Europe",
+    //     "logo": "https://www.oemsecrets.com/images/logos/suppliers/avnet.png",
+    //     "manufacturer_nr": "MFNSMF1102",
+    //     "manufacturer": "Microchip Technology",
+    //     "supplier_nr": "3131874",
+    // };
 
     useEffect(() => {
         const delay = async () => await sleep(100);
@@ -94,7 +94,7 @@ export const Search = ({
     return (
         <>
             <h4>Find part by manufacturer-nr or supplier-nr</h4>
-            <button
+            {/* <button
                 type="button"
                 onClick={() => {
                     onSelect(mock);
@@ -103,7 +103,7 @@ export const Search = ({
             >
                 MOCK SELECT
 
-            </button>
+            </button> */}
             <div className="uk-inline uk-width-expand">
                 <button
                     type="button"
