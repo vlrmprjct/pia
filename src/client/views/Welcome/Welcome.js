@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { fetchAPI } from '../../utils/api';
 
 export const Welcome = () => {
@@ -27,16 +28,16 @@ export const Welcome = () => {
                         <h3>Start</h3>
                         <ul className="uk-nav ul-margin-top uk-margin-bottom">
                             <li>
-                                <a href="/add" className="uk-padding-remove-top">
+                                <Link to="/parts/new" className="uk-padding-remove-top">
                                     <span uk-icon="plus-circle" className="uk-margin-small-right uk-icon" />
                                     <span className="uk-text-middle">New Part</span>
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="/add/project" className="uk-padding-remove-top">
+                                <Link to="/projects/new" className="uk-padding-remove-top">
                                     <span uk-icon="plus-circle" className="uk-margin-small-right uk-icon" />
                                     <span className="uk-text-middle">New Project</span>
-                                </a>
+                                </Link>
                             </li>
                         </ul>
                     </section>
@@ -48,10 +49,10 @@ export const Welcome = () => {
                                 state && state.items && state.items.map((e) => {
                                     return (
                                         <li>
-                                            <a href="/parts/id" className="uk-padding-remove-top">
+                                            <Link to={`parts/${e.id}`} className="uk-padding-remove-top">
                                                 <span uk-icon="tag" className="uk-margin-small-right uk-icon" />
                                                 <span className="uk-text-middle">{e.name}</span>
-                                            </a>
+                                            </Link>
                                         </li>
                                     );
                                 })
@@ -63,10 +64,10 @@ export const Welcome = () => {
                         <h3>Help</h3>
                         <ul className="uk-nav ul-margin-top uk-margin-bottom">
                             <li>
-                                <a href="/keyboard" className="uk-padding-remove-top">
+                                <Link to="/keyboard" className="uk-padding-remove-top">
                                     <span uk-icon="bookmark" className="uk-margin-small-right uk-icon" />
                                     <span className="uk-text-middle">Keyboard cheatsheet</span>
-                                </a>
+                                </Link>
                             </li>
                             <li>
                                 <a href="https://github.com/vlrmprjct/pia/issues" rel="noreferrer" target="_blank" className="uk-padding-remove-top">

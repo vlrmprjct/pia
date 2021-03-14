@@ -48,7 +48,6 @@ const databaseClient = () => {
     };
 
     const getEntry = (id) => {
-        console.log(id);
         const db = new Sql(dbPath);
         const query = 'SELECT * FROM parts WHERE ID = ' + id;
         const entries = db.prepare(query).all();
@@ -58,9 +57,11 @@ const databaseClient = () => {
     };
 
     const updateEntry = (data) => {
-        const sql = Object.keys(data).filter(key => typeof data[key] !== 'undefined').map(key => {
-            return key + ' = "' + data[key] + '"';
-        });
+        const sql = Object.keys(data)
+            .filter(key => data[key] !== null)
+            .map(key => {
+                return key + ' = "' + data[key] + '"';
+            });
         const db = new Sql(dbPath);
         const query = 'UPDATE parts SET ' + sql + ' WHERE id = ' + data.id;
         db.prepare(query).run();

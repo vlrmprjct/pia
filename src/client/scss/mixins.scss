@@ -5,6 +5,12 @@
     border-style: solid;
     font-size: 1rem;
     font-weight: normal;
+
+    &:invalid,
+    &:focus:invalid {
+        border-color: var(--color-danger);
+    }
+
 }
 
 @mixin hook-form-focus() {
@@ -63,7 +69,7 @@
         border-right: 0;
         border-radius: 0;
 
-        > * {
+        > *:not(.uk-dropdown) {
             border-radius: 0 $base-pre-border-radius $base-pre-border-radius 0;
         }
     }
@@ -77,10 +83,35 @@
         border: 1px solid $global-border;
         border-left: 0;
     }
+    > button:last-of-type {
+        border-radius: 0 $base-pre-border-radius $base-pre-border-radius 0;
+        border-left: 0;
+    }
+}
+
+@mixin hook-label(){
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.5rem;
+
+    &-hollow,
+    &-hollow-primary {
+        background: transparent;
+        border: 1px solid $global-primary-background;
+        color: $text-primary-color;
+
+        &.uk-active {
+            background: $global-primary-background !important;
+            border: 1px solid $global-primary-background;
+            color: $global-inverse-color;
+        }
+    }
 }
 
 @mixin hook-dropdown() {
     box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.2);
+    border-radius: $base-pre-border-radius;
 }
 
 @mixin hook-form-label(){

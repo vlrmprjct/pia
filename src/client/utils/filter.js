@@ -1,7 +1,6 @@
 import React from 'react';
 import matchSorter from 'match-sorter';
 
-
 export const GlobalFilter = ({
     preGlobalFilteredRows,
     globalFilter,
