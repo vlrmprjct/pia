@@ -2,7 +2,7 @@ import React, { useState, useEffect, Fragment } from 'react';
 
 export const Form = ({
     item,
-    submitMe,
+    onSubmit,
     currentButtonName,
 }) => {
 
@@ -16,16 +16,11 @@ export const Form = ({
         });
     };
 
-    const onSubmit = () => {
-        if (submitMe) {
-            submitMe(state);
-        }
-    };
-
     const config = {
         default: {
             className: 'uk-input',
             disabled: false,
+            tabIndex: 99,
             type: 'text',
         },
         id: {
@@ -37,38 +32,90 @@ export const Form = ({
         date_updated: {
             disabled: true,
         },
+        image: {
+            type: 'url',
+            placeholder: 'URL http(s):// ...',
+            tabIndex: 14,
+        },
+        link: {
+            type: 'url',
+            placeholder: 'URL http(s):// ...',
+            tabIndex: 15,
+        },
+        manufacturer: {
+            tabIndex: 12,
+        },
+        manufacturer_nr: {
+            tabIndex: 13,
+        },
         min_stock: {
             type: 'number',
             min: 0,
+            tabIndex: 7,
+        },
+        name: {
+            tabIndex: 2,
         },
         price_total: {
             className: 'uk-input uk-text-right',
             disabled: true,
-            value: (parseFloat(state.price) * parseInt(state.stock)).toFixed(2).toString(),
+            value: state.price && (parseFloat(state.price) * parseInt(state.stock || 1)).toFixed(2).toString(),
+        },
+        price: {
+            pattern: '.{3,}',
+            placeholder: '0.00',
+            tabIndex: 4,
         },
         stock: {
             type: 'number',
             min: 0,
+            tabIndex: 6,
+        },
+        storage_name: {
+            tabIndex: 8,
+        },
+        storage_location: {
+            tabIndex: 9,
+        },
+        supplier: {
+            tabIndex: 10,
+        },
+        supplier_nr: {
+            tabIndex: 11,
+        },
+        tags: {
+            tabIndex: 16,
+        },
+        type: {
+            tabIndex: 1,
+        },
+        unit: {
+            tabIndex: 5
+        },
+        value: {
+            tabIndex: 3,
         }
     };
 
+    if (item.length === 0) return null;
+
     return (
-        <form autoComplete="null" className="item-form uk-margin-top">
+        <form autoComplete="null" className="form--entry">
             {
                 Object.keys(state).map(key => {
                     return (
-                        <Fragment>
+                        <Fragment key={key}>
                             { key === 'image'
                                 &&
                                 (
                                     <div
                                         htmlFor="image_2"
-                                        className="item-form-image-2"
+                                        className="form--entry-image-2"
                                         style={{ backgroundImage: `url(${state[key]})` }}
                                     />
                                 )
                             }
-                            <label className="uk-form-label" key={key} htmlFor={key}>
+                            <label className="uk-form-label" htmlFor={key}>
                                 {key.replace('_', ' ')}
                                 <input
                                     {...config.default}
@@ -86,33 +133,27 @@ export const Form = ({
                 })
             }
 
-            <div className="item-form-separator-1" htmlFor="separator_1" />
-            <div className="item-form-separator-2" htmlFor="separator_2" />
+            <div className="form--entry-separator-1" htmlFor="separator_1" />
+            <div className="form--entry-separator-2" htmlFor="separator_2" />
 
-            <div className="item-form-footer" htmlFor="footer">
-                <button
-                    className="uk-button uk-button-default"
-                    type="reset"
-                    name="cancel"
-                >
-                    CANCEL
-                </button>
-                <button
-                    className="uk-button uk-button-default"
-                    onClick={() => onSubmit()}
-                    type="button"
-                    name="submit"
-                >
-                    {currentButtonName}
-                </button>
-                <button
-                    className="uk-button uk-button-default"
-                    type="button"
-                    name="hide"
-                    onClick={() => setState({ isFormVisible: false })}
-                >
-                    HIDE ME
-                </button>
+            <div className="form--entry-footer" htmlFor="footer">
+                <div className="uk-button-group uk-border-rounded">
+                    <button
+                        className="uk-button uk-button-primary"
+                        type="reset"
+                        name="cancel"
+                    >
+                        CANCEL
+                    </button>
+                    <button
+                        className="uk-button uk-button-primary"
+                        onClick={() => onSubmit(state)}
+                        type="button"
+                        name="submit"
+                    >
+                        {currentButtonName}
+                    </button>
+                </div>
             </div>
         </form>
     );

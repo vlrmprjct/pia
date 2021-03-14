@@ -5,6 +5,12 @@
     border-style: solid;
     font-size: 1rem;
     font-weight: normal;
+
+    &:invalid,
+    &:focus:invalid {
+        border-color: var(--color-danger);
+    }
+
 }
 
 @mixin hook-form-focus() {
@@ -75,6 +81,10 @@
     > *:last-child {
         border-radius: 0 $base-pre-border-radius $base-pre-border-radius 0;
         border: 1px solid $global-border;
+        border-left: 0;
+    }
+    > button:last-of-type {
+        border-radius: 0 $base-pre-border-radius $base-pre-border-radius 0;
         border-left: 0;
     }
 }

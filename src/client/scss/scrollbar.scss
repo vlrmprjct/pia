@@ -5,8 +5,11 @@ div * {
         background: transparent;
     }
     ::-webkit-scrollbar {
-        width: 6px;
+        width: 0;
         background: transparent;
+    }
+    ::-webkit-scrollbar:horizontal {
+        height: 0;
     }
     ::-webkit-scrollbar-thumb {
         background: transparent;
@@ -26,7 +29,6 @@ div * {
         width: 6px;
         background: transparent;
     }
-
     &::-webkit-scrollbar-thumb {
         background: rgba(172, 172, 172, .5);
 
@@ -38,3 +40,46 @@ div * {
         }
     }
 }
+
+// div * {
+//     scrollbar-width: none; /* Firefox */
+//     ::-webkit-scrollbar-track:vertical {
+//         border-left: 1px solid #E7E7E7;
+//         box-shadow: 1px 0 1px 0 #F6F6F6 inset, -1px 0 1px 0 #F6F6F6 inset;
+//     }
+
+//     ::-webkit-scrollbar-track:horizontal {
+//         border-top: 1px solid #E7E7E7;
+//         box-shadow: 0 1px 1px 0 #F6F6F6 inset, 0 -1px 1px 0 #F6F6F6 inset;
+//     }
+
+//     ::-webkit-scrollbar {
+//         -webkit-appearance: none;
+//         background-color: #FAFAFA;
+//         width: 16px;
+//     }
+
+//     ::-webkit-scrollbar:horizontal {
+//         -webkit-appearance: none;
+//         background-color: #FAFAFA;
+//         height: 15px;
+//     }
+
+//     ::-webkit-scrollbar-thumb {
+//         background-clip: padding-box;
+//         background-color: #C1C1C1;
+//         border-color: transparent;
+//         border-radius: 8px;
+//         border-style: solid;
+//         border-width: 3px 3px 3px 4px;
+//         box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+//     }
+
+//     ::-webkit-scrollbar-thumb:hover {
+//         background-color: rgba(0, 0, 0, 0.5);
+//     }
+// }
+
+// .on-scrollbar {
+
+// }

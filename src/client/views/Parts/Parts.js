@@ -1,24 +1,54 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import UIkit from 'uikit';
-import { octopartSearch } from '../../utils/octopart';
 import { fetchAPI } from '../../utils/api';
 import { Table } from './Table';
-import { Form } from './Form';
 
 export const Parts = () => {
-    const [state, setState] = useState({});
+
+    const { id } = useParams();
     const history = useHistory();
 
-    useEffect(() => {
+    const [state, setState] = useState({
+        addForm: id === 'new',
+        items: [],
+        item: {},
+        current: 'SAVE',
+        searchForm: false,
+    });
 
+    useEffect(() => {
         fetchAPI('/api/parts', (data) => {
-            setState({
-                current: 'SAVE',
-                items: data,
-                item: null,
-                isFormVisible: false
-            });
+
+            if (state.addForm && data.length > 0) {
+                (async () => {
+                    const response = await fetch('/api/partcolumns');
+                    const columns = await response.json();
+                    const altObj = Object.fromEntries(
+                        // eslint-disable-next-line no-unused-vars
+                        Object.entries(columns).map(([key, value]) =>
+                            [`${value.name}`, '']
+                        )
+                    );
+
+                    setState({
+                        ...state,
+                        items: data,
+                        item: altObj,
+                        current: 'SAVE',
+                        searchForm: false,
+                    });
+                })();
+            }
+
+            if (!state.addForm && data.length > 0) {
+                setState({
+                    current: 'SAVE',
+                    items: data,
+                    item: null,
+                    searchForm: false
+                });
+            }
         });
 
     }, []);
@@ -27,7 +57,7 @@ export const Parts = () => {
         const currentItem = state.items[index];
         setState({
             ...state,
-            isFormVisible: true,
+            searchForm: false,
             item: currentItem,
             current: 'UPDATE',
             index,
@@ -35,7 +65,7 @@ export const Parts = () => {
         history.push(`/parts/${state.items[index].id}`);
     };
 
-    const onAdd = () => {
+    const onAdd = (oempart) => {
         (async () => {
             const response = await fetch('/api/partcolumns');
             const columns = await response.json();
@@ -46,13 +76,20 @@ export const Parts = () => {
                 )
             );
 
+            if (oempart) {
+                delete oempart.logo;
+                delete oempart.datasheet;
+            }
+
+
             setState({
                 ...state,
-                item: altObj,
+                item: { ...altObj, ...oempart } ,
                 current: 'SAVE',
-                isFormVisible: true
+                searchForm: false,
             });
 
+            history.push('/parts/new');
         })();
     };
 
@@ -100,10 +137,6 @@ export const Parts = () => {
 
             const updateItem = async () => {
                 try {
-                    octopartSearch(formData.manufacturer_nr).then(data => {
-                        console.log(data);
-                    });
-
                     const response = await fetch('/api/part', options);
                     UIkit.notification({
                         message: (response.status === 200) ? 'Saved successfully' : 'Oops, something went wrong!',
@@ -144,32 +177,31 @@ export const Parts = () => {
         });
     };
 
-    if (Object.keys(state).length === 0 && state.constructor === Object) {
-        return null;
-    }
+    const onSearch = () => {
+        setState({ ...state, searchForm: true });
+        console.log('SEARCH');
+        return true;
+    };
+
+    // if (Object.keys(state).length === 0 && state.constructor === Object) {
+    //     return null;
+    // }
+
+    console.log(state);
 
     return (
-        <div className="home open">
-
-            {/* <div className="item">
-                {state.isFormVisible && (
-                    <Form
-                        item={state.item}
-                        submitMe={onSubmit}
-                        currentButtonName={state.current}
-                    />
-                )}
-            </div> */}
-
-            <div className="parts">
-                <Table
-                    items={state.items}
-                    onAdd={onAdd}
-                    onEdit={onEdit}
-                    onDelete={onDelete}
-                />
-            </div>
-
+        <div className="parts">
+            <Table
+                items={state.items}
+                selectedItem={state.item}
+                currentButtonName={state.current}
+                searchForm={state.searchForm}
+                onAdd={onAdd}
+                onEdit={onEdit}
+                onDelete={onDelete}
+                onSubmit={onSubmit}
+                onSearch={onSearch}
+            />
         </div>
     );
 };

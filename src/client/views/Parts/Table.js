@@ -1,4 +1,4 @@
-import React, { useMemo, Fragment } from 'react';
+import React, { Fragment, useMemo, useRef } from 'react';
 import UIkit from 'uikit';
 import Icons from 'uikit/dist/js/uikit-icons';
 import {
@@ -10,26 +10,37 @@ import {
     usePagination,
     useGlobalFilter
 } from 'react-table';
-import { getLocalStorage } from './../../utils/localstorage';
+import SplitterLayout from 'react-splitter-layout';
+import { getLocalStorage, setLocalStorage } from './../../utils/localstorage';
 import { GlobalFilter, DefaultColumnFilter, fuzzyTextFilter } from './../../utils/filter';
 import { Pagination } from './../../components/Pagination';
 import { Pageselector } from './../../components/Pageselector';
 import { Pagesize } from './../../components/Pagesize';
+import { Form } from './Form';
+import { Search } from './Search';
 import { Add } from './Toolbar/Add';
 
 UIkit.use(Icons);
 fuzzyTextFilter.autoRemove = val => !val;
 
 export const Table = ({
+    currentButtonName,
     items,
+    selectedItem,
     onAdd,
     onEdit,
+    onSubmit,
     // onDelete
+    searchForm,
+    onSearch,
 }) => {
+
+    const dataPane = useRef(null);
+    const formPane = useRef(null);
 
     const data = useMemo(() => items);
 
-    const filterTypes = React.useMemo(
+    const filterTypes = useMemo(
         () => ({
             fuzzyText: fuzzyTextFilter,
             text: (rows, id, filterValue) => {
@@ -148,6 +159,15 @@ export const Table = ({
             autoResetSortBy: false,
             autoResetFilters: false,
             autoResetRowState: false,
+            useControlledState: state => {
+                return useMemo(
+                    () => ({
+                        ...state,
+                        searchForm,
+                    }),
+                    [state, searchForm]
+                );
+            },
         },
         useRowState,
         useFilters,
@@ -155,7 +175,6 @@ export const Table = ({
         useSortBy,
         usePagination,
         useFlexLayout,
-
     );
 
     const rowSelect = (event, index) => {
@@ -165,7 +184,7 @@ export const Table = ({
     };
 
     return (
-        <Fragment>
+        <>
             <section className="toolbar">
                 <GlobalFilter
                     preGlobalFilteredRows={preGlobalFilteredRows}
@@ -176,7 +195,6 @@ export const Table = ({
                 <Pagination
                     canPreviousPage={canPreviousPage}
                     canNextPage={canNextPage}
-                    className="foobar"
                     gotoPage={gotoPage}
                     nextPage={nextPage}
                     pageCount={pageCount}
@@ -195,65 +213,95 @@ export const Table = ({
                 />
 
                 <Add
-                    onClick={onAdd}
+                    onAdd={() => {
+                        onAdd();
+                    }}
+                    onSearch={() => {
+                        onSearch();
+                    }}
                 />
-
             </section>
 
-            <section className="data">
-                <table
-                    {...getTableProps()}
-                    className="uk-table uk-table-divider uk-table-hover uk-table-striped uk-table-small"
-                >
-                    <thead>
-                        {headerGroups.map(headerGroup => (
-                            <tr {...headerGroup.getHeaderGroupProps()}>
-                                {headerGroup.headers.map(column => (
-                                    <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                                        {column.render('Header')}
-                                        <span className="sort">
-                                            {column.isSorted
-                                                ? column.isSortedDesc
-                                                    ? <span uk-icon="chevron-down" />
-                                                    : <span uk-icon="chevron-up" />
-                                                : <span uk-icon="minus" />}
-                                        </span>
-                                    </th>
-                                ))}
-                            </tr>
-                        ))}
-                    </thead>
-                    <tbody {...getTableBodyProps()}>
-                        {page.map((row) => {
-                            prepareRow(row);
-                            return (
-                                <tr
-                                    {...row.getRowProps()}
-                                    onClick={() => onEdit(row.id)}
-                                    onDoubleClick={(event) => {
-                                        rowSelect(event, row.id);
-                                    }}
-                                >
-                                    {row.cells.map(cell => {
-                                        return (
-                                            <td
-                                                {...cell.getCellProps({
-                                                    className: cell.column.className
-                                                })}
-                                            >
-                                                {cell.render('Cell')}
-                                            </td>
-                                        );
+            <SplitterLayout
+                customClassName="pane"
+                secondaryInitialSize={getLocalStorage('datapanesize') || 550}
+                secondaryMinSize={20}
+                primaryMinSize={550}
+                onDragEnd={() => {
+                    setLocalStorage({ 'datapanesize': formPane.current.offsetWidth });
+                }}
+            >
 
-                                    })}
-
+                <section ref={dataPane} className="data">
+                    <table
+                        {...getTableProps()}
+                        className="uk-table uk-table-divider uk-table-hover uk-table-striped uk-table-small"
+                    >
+                        <thead>
+                            {headerGroups.map(headerGroup => (
+                                <tr {...headerGroup.getHeaderGroupProps()}>
+                                    {headerGroup.headers.map(column => (
+                                        <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                                            {column.render('Header')}
+                                            <span className="sort">
+                                                {column.isSorted
+                                                    ? column.isSortedDesc
+                                                        ? <span uk-icon="chevron-down" />
+                                                        : <span uk-icon="chevron-up" />
+                                                    : <span uk-icon="minus" />}
+                                            </span>
+                                        </th>
+                                    ))}
                                 </tr>
-                            );
-                        })}
-                    </tbody>
-                </table>
-            </section>
+                            ))}
+                        </thead>
+                        <tbody {...getTableBodyProps()}>
+                            {page.map((row) => {
+                                prepareRow(row);
+                                return (
+                                    <tr
+                                        {...row.getRowProps()}
+                                        onDoubleClick={(event) => {
+                                            rowSelect(event, row.id);
+                                        }}
+                                    >
+                                        {row.cells.map(cell => {
+                                            return (
+                                                <td
+                                                    {...cell.getCellProps({
+                                                        className: cell.column.className
+                                                    })}
+                                                >
+                                                    {cell.render('Cell')}
+                                                </td>
+                                            );
 
-        </Fragment>
+                                        })}
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                </section>
+
+                <section ref={formPane} className="form">
+                    {searchForm && (
+                        <Search onSelect={(oemSelected) => {
+                            onAdd(oemSelected);
+                        }}
+                        />
+                    )}
+                    {!searchForm && (
+                        <Form
+                            item={selectedItem || []}
+                            onSubmit={onSubmit}
+                            currentButtonName={currentButtonName}
+                        />
+                    )}
+                </section>
+
+            </SplitterLayout>
+
+        </>
     );
 };

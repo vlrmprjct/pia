@@ -1,3 +1,7 @@
+* {
+    user-select: none;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -59,79 +63,74 @@ main {
     height: 100vh;
 }
 
-.home {
-    display: grid;
-    grid-template:
-        [main] "data item" 1fr [main]
-        / 3fr auto;
-    height: 100vh;
-
+main {
     .parts {
         display: grid;
-        grid-area: data;
         grid-template:
-            [toolbar] "toolbar" 6rem [toolbar]
-            [main] "data" 1fr [main]
+            [toolbar] "toolbar" 5rem [toolbar]
+            [main] "pane" 1fr [main]
         / 1fr;
         padding: 2rem;
-    }
+        column-gap: 1.5rem;
 
-    .item {
-        grid-area: item;
-        width: 0px;
-        overflow: auto;
-        opacity: 0;
-        padding: 0 1.5rem;
-        transition: all .3s ease-out;
-        box-shadow: 0 0px 5px 5px #DDD;
-    }
-
-    &.open {
-        .item {
-            opacity: 1;
-            width: 40rem;
+        .splitter-layout {
+            position: relative;
         }
-    }
-}
 
-.parts .toolbar {
-    grid-area: toolbar;
-    // position: sticky;
-    // top: 0;
-    // z-index: 10;
-    display: grid;
-    grid-gap: 1.5rem;
-    grid-template:
-        [row1] "filter pageselector pagesize pagination actions" fit-content(0) [row1]
-        / 1fr auto auto auto auto;
+        .pane {
+            grid-area: pane;
+        }
 
-    .filter {
-        grid-area: filter;
-    }
-    .pagination {
-        grid-area: pagination;
-    }
+        .data {
+            height: calc(100vH - 9rem);
+            overflow: auto;
+            overflow-y: scroll;
+            border: 1px solid #e5e5e5;
+            border-radius: 3px;
+            margin-right: 0.5rem;
+        }
 
-    .pagesize {
-        grid-area: pagesize;
-    }
+        .form {
+            background: var(--background-secondary);
+            padding: 0.5rem 1.5rem;
+            transition: all .3s ease-out;
+            height: calc(100vH - 10rem);
+            overflow: auto;
+            overflow-y: scroll;
+            border: 1px solid #e5e5e5;
+            border-radius: 3px;
+            margin-left: 0.4rem;
+        }
 
-    .pageselector {
-        grid-area: pageselector;
-    }
+        .toolbar {
+            grid-area: toolbar;
+            display: grid;
+            grid-gap: 1.5rem;
+            grid-template:
+                [row1] "filter pageselector pagesize pagination actions" fit-content(0) [row1]
+                / 1fr auto auto auto auto;
 
-    .actions {
-        grid-area: actions;
-    }
-}
+            .filter {
+                grid-area: filter;
+            }
+            .pagination {
+                grid-area: pagination;
+            }
 
-.parts .data {
-    grid-area: data;
-    height: calc(100vH - 10rem);
-    overflow: auto;
-    overflow-y: scroll;
-    border: 1px solid #e5e5e5;
-    border-radius: 3px;
+            .pagesize {
+                grid-area: pagesize;
+            }
+
+            .pageselector {
+                grid-area: pageselector;
+            }
+
+            .actions {
+                grid-area: actions;
+            }
+        }
+
+    }
 }
 
 
@@ -145,10 +144,9 @@ main {
     grid-gap: 2rem;
     row-gap: 0.5rem;
     grid-template:
-        "filter result" 68vH
+        "filter result" calc(100vh - 24.5rem)
         "status status" fit-content(0)
-        / 20rem 38rem;
-    width: 60rem;
+        / 14rem 1fr;
 
     &--result {
         grid-area: result;
