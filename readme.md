@@ -17,8 +17,10 @@ What I need is a lightweight system running local or everywhere with a fast ligh
 ---
 
 ## Screenshots
-![Parts View Table](doc/view-parts-1.png)
-![Parts View with Parts Single View](doc/view-parts-2.png)
+![Welcome View](doc/view-parts-1.png)
+![Parts View with new Part Form](doc/view-parts-2.png)
+![Parts View with OEMSecret Search](doc/view-parts-3.png)
+![Parts View with Part taken from OEMSecret](doc/view-parts-4.png)
 
 ---
 
@@ -51,10 +53,12 @@ Another point is, we don't need all with CRA shipped packages.
 - ~~Initial setup process~~
 - Build Process &#x2714;
 - Electron Wrapper
-- Octopart API Integration ( ? )
+- ~~Octopart API Integration ( ? )~~
+- OEMSecret API Integration &#x2714;
 - BOM Imports
 - Projects BOMs
-- Login System ( ? )
+- ~~Login System ( ? )~~
+- Github Login
 
 
 ### Alternatives
