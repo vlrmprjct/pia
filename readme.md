@@ -17,6 +17,7 @@ What I need is a lightweight system running local or everywhere with a fast ligh
 ---
 
 ## Screenshots
+![PIA Cast](doc/view-pia.gif)
 ![Welcome View](doc/view-parts-1.png)
 ![Parts View with new Part Form](doc/view-parts-2.png)
 ![Parts View with OEMSecret Search](doc/view-parts-3.png)
