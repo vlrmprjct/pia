@@ -1,10 +1,7 @@
 import 'dotenv-flow/config';
 import { Router } from 'express';
 import request from 'request';
-import os from 'os';
 import databaseClientFactory from './databaseClient';
-
-
 
 const databaseClient = databaseClientFactory();
 const apiRouter = Router();
@@ -21,7 +18,6 @@ apiRouter.get('/oemsecret/:query?', (req, res) => {
         }
     }).pipe(res);
 });
-
 
 apiRouter.get('/mouser/:query?', (req, res) => {
     request({
