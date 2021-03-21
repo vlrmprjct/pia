@@ -8,15 +8,28 @@ import {
     Welcome
 } from './../';
 
-const Routes = (props) => {
+const Routes = ({
+    onSuccess = () => { },
+    ...props
+}) => {
+
+    const isLoggedIn = props.token;
+
     return (
-        <Switch>
-            <Route exact path='/parts/:id?' render={() => <Parts {...props} />} />
-            <Route exact path='/welcome' render={() => <Welcome {...props} />} />
-            <Route exact path='/login' render={() => <Login {...props} />} />
-            <Route exact path='/' render={() => <Redirect to="/welcome" />} />
-            <Route path="*" component={Error} />
-        </Switch>
+        (!isLoggedIn) ? (
+            <Switch>
+                <Route path="/login" render={() => <Login {...props} onSuccess={onSuccess} />} />
+                <Redirect to="/login" />
+            </Switch>
+        ) : (
+            <Switch>
+                <Route exact path='/parts/:id?' render={() => <Parts {...props} />} />
+                <Route exact path='/welcome' render={() => <Welcome {...props} />} />
+                <Route exact path='/login' render={() => <Login {...props} />} />
+                <Route exact path='/' render={() => <Redirect to="/welcome" />} />
+                <Route path="*" component={Error} />
+            </Switch>
+        )
     );
 };
 

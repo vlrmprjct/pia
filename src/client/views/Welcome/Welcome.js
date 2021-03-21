@@ -7,13 +7,11 @@ export const Welcome = () => {
     const [state, setState] = useState({});
 
     useEffect(() => {
-
         fetchAPI('/api/latestentries', (data) => {
             setState({
                 items: data,
             });
         });
-
     }, []);
 
     return (
@@ -51,7 +49,10 @@ export const Welcome = () => {
                                         <li>
                                             <Link to={`parts/${e.id}`} className="uk-padding-remove-top">
                                                 <span uk-icon="tag" className="uk-margin-small-right uk-icon" />
-                                                <span className="uk-text-middle">{e.name}</span>
+                                                <span className="uk-text-middle">
+                                                    {e.name.substring(0,30)}
+                                                    {`${(e.name.length > 30) ? ' ...' : ''}`}
+                                                </span>
                                             </Link>
                                         </li>
                                     );

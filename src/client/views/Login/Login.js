@@ -1,11 +1,40 @@
-/* eslint-disable max-len */
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+import { fetchAPI } from '../../utils/api';
 import logo from './../../assets/media/logo.svg';
 
-export const Login = () => {
+export const Login = ({
+    onSuccess = () => {},
+}) => {
+
+    const history = useHistory();
+    const [, setCookie] = useCookies(['access_token']);
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+
+    useEffect(() => {
+        if (!code) return;
+        fetchAPI('/api/login/' + code, (data) => {
+            if (data.access_token && data.token_type === 'bearer') {
+                setCookie('access_token', data.access_token, {
+                    path: '/',
+                    maxAge: 86400 * 30,
+                    sameSite: 'lax',
+                });
+
+                onSuccess(data.access_token);
+                setTimeout(() => history.replace('/'), 0);
+            }
+        });
+    }, []);
+
     return (
-        <div className="uk-cover-container uk-flex uk-flex-center uk-flex-middle uk-height-viewport uk-overflow-hidden uk-light" data-uk-height-viewport>
+        <div
+            className="uk-cover-container uk-flex uk-flex-center uk-flex-middle uk-overflow-hidden uk-light"
+            data-uk-height-viewport
+        >
 
             <div className="uk-position-cover uk-overlay-primary" />
 
@@ -28,52 +57,21 @@ export const Login = () => {
 
                 <form className="toggle-class">
                     <fieldset className="uk-fieldset">
-                        <div className="uk-margin-small">
-                            <div className="uk-inline uk-width-1-1">
-                                <span className="uk-form-icon uk-form-icon-flip" data-uk-icon="icon: user" />
-                                <input className="uk-input" required placeholder="Username" type="text" />
-                            </div>
-                        </div>
-                        <div className="uk-margin-small">
-                            <div className="uk-inline uk-width-1-1">
-                                <span className="uk-form-icon uk-form-icon-flip" data-uk-icon="icon: lock" />
-                                <input className="uk-input" required placeholder="Password" type="password" />
-                            </div>
-                        </div>
-                        <div className="uk-margin-small">
-                            <label htmlFor="keep">
-                                <input name="keep" className="uk-checkbox" type="checkbox" />
-                                {' '}
-                                Keep me logged in
-                            </label>
-                        </div>
                         <div className="uk-margin-bottom">
-                            <button type="submit" className="uk-button uk-button-primary uk-width-1-1">LOG IN</button>
+                            <a
+                                className="uk-button uk-input uk-width-1-1"
+                                href="https://github.com/login/oauth/authorize?client_id=f6b7044bab13d95678e3&scope=gist"
+                            >
+                                <span
+                                    uk-icon="icon: github-alt"
+                                    style={{ position: 'relative', top: '-2px', left: '-3px' }}
+                                />
+                                {'  '}
+                                LOGIN WITH GITHUB
+                            </a>
                         </div>
                     </fieldset>
                 </form>
-
-                <form className="toggle-class" hidden>
-                    <div className="uk-margin-small">
-                        <div className="uk-inline uk-width-1-1">
-                            <span className="uk-form-icon uk-form-icon-flip" data-uk-icon="icon: mail" />
-                            <input className="uk-input" placeholder="E-mail" required type="text" />
-                        </div>
-                    </div>
-                    <div className="uk-margin-bottom">
-                        <button type="submit" className="uk-button uk-button-primaryuk-width-1-1">SEND PASSWORD</button>
-                    </div>
-                </form>
-
-                <div>
-                    <div className="uk-text-center">
-                        <a className="uk-link-reset uk-text-small toggle-class" data-uk-toggle="target: .toggle-class ;animation: uk-animation-fade">Forgot your password?</a>
-                        <a className="uk-link-reset uk-text-small toggle-class" data-uk-toggle="target: .toggle-class ;animation: uk-animation-fade" hidden>
-                            <span data-uk-icon="arrow-left" />
-                            Back to Login
-                        </a>
-                    </div>
-                </div>
 
             </div>
 
