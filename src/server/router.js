@@ -23,7 +23,7 @@ apiRouter.get('/success/:token?', (req, res) => {
         uri: `https://api.github.com/user`,
         headers: {
             Authorization: 'token ' + req.params.token,
-            'User-Agent': 'p.i.a.',
+            'User-Agent': req.headers['user-agent'],
         }
     }).pipe(res);
 });
