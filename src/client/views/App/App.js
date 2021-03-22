@@ -53,13 +53,9 @@ export const App = withRouter((props) => {
     return (
         <>
             <Header />
-            <Sidebar />
+            <Sidebar {...props} {...state} />
             <main>
-                <Routes
-                    {...props}
-                    {...state}
-                    onSuccess={onSuccess}
-                />
+                <Routes {...props} {...state} onSuccess={onSuccess} />
             </main>
             <Footer />
         </>
