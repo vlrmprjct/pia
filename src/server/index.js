@@ -1,5 +1,4 @@
 import express from 'express';
-import bodyParser from 'body-parser';
 import databaseMiddleware from './databaseMiddleware';
 import apiRouter from './router';
 
@@ -13,11 +12,10 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(databaseMiddleware);
 app.use(express.static('dist'));
 app.use('/api', apiRouter);
-
 app.listen(process.env.PORT || 8080, () => {
     console.info(`Listening on port ${process.env.PORT || 8080}!`);
 });
