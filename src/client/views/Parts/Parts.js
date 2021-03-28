@@ -11,6 +11,7 @@ export const Parts = () => {
 
     const [state, setState] = useState({
         addForm: id === 'new',
+        index: null,
         items: [],
         item: {},
         current: 'SAVE',
@@ -20,7 +21,7 @@ export const Parts = () => {
     useEffect(() => {
         fetchAPI('/api/parts', (data) => {
 
-            if (state.addForm && data.length > 0) {
+            if (state.addForm &&  data.length > 0) {
                 (async () => {
                     const response = await fetch('/api/partcolumns');
                     const columns = await response.json();
@@ -43,6 +44,7 @@ export const Parts = () => {
 
             if (!state.addForm && data.length > 0) {
                 setState({
+                    ...state,
                     current: 'SAVE',
                     items: data,
                     item: null,
@@ -52,6 +54,17 @@ export const Parts = () => {
         });
 
     }, []);
+
+    useEffect(() => {
+        if (!isNaN(parseInt(id))) {
+            setState({
+                ...state,
+                current: 'UPDATE',
+                index: state.items.findIndex((x) => (x.id === parseInt(id))),
+                item: state.items.filter(e => (e.id === parseInt(id)))[0],
+            });
+        }
+    }, [state.items]);
 
     const onEdit = (index) => {
         const currentItem = state.items[index];
@@ -80,7 +93,6 @@ export const Parts = () => {
                 delete oempart.logo;
                 delete oempart.datasheet;
             }
-
 
             setState({
                 ...state,
@@ -186,8 +198,6 @@ export const Parts = () => {
     // if (Object.keys(state).length === 0 && state.constructor === Object) {
     //     return null;
     // }
-
-    console.log(state);
 
     return (
         <div className="parts">

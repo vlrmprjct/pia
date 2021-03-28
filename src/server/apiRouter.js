@@ -1,24 +1,18 @@
 import 'dotenv-flow/config';
 import { Router } from 'express';
 import request from 'request';
-import os from 'os';
 import databaseClientFactory from './databaseClient';
-
-
 
 const databaseClient = databaseClientFactory();
 const apiRouter = Router();
 
-apiRouter.get('/getUsername', (req, res) => {
-    res.send({ username: os.userInfo().username });
-});
-
-apiRouter.get('/octopart/:query?', (req, res) => {
+apiRouter.get('/success', (req, res) => {
     request({
-        uri: 'https://octopart.com/api/v3/parts/search',
-        qs: {
-            apikey: process.env.OCTOPART_API_KEY,
-            q: req.params.query
+        method: 'get',
+        uri: `https://api.github.com/user`,
+        headers: {
+            Authorization: 'token ' + req.session.token,
+            'User-Agent': req.headers['user-agent'],
         }
     }).pipe(res);
 });
@@ -35,7 +29,6 @@ apiRouter.get('/oemsecret/:query?', (req, res) => {
         }
     }).pipe(res);
 });
-
 
 apiRouter.get('/mouser/:query?', (req, res) => {
     request({
@@ -70,14 +63,14 @@ apiRouter.get('/partcolumns', (req, res) => {
     res.status(200).send(entries);
 });
 
-apiRouter.get('/wikis/get/:id?', (req, res) => {
-    const entries = databaseClient.getEntry(req.params.id);
-    res.status(200).send(entries);
-});
-
 apiRouter.post('/part', (req, res) => {
     const updateEntry = databaseClient.updateEntry(req.body);
     res.status(200).send(updateEntry);
+});
+
+apiRouter.get('/part/:id?', (req, res) => {
+    const entries = databaseClient.getEntry(req.params.id);
+    res.status(200).send(entries);
 });
 
 apiRouter.post('/addpart', (req, res) => {
