@@ -1,12 +1,13 @@
-/* eslint-disable max-len */
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import logo from './../../assets/media/logo.svg';
 
 export const Login = () => {
-    return (
-        <div className="uk-cover-container uk-flex uk-flex-center uk-flex-middle uk-height-viewport uk-overflow-hidden uk-light" data-uk-height-viewport>
 
+    return (
+        <div
+            className="uk-cover-container uk-flex uk-flex-center uk-flex-middle uk-overflow-hidden uk-light"
+            data-uk-height-viewport
+        >
             <div className="uk-position-cover uk-overlay-primary" />
 
             <div className="uk-position-bottom-center uk-position-small uk-visible@m uk-position-z-index">
@@ -28,52 +29,21 @@ export const Login = () => {
 
                 <form className="toggle-class">
                     <fieldset className="uk-fieldset">
-                        <div className="uk-margin-small">
-                            <div className="uk-inline uk-width-1-1">
-                                <span className="uk-form-icon uk-form-icon-flip" data-uk-icon="icon: user" />
-                                <input className="uk-input" required placeholder="Username" type="text" />
-                            </div>
-                        </div>
-                        <div className="uk-margin-small">
-                            <div className="uk-inline uk-width-1-1">
-                                <span className="uk-form-icon uk-form-icon-flip" data-uk-icon="icon: lock" />
-                                <input className="uk-input" required placeholder="Password" type="password" />
-                            </div>
-                        </div>
-                        <div className="uk-margin-small">
-                            <label htmlFor="keep">
-                                <input name="keep" className="uk-checkbox" type="checkbox" />
-                                {' '}
-                                Keep me logged in
-                            </label>
-                        </div>
                         <div className="uk-margin-bottom">
-                            <button type="submit" className="uk-button uk-button-primary uk-width-1-1">LOG IN</button>
+                            <a
+                                className="uk-button uk-input uk-width-1-1"
+                                href="/api/login/github"
+                            >
+                                <span
+                                    uk-icon="icon: github-alt"
+                                    style={{ position: 'relative', top: '-2px', left: '-3px' }}
+                                />
+                                {'  '}
+                                LOGIN WITH GITHUB
+                            </a>
                         </div>
                     </fieldset>
                 </form>
-
-                <form className="toggle-class" hidden>
-                    <div className="uk-margin-small">
-                        <div className="uk-inline uk-width-1-1">
-                            <span className="uk-form-icon uk-form-icon-flip" data-uk-icon="icon: mail" />
-                            <input className="uk-input" placeholder="E-mail" required type="text" />
-                        </div>
-                    </div>
-                    <div className="uk-margin-bottom">
-                        <button type="submit" className="uk-button uk-button-primaryuk-width-1-1">SEND PASSWORD</button>
-                    </div>
-                </form>
-
-                <div>
-                    <div className="uk-text-center">
-                        <a className="uk-link-reset uk-text-small toggle-class" data-uk-toggle="target: .toggle-class ;animation: uk-animation-fade">Forgot your password?</a>
-                        <a className="uk-link-reset uk-text-small toggle-class" data-uk-toggle="target: .toggle-class ;animation: uk-animation-fade" hidden>
-                            <span data-uk-icon="arrow-left" />
-                            Back to Login
-                        </a>
-                    </div>
-                </div>
 
             </div>
 

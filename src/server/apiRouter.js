@@ -6,6 +6,17 @@ import databaseClientFactory from './databaseClient';
 const databaseClient = databaseClientFactory();
 const apiRouter = Router();
 
+apiRouter.get('/success', (req, res) => {
+    request({
+        method: 'get',
+        uri: `https://api.github.com/user`,
+        headers: {
+            Authorization: 'token ' + req.session.token,
+            'User-Agent': req.headers['user-agent'],
+        }
+    }).pipe(res);
+});
+
 apiRouter.get('/oemsecret/:query?', (req, res) => {
     request({
         uri: 'https://beta.api.oemsecrets.com/partsearch',
