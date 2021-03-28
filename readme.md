@@ -1,27 +1,30 @@
-# &#x26A0; WIP &#x26A0;
-( means, proof of concept and not finishid yet )
-
----
-
 ![GitHub License](https://img.shields.io/github/license/vlrmprjct/pia?style=flat-square)
 ![GitHub Issues](https://img.shields.io/github/issues/vlrmprjct/pia?style=flat-square)
+![GitHub last commit](https://img.shields.io/github/last-commit/vlrmprjct/pia?style=flat-square)
+![GitHub (Pre-)Release Date](https://img.shields.io/github/release-date-pre/vlrmprjct/pia?style=flat-square)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/vlrmprjct/pia?style=flat-square)
 
-# ***PIA***  ( ***P***arts ***I***nventory ***A***ssistant )
+# **PIA**  ( **P**arts **I**nventory **A**ssistant ) ( evolved )
 
-This is a ___working in progress___ Electronics Parts/component Inventory Application called PIA using SQLite, Express and Webpack and ReactJS but ___without___ [CRA](https://github.com/facebook/create-react-app).
+This is a &#x26A0; __working in progress__ &#x26A0; Electronics Parts/component Inventory Application called PIA using SQLite, ExpressJS and ReactJS but ___without___ [CRA](https://github.com/facebook/create-react-app).
 
 There a many ready to use Inventory-Systems or -Applications written in PHP or other languages
 with a huge overkill about functions or server configurations.
 What I need is a lightweight system running local or everywhere with a fast lightning search and easy to extend.
 
+
+__Please note:__  __WIP__ means, proof of concept and not finishid yet !
+
 ---
 
 ## Screenshots
-![PIA Cast](doc/view-pia.gif)
-![Welcome View](doc/view-parts-1.png)
-![Parts View with new Part Form](doc/view-parts-2.png)
-![Parts View with OEMSecret Search](doc/view-parts-3.png)
-![Parts View with Part taken from OEMSecret](doc/view-parts-4.png)
+<!-- ![PIA Cast](doc/view-pia.gif) -->
+![Login View](doc/view-login.jpg)
+![Welcome View](doc/view-welcome.jpg)
+![Parts View with selected Part Form](doc/view-parts-1.jpg)
+![Parts View with OEMSecret Search](doc/view-parts-2.jpg)
+![Parts View with new Part Form](doc/view-parts-3.jpg)
+![Parts View with selected supplier OEMSecret Search](doc/view-parts-4.jpg)
 
 ---
 
