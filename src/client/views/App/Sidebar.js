@@ -23,6 +23,11 @@ const Sidebar = (props) => {
                             <span className="uk-margin-small-right" uk-icon="icon: list" />
                         </NavLink>
                     </li>
+                    <li>
+                        <a href="/api/logout">
+                            <span className="uk-margin-small-right" uk-icon="icon: sign-out" />
+                        </a>
+                    </li>
                 </ul>
             </div>
         </nav>

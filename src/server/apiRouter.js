@@ -6,23 +6,12 @@ import databaseClientFactory from './databaseClient';
 const databaseClient = databaseClientFactory();
 const apiRouter = Router();
 
-apiRouter.get('/login/:code?', (req, res) => {
-    request({
-        uri: `https://github.com/login/oauth/access_token?client_id=${process.env.GITHUB_KEY}&client_secret=${process.env.GITHUB_SECRET}&code=${req.params.code}`,
-        method: 'post',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-        },
-    }).pipe(res);
-});
-
-apiRouter.get('/success/:token?', (req, res) => {
+apiRouter.get('/success', (req, res) => {
     request({
         method: 'get',
         uri: `https://api.github.com/user`,
         headers: {
-            Authorization: 'token ' + req.params.token,
+            Authorization: 'token ' + req.session.token,
             'User-Agent': req.headers['user-agent'],
         }
     }).pipe(res);

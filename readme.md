@@ -59,7 +59,8 @@ Another point is, we don't need all with CRA shipped packages.
 - BOM Imports
 - Projects BOMs
 - ~~Login System ( ? )~~
-- Github Login
+- Github Login &#x2714;
+- Github Gists as DB ( ? )
 
 
 ### Alternatives

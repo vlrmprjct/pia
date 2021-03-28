@@ -8,17 +8,12 @@ import {
     Welcome
 } from './../';
 
-const Routes = ({
-    onSuccess = () => { },
-    ...props
-}) => {
-
-    const isLoggedIn = props.token;
+const Routes = ({ loggedIn }, ...props) => {
 
     return (
-        (!isLoggedIn) ? (
+        (!loggedIn && loggedIn !== null) ? (
             <Switch>
-                <Route path="/login" render={() => <Login {...props} onSuccess={onSuccess} />} />
+                <Route path="/login" render={() => <Login {...props} />} />
                 <Redirect to="/login" />
             </Switch>
         ) : (
