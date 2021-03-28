@@ -46,7 +46,7 @@ export const Welcome = () => {
                             {
                                 state && state.items && state.items.map((e) => {
                                     return (
-                                        <li>
+                                        <li key={`part_${e.id}`}>
                                             <Link to={`parts/${e.id}`} className="uk-padding-remove-top">
                                                 <span uk-icon="tag" className="uk-margin-small-right uk-icon" />
                                                 <span className="uk-text-middle">
