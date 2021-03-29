@@ -1,6 +1,7 @@
 import 'dotenv-flow/config';
 import express from 'express';
 import session from 'express-session';
+import bodyParser from 'body-parser';
 import passport from 'passport';
 import { Strategy } from 'passport-github';
 import databaseMiddleware from './databaseMiddleware';
@@ -41,7 +42,9 @@ app.use(session({
     saveUninitialized: true
 }));
 
-app.use(express.urlencoded({ extended: true }));
+// TODO: Without bodyparser save and update entries won't work !
+app.use(bodyParser.json());
+// app.use(express.urlencoded({ extended: true }));
 app.use(databaseMiddleware);
 app.use(express.static('dist'));
 
