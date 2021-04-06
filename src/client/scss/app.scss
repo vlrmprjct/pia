@@ -1,7 +1,3 @@
-* {
-    user-select: none;
-}
-
 body {
     margin: 0;
     padding: 0;
@@ -10,6 +6,10 @@ body {
 
 a[disabled] {
     pointer-events: none;
+}
+
+.splitter-layout > .layout-splitter {
+    background: $global-secondary-background;
 }
 
 [data-root] {
@@ -39,20 +39,18 @@ a[disabled] {
 
 header {
     grid-area: header;
-    background: var(--accent);
+    background: $global-secondary-background;
 }
 
 nav {
     grid-area: nav;
-    transition: all 0.25s ease-out;
-    overflow: hidden;
-    padding: 0;
-    background: #F6F6F8;
 }
 
 footer {
     grid-area: footer;
-    background: var(--accent);
+    text-align: center;
+    padding: 1rem 0;
+    background: $global-secondary-background;
 }
 
 main {
@@ -85,20 +83,23 @@ main {
             height: calc(100vH - 9rem);
             overflow: auto;
             overflow-y: scroll;
-            border: 1px solid #e5e5e5;
-            border-radius: 3px;
+            border-radius: $base-pre-border-radius;
+            border-width: $global-border-width;
+            border-color: $global-border;
+            border-style: solid;
             margin-right: 0.5rem;
         }
 
         .form {
-            background: var(--background-secondary);
             padding: 0.5rem 1.5rem;
             transition: all .3s ease-out;
             height: calc(100vH - 10rem);
             overflow: auto;
             overflow-y: scroll;
-            border: 1px solid #e5e5e5;
-            border-radius: 3px;
+            border-radius: $base-pre-border-radius;
+            border-width: $global-border-width;
+            border-color: $global-border;
+            border-style: solid;
             margin-left: 0.4rem;
         }
 
@@ -183,17 +184,17 @@ main {
 
     &--image {
         grid-area: image;
-        	background-image: url('../assets/media/noimage.jpg');
-            background-position: center center;
-            background-repeat: no-repeat;
-            background-size: contain;
+        background-image: url('../assets/media/noimage.jpg');
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-radius: $border-rounded-border-radius;
     }
 
     &--partnumber {
         grid-area: partnumber;
         font-size: 1rem;
         text-transform: uppercase;
-        color: #000;
     }
 
     &--description {

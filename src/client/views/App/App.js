@@ -4,7 +4,7 @@ import Icons from 'uikit/dist/js/uikit-icons';
 import { withRouter } from 'react-router';
 import { fetchAPI } from '../../utils/api';
 import { scroll } from '../../utils/scrollbar';
-import { initLocalStorage } from '../../utils/localstorage';
+import { setLocalStorage, initLocalStorage } from '../../utils/localstorage';
 
 import Routes from './Routes';
 import Header from './Header';
@@ -34,6 +34,12 @@ export const App = withRouter((props) => {
 
     useEffect(() => {
         window.addEventListener('scroll', scroll, true);
+
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            setLocalStorage({ 'theme': 'dark' });
+        }
+
     }, []);
 
     useEffect(() => {
@@ -46,16 +52,22 @@ export const App = withRouter((props) => {
         });
     }, []);
 
+    const onChangeTheme = () => {
+        const e = document.documentElement;
+        e.setAttribute('data-theme', (e.getAttribute("data-theme") !== 'dark') ? 'dark' : 'light');
+        setLocalStorage({ 'theme': e.getAttribute("data-theme") });
+    };
+
     if (state.user === null) return null;
 
     return (
         <>
-            <Header />
-            <Sidebar {...props} {...state} />
+            {state.loggedIn && <Header />}
+            {state.loggedIn && <Sidebar {...props} {...state} onChangeTheme={onChangeTheme} />}
             <main>
                 <Routes {...props} {...state} />
             </main>
-            <Footer />
+            {state.loggedIn && <Footer />}
         </>
     );
 });

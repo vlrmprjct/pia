@@ -284,7 +284,7 @@ export const Table = ({
                     </table>
                 </section>
 
-                <section ref={formPane} className="form">
+                <section ref={formPane} className="form uk-background-secondary">
                     {searchForm && (
                         <Search onSelect={(oemSelected) => {
                             onAdd(oemSelected);

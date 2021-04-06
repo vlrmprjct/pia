@@ -1,36 +1,49 @@
 nav {
     overflow-x: hidden;
     overflow-y: auto;
-    background-color: var(--accent);
     width: 100%;
     z-index:2;
     position: relative;
+    display: flex;
+    flex-flow: column;
+    height: calc(100% - 2rem);
+    padding-top: 2rem;
 
-    ul.uk-nav-default > li > a {
-        padding: 16px 16px 16px 22px;
-        border-left: 4px solid transparent;
-        transition: all 0.15s ease-out;
-        display: block;
-        width: 100%;
+    > div:first-child {
+        flex-grow: 1;
+    }
 
-        &.active {
-            color: #FFF;
-            border-left: 4px solid #FFF;
+    ul.uk-nav-default {
+        > li > a {
+            color: var(--text-primary-invert);
+            padding: 16px 16px 16px 22px;
+            border-left: 4px solid transparent;
+            transition: all 0.15s ease-out;
+            display: block;
+            width: 100%;
+
+            &.active {
+                border-left: 4px solid var(--accent);
+            }
         }
-    }
 
-    ul.uk-nav-default li.uk-nav-header {
-	    padding:  20px 20px 8px 20px;
-    }
+        li.uk-nav-header {
+	        padding:  20px 20px 8px 20px;
+        }
 
-    ul.uk-nav-default > li > a:hover,
-    ul.uk-nav-default > li.uk-open > a {
-        border-left: 4px solid rgba(255,255,255,0.2);
-        color: #FFF;
-        background: rgba(0,0,0,0.1);
-    }
+        > li > a:hover,
+        > li.uk-open > a {
+            border-left: 4px solid var(--accent-hover);
+            color: var(--accent-hover);
+            background: var(--background-primary);
+        }
 
-    ul.uk-nav-default li .uk-nav-sub {
-	    padding-left: 34px;
+        > li > a:focus {
+            color: var(--text-primary-invert);
+        }
+
+        li .uk-nav-sub {
+            padding-left: 34px;
+        }
     }
 }
