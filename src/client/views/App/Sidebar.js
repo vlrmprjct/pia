@@ -1,12 +1,13 @@
 import React from 'react';
 import { NavLink } from "react-router-dom";
 
-const Sidebar = (props) => {
-
+const Sidebar = ({
+    onChangeTheme,
+    ...props
+}) => {
     return (
-        <nav>
-            <div className="left-nav-wrap">
-
+        <nav className="uk-background-secondary">
+            <div>
                 <ul className="uk-nav uk-nav-default uk-nav-parent-icon uk-margin" data-uk-nav>
                     <li className="uk-text-center">
                         <img className="uk-icon-button" src={props.user && props.user.avatar_url} alt="" />
@@ -26,6 +27,15 @@ const Sidebar = (props) => {
                     <li>
                         <a href="/api/logout">
                             <span className="uk-margin-small-right" uk-icon="icon: sign-out" />
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <ul className="uk-nav uk-nav-default uk-nav-parent-icon uk-margin" data-uk-nav>
+                    <li>
+                        <a onClick={onChangeTheme} onKeyDown={() => { }} role="button" tabIndex="-1">
+                            <span className="uk-margin-small-right" uk-icon="icon: paint-bucket" />
                         </a>
                     </li>
                 </ul>

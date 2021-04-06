@@ -111,7 +111,10 @@ export const Form = ({
                                     <div
                                         htmlFor="image_2"
                                         className="form--entry-image-2"
-                                        style={{ backgroundImage: `url(${state[key]})` }}
+                                        style={state[key] === ''
+                                            ? null
+                                            : { backgroundImage: `url(${state[key]})`, backgroundColor: '#FFF' }
+                                        }
                                     />
                                 )
                             }

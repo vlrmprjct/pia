@@ -1,53 +1,65 @@
 @import './utils.scss';
 
-$horizon: (
+$horizonLight: (
     "--accent": #4167A4,
+    "--accent-hover": #4167A4EE,
     "--background-primary": #FFFFFF,
     "--background-secondary": #F8F8F8,
+    "--background-overlay": #1C1E2699,
     "--border-default": #E5E5E5,
-    "--border-dark": #CCCCCC,
-
+    "--mark-color": #E5E5E5,
     "--text-primary": #666666,
-
-    "--background-success": #32d296,
-    "--background-danger": #F0506E,
-    "--color-success": #169768,
-    "--color-danger": #B42E47,
-
-
-    "--themePrimary": #e95378,
-    "--themeLighterAlt": #090305,
-    "--themeLighter": #250d13,
-    "--themeLight": #461924,
-    "--themeTertiary": #8b3248,
-    "--themeSecondary": #cc4a6a,
-    "--themeDarkAlt": #ea6385,
-    "--themeDark": #ee7a97,
-    "--themeDarker": #f29bb1,
-    "--neutralLighterAlt": #1c1d25,
-    "--neutralLighter": #1b1d25,
-    "--neutralLight": #1a1c23,
-    "--neutralQuaternaryAlt": #181a21,
-    "--neutralQuaternary": #17191f,
-    "--neutralTertiaryAlt": #16181e,
-    "--neutralTertiary": #c8c8c8,
-    "--neutralSecondary": #d0d0d0,
-    "--neutralPrimaryAlt": #dadada,
-    "--neutralPrimary": #ffffff,
-    "--neutralDark": #f4f4f4,
-    "--black": #f8f8f8,
-    "--white": #1c1e26,
+    "--text-primary-disabled": #99999956,
+    "--text-primary-invert": #16161C,
+    "--background-success": #27D796,
+    "--background-warning": #FAB28E,
+    "--background-danger": #F43E5C,
 );
 
-:root {
-    @each $key, $value in $horizon {
-        // {$key}: unquote($value);
+$horizonDark: (
+    "--accent": #21BFC2,
+    "--accent-hover": #21BFC2CC,
+    "--background-primary": #16161C,
+    "--background-secondary": #1C1E26,
+    "--background-overlay": #1C1E2699,
+    "--border-default": #2E303E,
+    "--mark-color": #2E303E,
+    "--text-primary": #9EA1A4,
+    "--text-primary-disabled": #99999956,
+    "--text-primary-invert": #FFFFFF,
+    "--background-success": #27D796,
+    "--background-warning": #FAB28E,
+    "--background-danger": #F43E5C,
+);
+
+:root[data-theme="dark"] {
+    @each $key, $value in $horizonDark {
         #{$key}: $value;
     }
 }
 
+:root[data-theme="light"] {
+    @each $key, $value in $horizonLight {
+        #{$key}: $value;
+    }
+}
+
+:root {
+    @each $key, $value in $horizonLight {
+        #{$key}: $value;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        @each $key, $value in $horizonDark {
+            #{$key}: $value;
+        }
+    }
+}
+
 :export {
-    @each $key, $value in $horizon {
+    @each $key, $value in $horizonDark {
         #{str-replace($key, '--', '')}: $value;
     }
 }

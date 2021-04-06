@@ -8,9 +8,8 @@
 
     &:invalid,
     &:focus:invalid {
-        border-color: var(--color-danger);
+        border-color: var(--backround-danger);
     }
-
 }
 
 @mixin hook-form-focus() {
@@ -20,45 +19,20 @@
 }
 
 @mixin hook-button-primary() {
-    // border: 1px solid red;
+    //
 }
 
 @mixin hook-button-default() {
-    // border: 1px solid $global-border;
+    border-radius: $base-pre-border-radius;
+    border-width: $global-border-width;
+    border-color: $global-border;
+    border-style: solid;
 }
 
 @mixin hook-button() {
     border-radius: $base-pre-border-radius;
-    // font-size: 1rem;
-    // font-weight: normal;
-    // line-height: 2.7rem;
-
-    .uk-button-group & {
-        // border: 1px solid $global-border;
-
-        // &:nth-child(odd),
-        // &:nth-child(even) {
-        //     border-right: none;
-        //     border-radius: 0;
-        // }
-
-        // &:first-child {
-        //     border-radius: 3px 0 0 3px;
-        // }
-
-        // &:last-child {
-        //     border-right: 1px solid $global-border;
-        //     border-radius: 0 3px 3px 0;
-        // }
-
-        // &:not(:first-child):not(:last-child) {
-        //     // background-color: red;
-        // }
-
-        // &:nth-child(1){
-        //     background-color: green;
-        // }
-    }
+    line-height: 2.75rem;
+    padding: 0 1.5rem;
 }
 
 .uk-button-group {
@@ -98,12 +72,14 @@
     &-hollow,
     &-hollow-primary {
         background: transparent;
-        border: 1px solid $global-primary-background;
-        color: $text-primary-color;
+        border-radius: $base-pre-border-radius;
+        border-width: $global-border-width;
+        border-color: $global-border;
+        border-style: solid;
+        color: $global-color;
 
         &.uk-active {
             background: $global-primary-background !important;
-            border: 1px solid $global-primary-background;
             color: $global-inverse-color;
         }
     }
@@ -125,4 +101,25 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+
+
+@mixin hook-notification-message-primary() {
+    border-radius: $base-pre-border-radius;
+    border: 1px solid var(--background-primary);
+}
+
+@mixin hook-notification-message-success() {
+    border-radius: $base-pre-border-radius;
+    border: 1px solid var(--background-success);
+}
+
+@mixin hook-notification-message-warning() {
+    border-radius: $base-pre-border-radius;
+    border: 1px solid var(--background-warning);
+}
+
+@mixin hook-notification-message-danger() {
+    border-radius: $base-pre-border-radius;
+    border: 1px solid var(--background-danger);
 }

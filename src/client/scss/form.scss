@@ -43,26 +43,34 @@ $itemAttributes: (
             [row8] "image image image" fit-content(0) [row8]
             [row8] "link link link" fit-content(0) [row8]
             [row9] "tags tags tags" fit-content(0) [row9]
-            [row10] "null-2 date_created date_updated" fit-content(0) [row10]
-            [row11] "footer footer footer" fit-content(0) [row11]
+            [row10] "date_created date_updated footer" fit-content(0) [row10]
             / 1fr 1fr 1fr;
     }
 
     &--entry-separator-1,
     &--entry-separator-2 {
-        border-top: 1px solid var(--border-dark);
+        border-radius: $base-pre-border-radius;
+        border-width: $global-border-width;
+        border-color: $global-border;
+        border-style: solid;
         margin-top: 1rem;
     }
 
 
     &--entry-image-2 {
         margin-top: 2rem;
-        background: var(--background-primary);
-        border: 1px solid #e5e5e5;
-        border-radius: 3px;
+        border-radius: $base-pre-border-radius;
+        border-width: $global-border-width;
+        border-color: $global-border;
+        border-style: solid;
         background-repeat: no-repeat;
         background-position: center;
-        background-size: 57.5%;
+        background-size: 56.5%;
+    }
+
+    &--entry-footer {
+        padding-top: 2rem;
+        text-align: right;
     }
 
     @each $itemAttribute in $itemAttributes {

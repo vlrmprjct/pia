@@ -154,7 +154,7 @@ export const Parts = () => {
                         message: (response.status === 200) ? 'Saved successfully' : 'Oops, something went wrong!',
                         status: (response.status === 200) ? 'success' : 'danger',
                         pos: 'top-right',
-                        timeout: 5,
+                        timeout: 1500,
                     });
                 } catch (error) {
                     throw error;
