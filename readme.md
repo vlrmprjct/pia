@@ -18,14 +18,14 @@ __Please note:__  __WIP__ means, proof of concept and not finishid yet !
 ---
 
 ## Screenshots
-<!-- ![PIA Cast](doc/view-pia.gif) -->
-![Login View](doc/view-login.jpg)
-![Welcome View](doc/view-welcome.jpg)
-![Parts View with selected Part Form](doc/view-parts-1.jpg)
-![Parts View with OEMSecret Search](doc/view-parts-2.jpg)
-![Parts View with new Part Form](doc/view-parts-3.jpg)
-![Parts View with selected supplier OEMSecret Search](doc/view-parts-4.jpg)
 
+| Light | Dark |
+|--|--|
+| ![](doc/view-login.jpg) | ![](doc/view-login.jpg) |
+| ![](doc/view-welcome-light.jpg) | ![](doc/view-welcome-dark.jpg) |
+| ![](doc/view-parts-1-light.jpg) | ![](doc/view-parts-1-dark.jpg)
+| ![](doc/view-parts-2-light.jpg) | ![](doc/view-parts-2-dark.jpg)
+| ![](doc/view-parts-3-light.jpg) | ![](doc/view-parts-3-dark.jpg)
 ---
 
   - [Introduction](#introduction)
@@ -62,6 +62,7 @@ Another point is, we don't need all with CRA shipped packages.
 - BOM Imports
 - Projects BOMs
 - ~~Login System ( ? )~~
+- Dark Mode according OS Settings &#x2714;
 - Github Login &#x2714;
 - Github Gists as DB ( ? )
 
