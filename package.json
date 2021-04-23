@@ -5,7 +5,10 @@
     "main": "src/server/index.js",
     "scripts": {
         "build": "rm -rf dist && webpack --config config/webpack.config.js --env.production",
-        "build:netlify": "concurrently 'yarn build' 'node server.js'",
+        "build:netlify": "concurrently 'yarn build' 'node dist/server.js'",
+
+        "build:netlify2": "concurrently \"yarn build\" \"wait-on node dist/server.js .\"",
+
         "build:start": "concurrently 'node dist/server.js' 'npx http-server dist'",
         "start": "concurrently 'yarn start:client' 'yarn start:server' 'nodemon dist/server.js'",
         "start:client": "webpack-dev-server --config config/webpack.config.js --config-name client --env.development --hot",
@@ -17,6 +20,7 @@
         "@csstools/normalize.css": "^11.0.1",
         "babel-polyfill": "^6.26.0",
         "better-sqlite3": "^5.4.3",
+        "concurrently": "^6.0.2",
         "cuid": "^2.1.8",
         "express": "^4.17.1",
         "express-session": "^1.17.1",
@@ -31,6 +35,7 @@
         "react-splitter-layout": "^4.0.0",
         "react-table": "^7.0.0",
         "uikit": "^3.3.1",
+        "wait-on": "^5.3.0",
         "webpack-stylish": "^0.1.8"
     },
     "devDependencies": {
@@ -41,7 +46,6 @@
         "@svgr/webpack": "^5.5.0",
         "babel-eslint": "^10.0.0",
         "babel-loader": "^8.0.0",
-        "concurrently": "^4.0.0",
         "css-loader": "^2.0.0",
         "dotenv": "^8.2.0",
         "dotenv-flow": "^3.2.0",
