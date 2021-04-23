@@ -1,10 +1,22 @@
 import 'dotenv-flow/config';
 import { Router } from 'express';
 import request from 'request';
-import databaseClientFactory from './databaseClient';
+import databaseClient from './databaseClient';
 
-const databaseClient = databaseClientFactory();
 const apiRouter = Router();
+
+const defaultRoute = (req, res, next) => {
+    if (!req.isAuthenticated()) {
+        res.status(401).send({
+            'status': 'unauthorized',
+            'message': 'authentication is required',
+        });
+    } else {
+        next();
+    }
+};
+
+apiRouter.get("/*", defaultRoute);
 
 apiRouter.get('/success', (req, res) => {
     request({
@@ -54,32 +66,32 @@ apiRouter.get('/mouser/:query?', (req, res) => {
 });
 
 apiRouter.get('/parts', (req, res) => {
-    const entries = databaseClient.listEntries();
+    const entries = databaseClient(req.dbname).listEntries();
     res.status(200).send(entries);
 });
 
 apiRouter.get('/partcolumns', (req, res) => {
-    const entries = databaseClient.getPartColumns();
+    const entries = databaseClient(req.dbname).getPartColumns();
     res.status(200).send(entries);
 });
 
 apiRouter.post('/part', (req, res) => {
-    const updateEntry = databaseClient.updateEntry(req.body);
+    const updateEntry = databaseClient(req.dbname).updateEntry(req.body);
     res.status(200).send(updateEntry);
 });
 
 apiRouter.get('/part/:id?', (req, res) => {
-    const entries = databaseClient.getEntry(req.params.id);
+    const entries = databaseClient(req.dbname).getEntry(req.params.id);
     res.status(200).send(entries);
 });
 
 apiRouter.post('/addpart', (req, res) => {
-    const addItem = databaseClient.addEntry(req.body);
+    const addItem = databaseClient(req.dbname).addEntry(req.body);
     res.status(200).send(addItem);
 });
 
 apiRouter.get('/latestentries', (req, res) => {
-    const entries = databaseClient.latestEntries(req.body);
+    const entries = databaseClient(req.dbname).latestEntries(req.body);
     res.status(200).send(entries);
 });
 

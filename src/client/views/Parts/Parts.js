@@ -13,7 +13,7 @@ export const Parts = () => {
         addForm: id === 'new',
         index: null,
         items: [],
-        item: {},
+        item: [],
         current: 'SAVE',
         searchForm: false,
     });
@@ -21,7 +21,7 @@ export const Parts = () => {
     useEffect(() => {
         fetchAPI('/api/parts', (data) => {
 
-            if (state.addForm &&  data.length > 0) {
+            if (state.addForm && data.length >= 0) {
                 (async () => {
                     const response = await fetch('/api/partcolumns');
                     const columns = await response.json();

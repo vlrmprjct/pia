@@ -92,7 +92,6 @@ main {
 
         .form {
             padding: 0.5rem 1.5rem;
-            transition: all .3s ease-out;
             height: calc(100vH - 10rem);
             overflow: auto;
             overflow-y: scroll;
@@ -101,6 +100,10 @@ main {
             border-color: $global-border;
             border-style: solid;
             margin-left: 0.4rem;
+
+            &:focus-within {
+                border-color: $form-focus-color;
+            }
         }
 
         .toolbar {

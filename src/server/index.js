@@ -43,14 +43,14 @@ app.use(session({
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(databaseMiddleware);
 app.use(express.static('dist'));
 
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(databaseMiddleware);
+
 app.use((req, res, next) => {
-    // console.log('req.session);
     next();
 });
 

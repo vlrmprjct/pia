@@ -1,4 +1,5 @@
 ![GitHub License](https://img.shields.io/github/license/vlrmprjct/pia?style=flat-square)
+![Netlify](https://img.shields.io/netlify/c2894477-e591-48d1-83b2-c4e6e987277f?style=flat-square)
 ![GitHub Issues](https://img.shields.io/github/issues/vlrmprjct/pia?style=flat-square)
 ![GitHub last commit](https://img.shields.io/github/last-commit/vlrmprjct/pia?style=flat-square)
 ![GitHub (Pre-)Release Date](https://img.shields.io/github/release-date-pre/vlrmprjct/pia?style=flat-square)
