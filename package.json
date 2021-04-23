@@ -5,7 +5,7 @@
     "main": "src/server/index.js",
     "scripts": {
         "build": "rm -rf dist && webpack --config config/webpack.config.js --env.production",
-        "build:netlify": "concurrently 'yarn build' 'node dist/server.js'",
+        "build:netlify": "concurrently 'yarn build' 'node server.js'",
         "build:start": "concurrently 'node dist/server.js' 'npx http-server dist'",
         "start": "concurrently 'yarn start:client' 'yarn start:server' 'nodemon dist/server.js'",
         "start:client": "webpack-dev-server --config config/webpack.config.js --config-name client --env.development --hot",
