@@ -2,9 +2,13 @@ import 'dotenv-flow/config';
 import path from 'path';
 import Sql from 'better-sqlite3';
 
-const dbPath = path.join(__dirname, `../db/${process.env.DB_NAME}.db`);
+const databaseClient = (dbname) => {
 
-const databaseClient = () => {
+    const dbDirPath = (process.env.NODE_ENV === 'development')
+        ? path.join(__dirname, '../db')
+        : path.join(__dirname, './db');
+
+    const dbPath = `${dbDirPath}/${dbname}.db`;
 
     const addEntry = (data) => {
         delete data.id;
