@@ -1,0 +1,18 @@
+{
+    "version": 2,
+    "public": false,
+    "routes": [
+        {
+            "src": "/dist/.*",
+            "dest": "/dist/server.js"
+        },
+        {
+            "src": "^/static/(.*)",
+            "dest": "/static/$1"
+        },
+        {
+            "src": ".*",
+            "dest": "/index.html"
+        }
+    ]
+}
