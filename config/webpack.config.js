@@ -107,7 +107,7 @@ module.exports = env => {
                 port: 3000,
                 open: false,
                 proxy: {
-                    '/api': 'http://localhost:8080'
+                    '/api': 'http://localhost:5000'
                 }
             },
             plugins: [
