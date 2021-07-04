@@ -10,7 +10,7 @@
         "start:client": "webpack-dev-server --config config/webpack.config.js --config-name client --env.development --hot",
         "start:server": "webpack --config config/webpack.config.js --config-name server --env.development --profile --watch",
 
-        "start:api": "nodemon api/server.js",
+        "start:api": "nodemon api/server.1.js",
         "now-build": "yarn build"
     },
     "author": "Thomas Meschke",
