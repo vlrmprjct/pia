@@ -27,19 +27,6 @@ module.exports = env => {
                 __dirname: false
             },
             stats: 'none',
-            // module: {
-            //     rules: [
-            //         {
-            //             test: /\.(js|jsx)$/,
-            //             use: { loader: 'babel-loader' },
-            //             include: __dirname,
-            //             exclude: /node_modules/
-            //         }
-            //     ]
-            // },
-            plugins: [
-                // stylish,
-            ],
             output: {
                 path: path.join(__dirname, buildDir),
                 filename: 'server.js'

@@ -12,7 +12,8 @@ const app = express();
 passport.use(new Strategy({
     clientID: process.env.GITHUB_KEY,
     clientSecret: process.env.GITHUB_SECRET,
-    callbackURL: '/api/login',
+    // callbackURL: '/api/login',
+    callbackURL: "/api/login",
     passReqToCallback: true,
 },(req, accessToken, refreshToken, profile, cb) => {
     req.session.token = accessToken;
