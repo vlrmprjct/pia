@@ -7,8 +7,8 @@
             "destination": "/api/server.js"
         },
         {
-            "source": ".*",
-            "destination": "/index.html"
+            "source": "/(.*)",
+            "destination": "/"
         }
     ]
 }
