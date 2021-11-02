@@ -1,11 +1,13 @@
 {
     "version": 2,
     "public": false,
-    "routes": [
+    "rewrites": [
         {
-            "src": "/api/.*",
-            "dest": "/api/server.js"
-        },
+            "source": "/dist/server.js",
+            "destination": "/api/server.js"
+        }
+    ],
+    "routes": [
         {
             "src": "^/(.*)",
             "dest": "/$1"
