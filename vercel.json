@@ -1,12 +1,6 @@
 {
     "version": 2,
     "public": false,
-    "builds": [
-        {
-            "src": "./server.js",
-            "use": "@vercel/node"
-        }
-    ],
     "rewrites": [
         {
             "source": "/((?!api\/.*).*)",
