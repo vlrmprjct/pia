@@ -3,8 +3,8 @@
     "public": false,
     "routes": [
         {
-            "src": "/api/.*",
-            "dest": "/api/server.js"
+            "src": "/dist/.*",
+            "dest": "/dist/server.js"
         },
         {
             "src": "^/(.*)",
