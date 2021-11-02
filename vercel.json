@@ -7,8 +7,8 @@
             "destination": "/index.html"
         },
         {
-            "src": "/api/(.*)",
-            "dest": "/api/server.js"
+            "source": "/dist/server.js",
+            "destination": "/api/server.js"
         }
     ]
 }
