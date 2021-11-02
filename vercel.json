@@ -5,16 +5,10 @@
         {
             "source": "/dist/server.js",
             "destination": "/api/server.js"
-        }
-    ],
-    "routes": [
-        {
-            "src": "^/(.*)",
-            "dest": "/$1"
         },
         {
-            "src": ".*",
-            "dest": "/index.html"
+            "source": ".*",
+            "destination": "/index.html"
         }
     ]
 }
