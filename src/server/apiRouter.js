@@ -1,7 +1,7 @@
 import 'dotenv-flow/config';
 import { Router } from 'express';
 import request from 'request';
-import databaseClient from './databaseClient';
+// import databaseClient from './databaseClient';
 
 const apiRouter = Router();
 
@@ -65,34 +65,34 @@ apiRouter.get('/mouser/:query?', (req, res) => {
     }).pipe(res);
 });
 
-apiRouter.get('/parts', (req, res) => {
-    const entries = databaseClient(req.dbname).listEntries();
-    res.status(200).send(entries);
-});
+// apiRouter.get('/parts', (req, res) => {
+//     const entries = databaseClient(req.dbname).listEntries();
+//     res.status(200).send(entries);
+// });
 
-apiRouter.get('/partcolumns', (req, res) => {
-    const entries = databaseClient(req.dbname).getPartColumns();
-    res.status(200).send(entries);
-});
+// apiRouter.get('/partcolumns', (req, res) => {
+//     const entries = databaseClient(req.dbname).getPartColumns();
+//     res.status(200).send(entries);
+// });
 
-apiRouter.post('/part', (req, res) => {
-    const updateEntry = databaseClient(req.dbname).updateEntry(req.body);
-    res.status(200).send(updateEntry);
-});
+// apiRouter.post('/part', (req, res) => {
+//     const updateEntry = databaseClient(req.dbname).updateEntry(req.body);
+//     res.status(200).send(updateEntry);
+// });
 
-apiRouter.get('/part/:id?', (req, res) => {
-    const entries = databaseClient(req.dbname).getEntry(req.params.id);
-    res.status(200).send(entries);
-});
+// apiRouter.get('/part/:id?', (req, res) => {
+//     const entries = databaseClient(req.dbname).getEntry(req.params.id);
+//     res.status(200).send(entries);
+// });
 
-apiRouter.post('/addpart', (req, res) => {
-    const addItem = databaseClient(req.dbname).addEntry(req.body);
-    res.status(200).send(addItem);
-});
+// apiRouter.post('/addpart', (req, res) => {
+//     const addItem = databaseClient(req.dbname).addEntry(req.body);
+//     res.status(200).send(addItem);
+// });
 
-apiRouter.get('/latestentries', (req, res) => {
-    const entries = databaseClient(req.dbname).latestEntries(req.body);
-    res.status(200).send(entries);
-});
+// apiRouter.get('/latestentries', (req, res) => {
+//     const entries = databaseClient(req.dbname).latestEntries(req.body);
+//     res.status(200).send(entries);
+// });
 
 export default apiRouter;

@@ -7,11 +7,11 @@ export const Welcome = () => {
     const [state, setState] = useState({});
 
     useEffect(() => {
-        fetchAPI('/api/latestentries', (data) => {
-            setState({
-                items: data,
-            });
-        });
+        // fetchAPI('/api/latestentries', (data) => {
+        //     setState({
+        //         items: data,
+        //     });
+        // });
     }, []);
 
     return (
