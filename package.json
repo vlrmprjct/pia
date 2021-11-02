@@ -11,7 +11,7 @@
         "start:server": "webpack --config config/webpack.config.js --config-name server --env.development --profile --watch",
 
         "start:api": "nodemon api/server.1.js",
-        "now-build": "yarn build"
+        "now-build": "yarn build && cp dist/server.js api/server.js"
     },
     "author": "Thomas Meschke",
     "license": "MIT",
