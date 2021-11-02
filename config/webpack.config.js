@@ -28,7 +28,7 @@ module.exports = env => {
             },
             stats: 'none',
             output: {
-                path: path.join(__dirname, buildDir),
+                path: path.join(__dirname, '../api'),
                 filename: 'server.js'
             },
         },
