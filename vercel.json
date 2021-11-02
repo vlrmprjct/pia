@@ -3,7 +3,7 @@
     "public": false,
     "builds": [
         {
-            "src": "/api/server.js",
+            "src": "/server.js",
             "use": "@vercel/node"
         }
     ],
@@ -11,6 +11,10 @@
         {
             "source": "/((?!api\/.*).*)",
             "destination": "/index.html"
+        },
+        {
+            "source": "/api/(.*)",
+            "destination": "/server.js"
         }
     ]
 }
