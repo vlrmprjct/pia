@@ -1,14 +1,18 @@
 {
     "version": 2,
     "public": false,
-    "rewrites": [
+    "routes": [
         {
-            "source": "/(.*)",
-            "destination": "/index.html"
+            "src": "/api/.*",
+            "dest": "/api/server.js"
         },
         {
-            "source": "/server.js",
-            "destination": "/api/server.js"
+            "src": "^/(.*)",
+            "dest": "/$1"
+        },
+        {
+            "src": ".*",
+            "dest": "/index.html"
         }
     ]
 }
