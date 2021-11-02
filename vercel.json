@@ -3,12 +3,8 @@
     "public": false,
     "rewrites": [
         {
-            "source": "/dist/server.js",
-            "destination": "/api/server.js"
-        },
-        {
             "source": "/(.*)",
-            "destination": "/"
+            "destination": "/index.html"
         }
     ]
 }
