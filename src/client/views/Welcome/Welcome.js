@@ -7,11 +7,11 @@ export const Welcome = () => {
     const [state, setState] = useState({});
 
     useEffect(() => {
-        // fetchAPI('/api/latestentries', (data) => {
-        //     setState({
-        //         items: data,
-        //     });
-        // });
+        fetchAPI('/api/latestentries', (data) => {
+            setState({
+                items: data,
+            });
+        });
     }, []);
 
     return (
@@ -41,7 +41,7 @@ export const Welcome = () => {
                     </section>
 
                     <section className="recent">
-                        <h3>Recent Parts</h3>
+                        <h3>Latest Parts</h3>
                         <ul className="uk-nav ul-margin-top uk-margin-bottom">
                             {
                                 state && state.items && state.items.map((e) => {

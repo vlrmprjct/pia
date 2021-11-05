@@ -3,7 +3,7 @@ import express from 'express';
 import session from 'express-session';
 import passport from 'passport';
 import { Strategy } from 'passport-github';
-// import databaseMiddleware from './databaseMiddleware';
+import databaseMiddleware from './databaseMiddleware';
 import authRouter from './authRouter';
 import apiRouter from './apiRouter';
 
@@ -12,7 +12,6 @@ const app = express();
 passport.use(new Strategy({
     clientID: process.env.GITHUB_KEY,
     clientSecret: process.env.GITHUB_SECRET,
-    // callbackURL: '/api/login',
     callbackURL: "/api/login",
     passReqToCallback: true,
 },(req, accessToken, refreshToken, profile, cb) => {
@@ -49,7 +48,7 @@ app.use(express.static('dist'));
 app.use(passport.initialize());
 app.use(passport.session());
 
-// app.use(databaseMiddleware);
+app.use(databaseMiddleware);
 
 app.use((req, res, next) => {
     next();

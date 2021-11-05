@@ -1,9 +1,21 @@
 import 'dotenv-flow/config';
 import { Router } from 'express';
+import Gitrows from 'gitrows';
 import request from 'request';
-// import databaseClient from './databaseClient';
 
 const apiRouter = Router();
+
+const userParts = (id) => process.env.DB_PATH + id + '/parts.json';
+
+const gitrows = new Gitrows({
+    user: 'vlrmprjct',
+    author: {
+        name: 'GitRows',
+        email: 'api@gitrows.com',
+    },
+    token: process.env.GITHUB_ACCESS,
+    strict: false,
+});
 
 const defaultRoute = (req, res, next) => {
     if (!req.isAuthenticated()) {
@@ -65,15 +77,19 @@ apiRouter.get('/mouser/:query?', (req, res) => {
     }).pipe(res);
 });
 
-// apiRouter.get('/parts', (req, res) => {
-//     const entries = databaseClient(req.dbname).listEntries();
-//     res.status(200).send(entries);
-// });
+apiRouter.get('/parts', (req, res) => {
+    gitrows.get(userParts(req.dbname))
+        .then((data) => {
+            res.status(200).send(data && data);
+        });
+});
 
-// apiRouter.get('/partcolumns', (req, res) => {
-//     const entries = databaseClient(req.dbname).getPartColumns();
-//     res.status(200).send(entries);
-// });
+apiRouter.get('/partcolumns', (req, res) => {
+    gitrows.get(process.env.DB_PATH + 'structure.json')
+        .then((data) => {
+            res.status(200).send(data);
+        });
+});
 
 // apiRouter.post('/part', (req, res) => {
 //     const updateEntry = databaseClient(req.dbname).updateEntry(req.body);
@@ -90,9 +106,11 @@ apiRouter.get('/mouser/:query?', (req, res) => {
 //     res.status(200).send(addItem);
 // });
 
-// apiRouter.get('/latestentries', (req, res) => {
-//     const entries = databaseClient(req.dbname).latestEntries(req.body);
-//     res.status(200).send(entries);
-// });
+apiRouter.get('/latestentries', (req, res) => {
+    gitrows.get(userParts(req.dbname))
+        .then((data) => {
+            res.status(200).send(data && data.slice(-5));
+        });
+});
 
 export default apiRouter;

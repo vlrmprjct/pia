@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import Sql from 'better-sqlite3';
+import Gitrows from 'gitrows';
 
 const dbDirPath = (process.env.NODE_ENV === 'development')
     ? path.join(__dirname, '../db')
@@ -14,7 +15,32 @@ const databaseMiddleware = (req, res, next) => {
 
     if (req.isAuthenticated()) {
 
-        req.dbname = process.env.DB_NAME || req.session.passport.user.id;
+        req.dbname = req.session.passport.user.id;
+
+        const data = { "id": "123", "name": "bar", "type": "ipsum" };
+
+        const gitrows = new Gitrows({
+            user: "vlrmprjct",
+            author: {
+                name: req.dbname,
+                email: req.dbname,
+            },
+            message: 'user dir ' + req.dbname + ' created',
+            token: process.env.GITHUB_ACCESS,
+            strict: false,
+        });
+
+        gitrows.create('@github/vlrmprjct/pia-database/' + req.dbname + '/parts.json', data)
+            .then(() => {
+                gitrows.put('@github/vlrmprjct/pia-database/' + req.dbname + '/projects.json', {})
+                    .then(() => {
+                        gitrows.put('@github/vlrmprjct/pia-database/' + req.dbname + '/settings.json', {})
+                            .then(() => {})
+                            .catch(() => {});
+                    })
+                    .catch(() => {});
+            })
+            .catch(() => {});
 
         const db = new Sql(path.join(dbDirPath, `${req.dbname}.db`));
 
