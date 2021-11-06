@@ -13,6 +13,7 @@ const gitrows = new Gitrows({
         name: 'GitRows',
         email: 'api@gitrows.com',
     },
+    // message: 'user dir ' + req.userID + ' for ' + req.userName + ' created',
     token: process.env.GITHUB_ACCESS,
     strict: false,
 });
@@ -78,7 +79,7 @@ apiRouter.get('/mouser/:query?', (req, res) => {
 });
 
 apiRouter.get('/parts', (req, res) => {
-    gitrows.get(userParts(req.dbname))
+    gitrows.get(userParts(req.userID))
         .then((data) => {
             res.status(200).send(data && data);
         });
@@ -91,15 +92,19 @@ apiRouter.get('/partcolumns', (req, res) => {
         });
 });
 
-// apiRouter.post('/part', (req, res) => {
-//     const updateEntry = databaseClient(req.dbname).updateEntry(req.body);
-//     res.status(200).send(updateEntry);
-// });
+apiRouter.post('/part', (req, res) => {
+    gitrows.update(userParts(req.userID), req.body, { id: req.body.id })
+        .then((response) => {
+            res.status(200).send(response);
+        });
+});
 
-// apiRouter.get('/part/:id?', (req, res) => {
-//     const entries = databaseClient(req.dbname).getEntry(req.params.id);
-//     res.status(200).send(entries);
-// });
+apiRouter.get('/parts/:id?', (req, res) => {
+    gitrows.get(userParts(req.userID), { id: req.params.id })
+        .then((data) => {
+            res.status(200).send(data);
+        });
+});
 
 // apiRouter.post('/addpart', (req, res) => {
 //     const addItem = databaseClient(req.dbname).addEntry(req.body);
@@ -107,7 +112,7 @@ apiRouter.get('/partcolumns', (req, res) => {
 // });
 
 apiRouter.get('/latestentries', (req, res) => {
-    gitrows.get(userParts(req.dbname))
+    gitrows.get(userParts(req.userID))
         .then((data) => {
             res.status(200).send(data && data.slice(-5));
         });

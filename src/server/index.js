@@ -57,5 +57,5 @@ app.use((req, res, next) => {
 app.use('/api', authRouter);
 app.use('/api', apiRouter);
 app.listen(process.env.PORT || 5000, () => {
-    console.info(`Listening on port ${process.env.PORT || 5000}!`);
+    console.info(`Listening on port ${process.env.PORT || 5000}! 👾`);
 });

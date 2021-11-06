@@ -70,14 +70,6 @@ export const Table = ({
     const columns = useMemo(
         () => [
             {
-                Header: 'ID',
-                accessor: 'id',
-                minWidth: 40,
-                width: 40,
-                maxWidth: 40,
-                className: 'uk-text-muted'
-            },
-            {
                 Header: 'Name',
                 accessor: 'name',
                 width: 130,

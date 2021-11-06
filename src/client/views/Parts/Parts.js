@@ -56,12 +56,12 @@ export const Parts = () => {
     }, []);
 
     useEffect(() => {
-        if (!isNaN(parseInt(id))) {
+        if (id && id.length > 0) {
             setState({
                 ...state,
                 current: 'UPDATE',
-                index: state.items.findIndex((x) => (x.id === parseInt(id))),
-                item: state.items.filter(e => (e.id === parseInt(id)))[0],
+                index: state.items.findIndex((x) => (x.id === id)),
+                item: state.items.filter(e => (e.id === id))[0],
             });
         }
     }, [state.items]);
@@ -191,7 +191,6 @@ export const Parts = () => {
 
     const onSearch = () => {
         setState({ ...state, searchForm: true });
-        console.log('SEARCH');
         return true;
     };
 

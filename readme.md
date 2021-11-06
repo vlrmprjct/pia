@@ -7,7 +7,7 @@
 
 # **PIA**  ( **P**arts **I**nventory **A**ssistant ) ( evolved )
 
-This is a &#x26A0; __working in progress__ &#x26A0; Electronics Parts/component Inventory Application called PIA using SQLite, ExpressJS and ReactJS but ___without___ [CRA](https://github.com/facebook/create-react-app).
+This is a &#x26A0; __working in progress__ &#x26A0; Electronics Parts/component Inventory Application called PIA using ExpressJS and ReactJS but ___without___ [CRA](https://github.com/facebook/create-react-app).
 
 There a many ready to use Inventory-Systems or -Applications written in PHP or other languages
 with a huge overkill about functions or server configurations.
@@ -57,15 +57,16 @@ Another point is, we don't need all with CRA shipped packages.
 - DOT.ENV Support &#x2714;
 - ~~Initial setup process~~
 - Build Process &#x2714;
-- Electron Wrapper
+- Vercel App Integration &#x2714;
+- Electron Wrapper ( ? )
 - ~~Octopart API Integration ( ? )~~
 - OEMSecret API Integration &#x2714;
 - BOM Imports
 - Projects BOMs
-- ~~Login System ( ? )~~
 - Dark Mode according OS Settings &#x2714;
 - Github Login &#x2714;
-- Github Gists as DB ( ? )
+- ~~Github Gists as DB~~
+- Repository as DB using [GitRows](https://github.com/gitrows/gitrows)
 
 
 ### Alternatives
