@@ -217,7 +217,7 @@ export const Table = ({
             <SplitterLayout
                 customClassName="pane"
                 secondaryInitialSize={getLocalStorage('datapanesize') || 550}
-                secondaryMinSize={20}
+                secondaryMinSize={480}
                 primaryMinSize={550}
                 onDragEnd={() => {
                     setLocalStorage({ 'datapanesize': formPane.current.offsetWidth });
