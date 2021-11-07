@@ -83,7 +83,7 @@ apiRouter.get('/mouser/:query?', (req, res) => {
 apiRouter.get('/parts', (req, res) => {
     gitrows.get(userParts(req.userID))
         .then((data) => {
-            res.status(200).send(data && data);
+            res.status(200).send(data && data.reverse());
         });
 });
 
@@ -131,7 +131,7 @@ apiRouter.post('/addpart', (req, res) => {
         }
     };
 
-    gitrows.put(userParts(req.userID), { ...req.body, ...{ "id": cuid() } })
+    gitrows.put(userParts(req.userID), data)
         .then((response) => {
             res.status(response.code).send(data);
         });
@@ -140,7 +140,7 @@ apiRouter.post('/addpart', (req, res) => {
 apiRouter.get('/latestentries', (req, res) => {
     gitrows.get(userParts(req.userID))
         .then((data) => {
-            res.status(200).send(data && data.slice(-5));
+            res.status(200).send(data && data.slice(-5).reverse());
         });
 });
 
