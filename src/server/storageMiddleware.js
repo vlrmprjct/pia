@@ -1,6 +1,6 @@
 import Gitrows from 'gitrows';
 
-const databaseMiddleware = (req, res, next) => {
+const storageMiddleware = (req, res, next) => {
 
     if (req.isAuthenticated()) {
 
@@ -38,4 +38,4 @@ const databaseMiddleware = (req, res, next) => {
     next();
 };
 
-export default databaseMiddleware;
+export default storageMiddleware;
