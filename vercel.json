@@ -1,0 +1,14 @@
+{
+    "version": 2,
+    "public": false,
+    "rewrites": [
+        {
+            "source": "/((?!api\/.*).*)",
+            "destination": "/index.html"
+        },
+        {
+            "source": "/api/(.*)",
+            "destination": "/api/server.js"
+        }
+    ]
+}
