@@ -66,7 +66,7 @@ Another point is, we don't need all with CRA shipped packages.
 - Dark Mode according OS Settings &#x2714;
 - Github Login &#x2714;
 - ~~Github Gists as DB~~
-- Repository as DB using [GitRows](https://github.com/gitrows/gitrows)
+- Repository as Storage using [GitRows](https://github.com/gitrows/gitrows)
 
 
 ### Alternatives
@@ -82,10 +82,6 @@ Another point is, we don't need all with CRA shipped packages.
 ### Development mode
 
 In the development mode, we will have 2 servers running. The front end code will be served by the [webpack dev server](https://webpack.js.org/configuration/dev-server/) which helps with hot and live reloading. The server side Express code will be served by a node server using [nodemon](https://nodemon.io/) which helps in automatically restarting the server whenever server side code changes.
-
-### Production mode
-
-TODO !
 
 ## Quick Start
 
@@ -103,38 +99,48 @@ $ yarn
 $ yarn start
 
 # Build for production
-# NOT implemented yet !
-# $ yarn build
+$ yarn build
 
 ```
 
 ## Documentation
 
+### Authorization
+
+The authorisation is quite simple by using Github as Authorisation provider. So no username and passwort is needed for using PIA.
+Just a Github-Account is needed.
+
 ### Folder Structure
 
 All the source code will be inside `./src` directory. Inside src, there is client and server directory. All the frontend code (react, css, js and any other assets) will be in client directory. Backend Node.js/Express code will be in the server directory.
 
+### Storage
+
+We use [GitRows](https://github.com/gitrows/gitrows) as Data-Storage Provider.
+Gitrows fetches data from a repository, whether is it `public` or `private`.
+
+In our case, it is a **private repository**, so no one has access!
+
+Test it: [PIA-Datebase](https://github.com/vlrmprjct/pia-database). You should get a `404` response.!
+
 ### ESLint
 
-[ESLint](https://eslint.org/) is a pluggable and configurable linter tool for identifying and reporting on patterns in JavaScript.
-
-[.eslintrc.json file](<(https://eslint.org/docs/user-guide/configuring)>) (alternatively configurations can we written in Javascript or YAML as well) is used describe the configurations required for ESLint. Below is the .eslintrc.json file which I am using.
-
-[I am using Airbnb's Javascript Style Guide](https://github.com/airbnb/javascript) which is used by many JavaScript developers worldwide. Since we are going to write both client (browser) and server side (Node.js) code, I am setting the **env** to browser and node. Optionally, we can override the Airbnb's configurations to suit our needs. I have turned off [**no-console**](https://eslint.org/docs/rules/no-console), [**comma-dangle**](https://eslint.org/docs/rules/comma-dangle) and [**react/jsx-filename-extension**](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-filename-extension.md) rules.
+[We using Airbnb's Javascript Style Guide](https://github.com/airbnb/javascript) which is used by many JavaScript developers worldwide. Since we are going to write both client (browser) and server side (Node.js) code, Optionally, we can override the Airbnb's configurations to suit our needs. I have turned off [**no-console**](https://eslint.org/docs/rules/no-console), [**comma-dangle**](https://eslint.org/docs/rules/comma-dangle) and [**react/jsx-filename-extension**](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-filename-extension.md) rules.
 
 ### Nodemon
 
 Nodemon is a utility that will monitor for any changes in the server source code and it automatically restart the server. This is used in development only.
 
-nodemon.json file is used to describe the configurations for Nodemon. Below is the nodemon.json file which I am using.
+Below is the `nodemon.json` file which we using.
 
 ```javascript
 {
-  "watch": ["src/server/"]
+  "watch": ["src/server/"],
+  "delay": 500
 }
 ```
 
-Here, we tell nodemon to watch the files in the directory src/server where out server side code resides. Nodemon will restart the node server whenever a file under src/server directory is modified.
+Here, we tell nodemon to watch the files in the directory src/server where out server side code resides. Nodemon will restart the node server whenever a file under src/server directory is modified after a short delay.
 
 ### Express
 
@@ -144,14 +150,10 @@ Express is a web application framework for Node.js. It is used to build our back
 
 ### Concurrently
 
-[Concurrently](https://github.com/kimmobrunfeldt/concurrently) is used to run multiple commands concurrently. I am using it to run the webpack dev server and the backend node server concurrently in the development environment. Below are the npm/yarn script commands used.
+[Concurrently](https://github.com/kimmobrunfeldt/concurrently) is used to run multiple commands concurrently. We using it to run the webpack dev server and the backend node server concurrently in the development environment. Below are the npm/yarn script commands used.
 
 ```javascript
         "start": "concurrently 'npm run start:client' 'npm run start:server' 'nodemon dist/server.js'",
         "start:client": "webpack-dev-server --config config/webpack.config.js --config-name client --env.development --hot",
         "start:server": "webpack --config config/webpack.config.js --config-name server --env.development --profile --watch"
 ```
-
-### VSCode + ESLint
-
-[VSCode](https://code.visualstudio.com/) is a lightweight but powerful source code editor. [ESLint](https://eslint.org/) takes care of the code-quality.
