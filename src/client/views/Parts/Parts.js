@@ -56,12 +56,12 @@ export const Parts = () => {
     }, []);
 
     useEffect(() => {
-        if (!isNaN(parseInt(id))) {
+        if (id && id.length > 0 && id !== 'new' && state.current !== 'UPDATE') {
             setState({
                 ...state,
                 current: 'UPDATE',
-                index: state.items.findIndex((x) => (x.id === parseInt(id))),
-                item: state.items.filter(e => (e.id === parseInt(id)))[0],
+                index: state.items.findIndex((x) => (x.id === id)),
+                item: state.items.filter(e => (e.id === id))[0],
             });
         }
     }, [state.items]);
@@ -130,10 +130,11 @@ export const Parts = () => {
             addItem().then(data => {
                 setState({
                     ...state,
-                    item: data[0],
-                    items: [...state.items, data[0]].reverse(),
+                    item: data,
+                    items: [data, ...state.items],
                     current: 'UPDATE',
                 });
+                history.push(`/parts/${data.id}`);
             });
         }
         else if (state.current === 'UPDATE') {
@@ -191,7 +192,6 @@ export const Parts = () => {
 
     const onSearch = () => {
         setState({ ...state, searchForm: true });
-        console.log('SEARCH');
         return true;
     };
 

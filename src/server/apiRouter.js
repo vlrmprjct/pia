@@ -1,9 +1,24 @@
 import 'dotenv-flow/config';
 import { Router } from 'express';
+import Gitrows from 'gitrows';
 import request from 'request';
-import databaseClient from './databaseClient';
+import cuid from 'cuid';
+import date from 'date-and-time';
 
 const apiRouter = Router();
+
+const userParts = (id) => process.env.DB_PATH + id + '/parts.json';
+
+const gitrows = new Gitrows({
+    user: 'vlrmprjct',
+    author: {
+        name: 'GitRows',
+        email: 'api@gitrows.com',
+    },
+    // message: 'user dir ' + req.userID + ' for ' + req.userName + ' created',
+    token: process.env.GITHUB_ACCESS,
+    strict: false,
+});
 
 const defaultRoute = (req, res, next) => {
     if (!req.isAuthenticated()) {
@@ -66,33 +81,67 @@ apiRouter.get('/mouser/:query?', (req, res) => {
 });
 
 apiRouter.get('/parts', (req, res) => {
-    const entries = databaseClient(req.dbname).listEntries();
-    res.status(200).send(entries);
+    gitrows.get(userParts(req.userID))
+        .then((data) => {
+            res.status(200).send(data && data.reverse());
+        });
 });
 
 apiRouter.get('/partcolumns', (req, res) => {
-    const entries = databaseClient(req.dbname).getPartColumns();
-    res.status(200).send(entries);
+    gitrows.get(process.env.DB_PATH + 'structure.json')
+        .then((data) => {
+            res.status(200).send(data);
+        });
 });
 
 apiRouter.post('/part', (req, res) => {
-    const updateEntry = databaseClient(req.dbname).updateEntry(req.body);
-    res.status(200).send(updateEntry);
+
+    const now = date.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
+
+    const data = {
+        ...req.body,
+        ...{
+            'date_updated': now,
+        }
+    };
+
+    gitrows.update(userParts(req.userID), data, { id: req.body.id })
+        .then((response) => {
+            res.status(200).send(response);
+        });
 });
 
-apiRouter.get('/part/:id?', (req, res) => {
-    const entries = databaseClient(req.dbname).getEntry(req.params.id);
-    res.status(200).send(entries);
+apiRouter.get('/parts/:id?', (req, res) => {
+    gitrows.get(userParts(req.userID), { id: req.params.id })
+        .then((data) => {
+            res.status(200).send(data);
+        });
 });
 
 apiRouter.post('/addpart', (req, res) => {
-    const addItem = databaseClient(req.dbname).addEntry(req.body);
-    res.status(200).send(addItem);
+
+    const now = date.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
+
+    const data = {
+        ...req.body,
+        ...{
+            'id': cuid(),
+            'date_created': now,
+            'date_updated': now,
+        }
+    };
+
+    gitrows.put(userParts(req.userID), data)
+        .then((response) => {
+            res.status(response.code).send(data);
+        });
 });
 
 apiRouter.get('/latestentries', (req, res) => {
-    const entries = databaseClient(req.dbname).latestEntries(req.body);
-    res.status(200).send(entries);
+    gitrows.get(userParts(req.userID))
+        .then((data) => {
+            res.status(200).send(data && data.slice(-5).reverse());
+        });
 });
 
 export default apiRouter;
