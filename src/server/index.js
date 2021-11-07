@@ -12,7 +12,7 @@ const app = express();
 passport.use(new Strategy({
     clientID: process.env.GITHUB_KEY,
     clientSecret: process.env.GITHUB_SECRET,
-    callbackURL: '/api/login',
+    callbackURL: "/api/login",
     passReqToCallback: true,
 },(req, accessToken, refreshToken, profile, cb) => {
     req.session.token = accessToken;
@@ -56,6 +56,6 @@ app.use((req, res, next) => {
 
 app.use('/api', authRouter);
 app.use('/api', apiRouter);
-app.listen(process.env.PORT || 8080, () => {
-    console.info(`Listening on port ${process.env.PORT || 8080}!`);
+app.listen(process.env.PORT || 5000, () => {
+    console.info(`Listening on port ${process.env.PORT || 5000}! 👾`);
 });

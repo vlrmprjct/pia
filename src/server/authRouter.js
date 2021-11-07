@@ -9,7 +9,7 @@ authRouter.get('/logout', (req, res) => {
     delete req.session.token;
     delete req.session.passport;
     req.logout();
-    res.redirect('/#/login');
+    res.redirect('/login');
 });
 
 authRouter.get('/login',

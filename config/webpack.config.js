@@ -14,7 +14,7 @@ module.exports = env => {
         {
             name: 'server',
             mode: (env.production) ? 'production' : 'development',
-            entry: ['babel-polyfill', './src/server/index.js'],
+            entry: ['./src/server/index.js'],
             target: 'node',
             externals: fs.readdirSync(path.resolve(__dirname, '../node_modules')).concat([
                 'react-dom/server'
@@ -27,19 +27,6 @@ module.exports = env => {
                 __dirname: false
             },
             stats: 'none',
-            module: {
-                rules: [
-                    {
-                        test: /\.(js|jsx)$/,
-                        use: { loader: 'babel-loader' },
-                        include: __dirname,
-                        exclude: /node_modules/
-                    }
-                ]
-            },
-            plugins: [
-                // stylish,
-            ],
             output: {
                 path: path.join(__dirname, buildDir),
                 filename: 'server.js'
@@ -107,7 +94,7 @@ module.exports = env => {
                 port: 3000,
                 open: false,
                 proxy: {
-                    '/api': 'http://localhost:8080'
+                    '/api': 'http://localhost:5000'
                 }
             },
             plugins: [
