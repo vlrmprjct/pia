@@ -95,7 +95,17 @@ apiRouter.get('/partcolumns', (req, res) => {
 });
 
 apiRouter.post('/part', (req, res) => {
-    gitrows.update(userParts(req.userID), req.body, { id: req.body.id })
+
+    const now = date.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
+
+    const data = {
+        ...req.body,
+        ...{
+            'date_updated': now,
+        }
+    };
+
+    gitrows.update(userParts(req.userID), data, { id: req.body.id })
         .then((response) => {
             res.status(200).send(response);
         });
