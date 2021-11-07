@@ -12,10 +12,10 @@ const userParts = (id) => process.env.DB_PATH + id + '/parts.json';
 const gitrows = new Gitrows({
     user: 'vlrmprjct',
     author: {
-        name: 'GitRows',
-        email: 'api@gitrows.com',
+        name: 'pia app',
+        email: 'pia@app',
     },
-    // message: 'user dir ' + req.userID + ' for ' + req.userName + ' created',
+    message: 'part created or updated',
     token: process.env.GITHUB_ACCESS,
     strict: false,
 });
