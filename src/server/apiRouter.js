@@ -2,6 +2,8 @@ import 'dotenv-flow/config';
 import { Router } from 'express';
 import Gitrows from 'gitrows';
 import request from 'request';
+import cuid from 'cuid';
+import date from 'date-and-time';
 
 const apiRouter = Router();
 
@@ -106,10 +108,24 @@ apiRouter.get('/parts/:id?', (req, res) => {
         });
 });
 
-// apiRouter.post('/addpart', (req, res) => {
-//     const addItem = databaseClient(req.dbname).addEntry(req.body);
-//     res.status(200).send(addItem);
-// });
+apiRouter.post('/addpart', (req, res) => {
+
+    const now = date.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
+
+    const data = {
+        ...req.body,
+        ...{
+            'id': cuid(),
+            'date_created': now,
+            'date_updated': now,
+        }
+    };
+
+    gitrows.put(userParts(req.userID), { ...req.body, ...{ "id": cuid() } })
+        .then((response) => {
+            res.status(response.code).send(data);
+        });
+});
 
 apiRouter.get('/latestentries', (req, res) => {
     gitrows.get(userParts(req.userID))

@@ -56,7 +56,7 @@ export const Parts = () => {
     }, []);
 
     useEffect(() => {
-        if (id && id.length > 0) {
+        if (id && id.length > 0 && state.current !== 'UPDATE') {
             setState({
                 ...state,
                 current: 'UPDATE',
@@ -130,10 +130,11 @@ export const Parts = () => {
             addItem().then(data => {
                 setState({
                     ...state,
-                    item: data[0],
-                    items: [...state.items, data[0]].reverse(),
+                    item: data,
+                    items: [...state.items, data].reverse(),
                     current: 'UPDATE',
                 });
+                history.push(`/parts/${data.id}`);
             });
         }
         else if (state.current === 'UPDATE') {

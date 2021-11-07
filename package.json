@@ -19,6 +19,7 @@
         "better-sqlite3": "^5.4.3",
         "concurrently": "^6.0.2",
         "cuid": "^2.1.8",
+        "date-and-time": "^2.0.1",
         "express": "^4.17.1",
         "express-session": "^1.17.1",
         "gitrows": "^0.8.0",
