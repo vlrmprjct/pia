@@ -3,7 +3,7 @@ import express from 'express';
 import session from 'express-session';
 import passport from 'passport';
 import { Strategy } from 'passport-github';
-import databaseMiddleware from './databaseMiddleware';
+import storageMiddleware from './storageMiddleware';
 import authRouter from './authRouter';
 import apiRouter from './apiRouter';
 
@@ -48,7 +48,7 @@ app.use(express.static('dist'));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(databaseMiddleware);
+app.use(storageMiddleware);
 
 app.use((req, res, next) => {
     next();
