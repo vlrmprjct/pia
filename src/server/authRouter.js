@@ -3,7 +3,7 @@ import passport from 'passport';
 
 const authRouter = Router();
 
-authRouter.get('/login/github', passport.authenticate('github', { scope: ['gist'] }));
+authRouter.get('/login/github', passport.authenticate('github'));
 
 authRouter.get('/logout', (req, res) => {
     delete req.session.token;
