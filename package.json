@@ -1,6 +1,6 @@
 {
     "name": "pia",
-    "version": "0.3.2",
+    "version": "0.3.3",
     "description": "PIA, (Electronic) Parts Inventory Assistant",
     "main": "src/server/index.js",
     "scripts": {
