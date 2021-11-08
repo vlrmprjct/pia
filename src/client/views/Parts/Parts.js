@@ -11,11 +11,11 @@ export const Parts = () => {
 
     const [state, setState] = useState({
         addForm: id === 'new',
+        searchForm: id === 'search',
         index: null,
         items: [],
         item: [],
         current: 'SAVE',
-        searchForm: false,
     });
 
     useEffect(() => {
@@ -37,7 +37,6 @@ export const Parts = () => {
                         items: data,
                         item: altObj,
                         current: 'SAVE',
-                        searchForm: false,
                     });
                 })();
             }
@@ -48,7 +47,6 @@ export const Parts = () => {
                     current: 'SAVE',
                     items: data,
                     item: null,
-                    searchForm: false
                 });
             }
         });
@@ -192,6 +190,7 @@ export const Parts = () => {
 
     const onSearch = () => {
         setState({ ...state, searchForm: true });
+        history.push('/parts/search');
         return true;
     };
 
