@@ -6,6 +6,7 @@ body {
 
 a[disabled] {
     pointer-events: none;
+    color: var(--text-primary-disabled);
 }
 
 .splitter-layout > .layout-splitter {
@@ -167,7 +168,7 @@ main {
 
         span {
             cursor: pointer;
-            margin-bottom: 1px;
+            margin-bottom: 2px;
         }
     }
 
@@ -177,7 +178,7 @@ main {
 
     &--item {
         display: grid;
-        grid-gap: 0.75rem;
+        grid-gap: 0.5rem;
         grid-template:
             "logo distributor" fit-content(0)
             "image partnumber" fit-content(0)
@@ -192,6 +193,7 @@ main {
         background-repeat: no-repeat;
         background-size: cover;
         border-radius: $border-rounded-border-radius;
+        height: 4rem;
     }
 
     &--partnumber {
