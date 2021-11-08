@@ -40,8 +40,7 @@ app.use(session({
     resave: true,
     rolling: true,
     saveUninitialized: false,
-    cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 },
-    // cookie: { maxAge: 5000 },
+    cookie: { maxAge: 1000 * 60 * 60 * 24 * 30 },
 }));
 
 app.use(express.urlencoded({ extended: true }));
@@ -56,39 +55,6 @@ app.use(storageMiddleware);
 app.use((req, res, next) => {
     next();
 });
-
-// app.use((req, res, next) => {
-//     //Checking previously set cookie (if there is one)
-//     const session = req.session.cookie._expires || '';
-//     console.log(session);
-//     console.log(new Date());
-
-//     console.log(session.getTime());
-//     console.log(new Date().getTime());
-
-
-//     // var d1 = new Date();
-//     // var d2 = new Date(d1);
-
-//     console.log(session.getTime() < new Date().getTime()); // prints true (correct)
-
-
-//     // res.redirect('/loginxx');
-//     if (session && new Date(session) < new Date()) {
-//         console.log('User session has expired.');
-//         // res.redirect('/login');
-//     }
-
-//     //Resetting the cookie
-//     // res.cookie('session', JSON.stringify({
-//     //     session: <sessionIDKeyHere>, expires: Date.now() + 3600000 }), {
-//     //         expires: new Date(2037, 0, 1),
-//     //         httpOnly: true,
-//     //         secure: true //Do you have https? If no, set to false
-//     // });
-
-//     next();
-// });
 
 app.use('/api', authRouter);
 app.use('/api', apiRouter);
