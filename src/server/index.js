@@ -2,7 +2,7 @@ import 'dotenv-flow/config';
 import express from 'express';
 import session from 'express-session';
 import passport from 'passport';
-import { Strategy } from 'passport-github';
+import { Strategy } from 'passport-github2';
 import storageMiddleware from './storageMiddleware';
 import authRouter from './authRouter';
 import apiRouter from './apiRouter';

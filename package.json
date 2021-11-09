@@ -5,10 +5,11 @@
     "main": "src/server/index.js",
     "scripts": {
         "build": "rm -rf dist && webpack --config config/webpack.config.js --env.production",
-        "build:start": "concurrently 'node dist/server.js' 'npx http-server dist'",
+        "build:server": "webpack --config config/webpack.config.js --config-name server --env.production",
         "start": "concurrently 'yarn start:server' 'yarn start:client' 'nodemon dist/server.js'",
         "start:client": "webpack-dev-server --config config/webpack.config.js --config-name client --env.development --hot",
         "start:server": "webpack --config config/webpack.config.js --config-name server --env.development --profile --watch",
+        "release": "rm -rf dist && rm -rf api/* && yarn build:server && cp dist/server.js api/server.js",
         "now-build": "yarn build"
     },
     "author": "Thomas Meschke",
@@ -25,8 +26,8 @@
         "match-sorter": "^4.0.2",
         "mini-css-extract-plugin": "^0.9.0",
         "node-sass": "^4.13.0",
-        "passport": "^0.4.1",
-        "passport-github": "^1.1.0",
+        "passport": "^0.5.0",
+        "passport-github2": "^0.1.12",
         "react": "^16.12.0",
         "react-dom": "^16.12.0",
         "react-router-dom": "^5.1.2",
