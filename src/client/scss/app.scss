@@ -89,6 +89,19 @@ main {
             border-color: $global-border;
             border-style: solid;
             margin-right: 0.5rem;
+
+            & .table {
+                &-row {
+                    &--selected {
+                        border: 0.1rem solid $form-focus-color;
+                        border-left-width: 0.4rem;
+
+                        a {
+                            color: $inverse-global-color;
+                        }
+                    }
+                }
+            }
         }
 
         .form {
