@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { useEffect} from 'react';
 import matchSorter from 'match-sorter';
+import { useFocus } from './usefocus';
 
 export const GlobalFilter = ({
     preGlobalFilteredRows,
     globalFilter,
     setGlobalFilter,
 }) => {
+    const [inputRef, setInputFocus] = useFocus();
     const count = preGlobalFilteredRows.length;
+
+    useEffect(() => {
+        setInputFocus();
+    }, []);
 
     return (
         <input
+            ref={inputRef}
             className="filter uk-input"
             type="text"
             value={globalFilter || ''}
@@ -28,6 +35,7 @@ export const DefaultColumnFilter = ({
 
     return (
         <input
+            ref
             value={filterValue || ''}
             onChange={e => {
                 setFilter(e.target.value || undefined);
