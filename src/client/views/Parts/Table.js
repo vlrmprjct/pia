@@ -99,22 +99,6 @@ export const Table = ({
                 Header: 'Manufacturer',
                 accessor: 'manufacturer',
             },
-            {
-                Header: 'Toolbar',
-                accessor: '',
-                Cell: props => {
-                    return (
-                        <button
-                            className="uk-text-muted"
-                            uk-icon="file-edit"
-                            type="button"
-                            onClick={e => {
-                                rowSelect(e, props.row.id);
-                            }}
-                        />
-                    );
-                }
-            },
         ],
         []
     );
@@ -233,16 +217,19 @@ export const Table = ({
                             {headerGroups.map(headerGroup => (
                                 <tr {...headerGroup.getHeaderGroupProps()}>
                                     {headerGroup.headers.map(column => (
-                                        <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                                            {column.render('Header')}
-                                            <span className="sort">
-                                                {column.isSorted
-                                                    ? column.isSortedDesc
-                                                        ? <span uk-icon="chevron-down" />
-                                                        : <span uk-icon="chevron-up" />
-                                                    : <span uk-icon="minus" />}
-                                            </span>
-                                        </th>
+                                        <>
+                                            <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                                                {column.render('Header')}
+                                                <span className="sort">
+                                                    {column.isSorted
+                                                        ? column.isSortedDesc
+                                                            ? <span uk-icon="chevron-down" />
+                                                            : <span uk-icon="chevron-up" />
+                                                        : <span uk-icon="minus" />}
+                                                </span>
+                                            </th>
+                                            <th />
+                                        </>
                                     ))}
                                 </tr>
                             ))}
@@ -253,6 +240,12 @@ export const Table = ({
                                 return (
                                     <tr
                                         {...row.getRowProps()}
+                                        className={
+                                            row
+                                            && selectedItem
+                                            && (selectedItem.id === row.original.id)
+                                            && 'table-row--selected'
+                                        }
                                         onDoubleClick={(event) => {
                                             rowSelect(event, row.id);
                                         }}
@@ -269,6 +262,19 @@ export const Table = ({
                                             );
 
                                         })}
+                                        <td>
+                                            <a
+                                                role="button"
+                                                tabIndex={0}
+                                                type="button"
+                                                onClick={e => rowSelect(e, row.id)}
+                                                onKeyPress={null}
+                                                uk-icon="icon: file-edit; ratio: 0.8"
+                                                title="Edit"
+                                            >
+                                                {' '}
+                                            </a>
+                                        </td>
                                     </tr>
                                 );
                             })}

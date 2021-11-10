@@ -10,6 +10,8 @@ $global-secondary-background:           #{var(--background-secondary)};
 $global-muted-background:               #{var(--background-secondary)};
 $global-emphasis-color:                 #{var(--text-primary)};
 
+$inverse-global-color:                  #{var(--text-primary-invert)};
+
 $base-code-font-family:                 Consolas, mono-spaced;
 $base-code-font-size:                   1.2rem;
 $base-heading-font-weight:              300;
