@@ -1,5 +1,5 @@
 import React from 'react';
-import Logo from './../../assets/media/logo.svg';
+import Logo from './../../assets/media/pia_logo_white.svg';
 
 const Header = () => (
     <header>
