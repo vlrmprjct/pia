@@ -77,11 +77,12 @@ export const Table = ({
             {
                 Header: 'Value',
                 accessor: 'value',
-                width: 150
+                width: 50,
             },
             {
                 Header: 'Type',
                 accessor: 'type',
+                width: 60,
             },
             {
                 Header: 'SPN',
@@ -221,16 +222,21 @@ export const Table = ({
                                             <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                                                 {column.render('Header')}
                                                 <span className="sort">
-                                                    {column.isSorted
-                                                        ? column.isSortedDesc
-                                                            ? <span uk-icon="chevron-down" />
-                                                            : <span uk-icon="chevron-up" />
-                                                        : <span uk-icon="minus" />}
+                                                    <span
+                                                        uk-icon="icon: triangle-up; ratio: 1"
+                                                        className={`sort-icon ${column.isSorted && !column.isSortedDesc
+                                                            ? 'sort-icon--active' : ''}`}
+                                                    />
+                                                    <span
+                                                        uk-icon="icon: triangle-down; ratio: 1"
+                                                        className={`sort-icon ${column.isSorted && column.isSortedDesc
+                                                            ? 'sort-icon--active' : ''}`}
+                                                    />
                                                 </span>
                                             </th>
-                                            <th />
                                         </>
                                     ))}
+                                    <th />
                                 </tr>
                             ))}
                         </thead>
