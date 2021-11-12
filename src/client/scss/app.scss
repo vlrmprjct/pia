@@ -11,6 +11,11 @@ a[disabled] {
 
 .splitter-layout > .layout-splitter {
     background: $global-secondary-background;
+    border-radius: $border-rounded-border-radius;
+
+    &:hover {
+        background: $global-link-hover-color;
+    }
 }
 
 [data-root] {
@@ -231,4 +236,22 @@ main {
         grid-area: logo;
         height: 2rem;
     }
+}
+
+
+.sort {
+    position: absolute;
+    right: 1px;
+    top: 4px;
+
+    &-icon {
+        display: block;
+        height: 0.8rem;
+        color: $global-color-disabled;
+
+        &--active {
+            color: $global-link-color;
+        }
+    }
+
 }
