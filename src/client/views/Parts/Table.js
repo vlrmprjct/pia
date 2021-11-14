@@ -1,4 +1,5 @@
 import React, { Fragment, useMemo, useRef } from 'react';
+import cuid from 'cuid';
 import UIkit from 'uikit';
 import Icons from 'uikit/dist/js/uikit-icons';
 import {
@@ -30,7 +31,7 @@ export const Table = ({
     onAdd,
     onEdit,
     onSubmit,
-    // onDelete
+    onDelete,
     searchForm,
     onSearch,
 }) => {
@@ -154,12 +155,6 @@ export const Table = ({
         useFlexLayout,
     );
 
-    const rowSelect = (event, index) => {
-        if (onEdit) {
-            onEdit(index);
-        }
-    };
-
     return (
         <>
             <section className="toolbar">
@@ -190,12 +185,8 @@ export const Table = ({
                 />
 
                 <Add
-                    onAdd={() => {
-                        onAdd();
-                    }}
-                    onSearch={() => {
-                        onSearch();
-                    }}
+                    onAdd={() => onAdd()}
+                    onSearch={() => onSearch()}
                 />
             </section>
 
@@ -218,25 +209,23 @@ export const Table = ({
                             {headerGroups.map(headerGroup => (
                                 <tr {...headerGroup.getHeaderGroupProps()}>
                                     {headerGroup.headers.map(column => (
-                                        <>
-                                            <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                                                {column.render('Header')}
-                                                <span className="sort">
-                                                    <span
-                                                        uk-icon="icon: triangle-up; ratio: 1"
-                                                        className={`sort-icon ${column.isSorted && !column.isSortedDesc
-                                                            ? 'sort-icon--active' : ''}`}
-                                                    />
-                                                    <span
-                                                        uk-icon="icon: triangle-down; ratio: 1"
-                                                        className={`sort-icon ${column.isSorted && column.isSortedDesc
-                                                            ? 'sort-icon--active' : ''}`}
-                                                    />
-                                                </span>
-                                            </th>
-                                        </>
+                                        <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                                            {column.render('Header')}
+                                            <span key={cuid()} className="sort">
+                                                <span
+                                                    uk-icon="icon: triangle-up; ratio: 1"
+                                                    className={`sort-icon ${column.isSorted && !column.isSortedDesc
+                                                        ? 'sort-icon--active' : ''}`}
+                                                />
+                                                <span
+                                                    uk-icon="icon: triangle-down; ratio: 1"
+                                                    className={`sort-icon ${column.isSorted && column.isSortedDesc
+                                                        ? 'sort-icon--active' : ''}`}
+                                                />
+                                            </span>
+                                        </th>
                                     ))}
-                                    <th />
+                                    <th width="40" />
                                 </tr>
                             ))}
                         </thead>
@@ -247,14 +236,10 @@ export const Table = ({
                                     <tr
                                         {...row.getRowProps()}
                                         className={
-                                            row
-                                            && selectedItem
-                                            && (selectedItem.id === row.original.id)
-                                            && 'table-row--selected'
+                                            selectedItem
+                                            && (selectedItem.id === row.original.id) ? 'table-row--selected' : ''
                                         }
-                                        onDoubleClick={(event) => {
-                                            rowSelect(event, row.id);
-                                        }}
+                                        onDoubleClick={() => onEdit(row.id)}
                                     >
                                         {row.cells.map(cell => {
                                             return (
@@ -273,10 +258,22 @@ export const Table = ({
                                                 role="button"
                                                 tabIndex={0}
                                                 type="button"
-                                                onClick={e => rowSelect(e, row.id)}
+                                                onClick={() => onEdit(row.id)}
                                                 onKeyPress={null}
                                                 uk-icon="icon: file-edit; ratio: 0.8"
                                                 title="Edit"
+                                            >
+                                                {' '}
+                                            </a>
+                                            {' '}
+                                            <a
+                                                role="button"
+                                                tabIndex={0}
+                                                type="button"
+                                                onClick={() => onDelete(row.id)}
+                                                onKeyPress={null}
+                                                uk-icon="icon: trash; ratio: 0.8"
+                                                title="Delete"
                                             >
                                                 {' '}
                                             </a>

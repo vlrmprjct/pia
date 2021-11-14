@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect  } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import UIkit from 'uikit';
 import { fetchAPI } from '../../utils/api';
+import { prepareForm } from '../../utils/prepareForm';
 import { Table } from './Table';
 
 export const Parts = () => {
@@ -22,23 +23,16 @@ export const Parts = () => {
         fetchAPI('/api/parts', (data) => {
 
             if (state.addForm && data.length >= 0) {
-                (async () => {
-                    const response = await fetch('/api/partcolumns');
-                    const columns = await response.json();
-                    const altObj = Object.fromEntries(
-                        // eslint-disable-next-line no-unused-vars
-                        Object.entries(columns).map(([key, value]) =>
-                            [`${value.name}`, '']
-                        )
-                    );
 
+                fetchAPI('/api/partcolumns', (columns) => {
                     setState({
                         ...state,
                         items: data,
-                        item: altObj,
+                        item: prepareForm(columns),
                         current: 'SAVE',
                     });
-                })();
+                });
+
             }
 
             if (!state.addForm && data.length > 0) {
@@ -77,15 +71,8 @@ export const Parts = () => {
     };
 
     const onAdd = (oempart) => {
-        (async () => {
-            const response = await fetch('/api/partcolumns');
-            const columns = await response.json();
-            const altObj = Object.fromEntries(
-                // eslint-disable-next-line no-unused-vars
-                Object.entries(columns).map(([key, value]) =>
-                    [`${value.name}`, '']
-                )
-            );
+
+        fetchAPI('/api/partcolumns', (columns) => {
 
             if (oempart) {
                 delete oempart.logo;
@@ -94,81 +81,59 @@ export const Parts = () => {
 
             setState({
                 ...state,
-                item: { ...altObj, ...oempart } ,
+                item: { ...prepareForm(columns), ...oempart},
                 current: 'SAVE',
                 searchForm: false,
             });
 
             history.push('/parts/new');
-        })();
+        });
     };
 
     const onSubmit = (formData) => {
 
+        const options = {
+            method: 'POST',
+            body: JSON.stringify(formData),
+        };
+
         if (state.current === 'SAVE') {
-            const options = {
-                method: 'POST',
-                body: JSON.stringify(formData),
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                }
-            };
 
-            const addItem = async () => {
-                try {
-                    const response = await fetch('/api/addpart', options);
-                    const data = await response.json();
-                    return data;
-                } catch (error) {
-                    throw error;
-                }
-            };
-
-            addItem().then(data => {
+            fetchAPI('/api/addpart', (result) => {
+                UIkit.notification({
+                    message: (result.response.code === 200) ? 'Saved successfully' : 'Oops, something went wrong!',
+                    status: (result.response.code === 200) ? 'success' : 'danger',
+                    pos: 'top-right',
+                    timeout: 2000,
+                });
                 setState({
                     ...state,
-                    item: data,
-                    items: [data, ...state.items],
+                    item: result.data,
+                    items: [result.data, ...state.items],
                     current: 'UPDATE',
                 });
-                history.push(`/parts/${data.id}`);
-            });
+                history.push(`/parts/${result.data.id}`);
+            }, options);
+
         }
         else if (state.current === 'UPDATE') {
 
-            const options = {
-                method: 'POST',
-                body: JSON.stringify(formData),
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                }
-            };
+            fetchAPI('/api/part', (data) => {
+                UIkit.notification({
+                    message: (data.code === 202) ? 'Updated successfully' : 'Oops, something went wrong!',
+                    status: (data.code === 202) ? 'success' : 'danger',
+                    pos: 'top-right',
+                    timeout: 2000,
+                });
+                setState({
+                    ...state,
+                    items: state.items.map((item, i) => i === parseInt(state.index)
+                        ? { ...state.items[state.index], ...formData }
+                        : item
+                    ),
+                });
+            }, options);
 
-            const updateItem = async () => {
-                try {
-                    const response = await fetch('/api/part', options);
-                    UIkit.notification({
-                        message: (response.status === 200) ? 'Saved successfully' : 'Oops, something went wrong!',
-                        status: (response.status === 200) ? 'success' : 'danger',
-                        pos: 'top-right',
-                        timeout: 1500,
-                    });
-                } catch (error) {
-                    throw error;
-                }
-            };
-
-            updateItem();
-
-            setState({
-                ...state,
-                items: state.items.map((item, i) => i === parseInt(state.index)
-                    ? { ...state.items[state.index], ...formData }
-                    : item
-                ),
-            });
         }
         else {
             setState({
@@ -179,24 +144,43 @@ export const Parts = () => {
         }
     };
 
-    const onDelete = (event, index) => {
-        setState({
-            ...state,
-            item: {},
-            current: 'SAVE',
-            items: state.items.filter((item, itemIndex) => (index != itemIndex)),
-        });
+    const onDelete = (index) => {
+
+        const options = {
+            method: 'POST',
+            body: JSON.stringify({ "id": state.items[index].id }),
+        };
+
+        fetchAPI('/api/delete', (result) => {
+
+            setState({
+                ...state,
+                item: (result.id === state.item.id) ? [] : state.item,
+                items: state.items.filter((item) => {
+                    return (result.id !== item.id);
+                }),
+            });
+
+            UIkit.notification({
+                message: (result.code === 204) ? 'Deleted successfully' : 'Oops, something went wrong!',
+                status: (result.code === 204) ? 'success' : 'danger',
+                pos: 'top-right',
+                timeout: 2000,
+            });
+
+        }, options);
     };
 
     const onSearch = () => {
-        setState({ ...state, searchForm: true });
+
+        setState({
+            ...state,
+            searchForm: true,
+        });
+
         history.push('/parts/search');
         return true;
     };
-
-    // if (Object.keys(state).length === 0 && state.constructor === Object) {
-    //     return null;
-    // }
 
     return (
         <div className="parts">
