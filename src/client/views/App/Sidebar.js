@@ -24,15 +24,15 @@ const Sidebar = ({
                             <span className="uk-margin-small-right" uk-icon="icon: list" />
                         </NavLink>
                     </li>
+                </ul>
+            </div>
+            <div>
+                <ul className="uk-nav uk-nav-default uk-nav-parent-icon uk-margin" data-uk-nav>
                     <li>
                         <a href="/api/logout">
                             <span className="uk-margin-small-right" uk-icon="icon: sign-out" />
                         </a>
                     </li>
-                </ul>
-            </div>
-            <div>
-                <ul className="uk-nav uk-nav-default uk-nav-parent-icon uk-margin" data-uk-nav>
                     <li>
                         <a onClick={onChangeTheme} onKeyDown={() => { }} role="button" tabIndex="-1">
                             <span className="uk-margin-small-right" uk-icon="icon: paint-bucket" />

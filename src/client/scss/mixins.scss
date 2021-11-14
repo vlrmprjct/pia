@@ -117,6 +117,7 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    cursor: default;
 }
 
 @mixin hook-notification-message-primary() {
