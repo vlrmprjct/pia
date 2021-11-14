@@ -94,6 +94,13 @@ apiRouter.get('/partcolumns', (req, res) => {
         });
 });
 
+apiRouter.post('/delete', (req, res) => {
+    gitrows.delete(userParts(req.userID), req.body,  { id: req.body.id })
+        .then((response) => {
+            res.status(200).send({ ...response, ...{ id: req.body.id }});
+        });
+});
+
 apiRouter.post('/part', (req, res) => {
 
     const now = date.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
@@ -107,7 +114,7 @@ apiRouter.post('/part', (req, res) => {
 
     gitrows.update(userParts(req.userID), data, { id: req.body.id })
         .then((response) => {
-            res.status(200).send(response);
+            res.status(response.code).send(response);
         });
 });
 
@@ -133,7 +140,7 @@ apiRouter.post('/addpart', (req, res) => {
 
     gitrows.put(userParts(req.userID), data)
         .then((response) => {
-            res.status(response.code).send(data);
+            res.status(response.code).send({ response, data });
         });
 });
 

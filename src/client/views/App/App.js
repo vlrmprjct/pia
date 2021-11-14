@@ -17,6 +17,13 @@ UIkit.use(Icons);
 
 export const App = withRouter((props) => {
 
+    // Prevent selecting text/word after doubleclick
+    document.addEventListener('mousedown', (event) => {
+        if (event.detail === 2) {
+            event.preventDefault();
+        }
+    }, false);
+
     const [state, setState] = useState({
         user: null,
         loggedIn: null,
