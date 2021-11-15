@@ -4,11 +4,11 @@
     "description": "PIA, (Electronic) Parts Inventory Assistant",
     "main": "src/server/index.js",
     "scripts": {
-        "build": "rm -rf dist && webpack --config config/webpack.config.js --env.production",
-        "build:server": "webpack --config config/webpack.config.js --config-name server --env.production",
+        "build": "rm -rf dist && webpack --config config/webpack.config.js --env production",
+        "build:server": "webpack --config config/webpack.config.js --config-name server --env production",
         "start": "concurrently 'yarn start:server' 'yarn start:client' 'nodemon dist/server.js'",
-        "start:client": "webpack-dev-server --config config/webpack.config.js --config-name client --env.development --hot",
-        "start:server": "webpack --config config/webpack.config.js --config-name server --env.development --profile --watch",
+        "start:client": "webpack serve --config config/webpack.config.js --config-name client --env development --hot",
+        "start:server": "webpack --config config/webpack.config.js --config-name server --env development --watch",
         "release": "rm -rf dist && rm -rf api/* && yarn build:server && cp dist/server.js api/server.js",
         "now-build": "yarn build"
     },
