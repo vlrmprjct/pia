@@ -915,10 +915,10 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
-"@csstools/normalize.css@^11.0.1":
-  version "11.0.1"
-  resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-11.0.1.tgz#31ffab0bff5f4f09551e059359bc1977ac83a974"
-  integrity sha512-kUlWZHQkll+lOlYdj7dg8XwziO9WALkfG2dAXLITZMB8gO99CXQBH5W/HleXC3YwWFWXVxe1UClMk/2qsB9oAw==
+"@csstools/normalize.css@^12.0.0":
+  version "12.0.0"
+  resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-12.0.0.tgz#a9583a75c3f150667771f30b60d9f059473e62c4"
+  integrity sha512-M0qqxAcwCsIVfpFQSlGN5XjXWu8l5JDZN+fPt1LeW5SZexQTgnaEvgXAY+CeygRw0EeppWHi12JxESWiWrB0Sg==
 
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"
