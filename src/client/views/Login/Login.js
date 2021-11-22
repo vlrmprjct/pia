@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './../../assets/media/logo.svg';
+import logo from './../../assets/media/pia_logo_white.svg';
 
 export const Login = () => {
 

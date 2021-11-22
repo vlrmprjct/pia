@@ -4,11 +4,14 @@ $global-link-color:                     #{var(--accent)};
 $global-link-hover-color:               #{var(--accent-hover)};
 $global-border:                         #{var(--border-default)};
 $global-color:                          #{var(--text-primary)};
+$global-color-disabled:                 #{var(--text-primary-disabled)};
 $global-background:                     #{var(--background-primary)};
 $global-primary-background:             #{var(--accent)};
 $global-secondary-background:           #{var(--background-secondary)};
 $global-muted-background:               #{var(--background-secondary)};
 $global-emphasis-color:                 #{var(--text-primary)};
+
+$inverse-global-color:                  #{var(--text-primary-invert)};
 
 $base-code-font-family:                 Consolas, mono-spaced;
 $base-code-font-size:                   1.2rem;

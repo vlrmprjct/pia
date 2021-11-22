@@ -4,10 +4,9 @@ import { getLocalStorage, setLocalStorage } from './../../utils/localstorage';
 import { sleep } from './../../utils/sleep';
 import { useFocus } from './../../utils/usefocus';
 import { stringToColour } from './../../utils/stringcolor';
-import Loader from './../../components/Loader';
 
 export const Search = ({
-    onSelect= () => { },
+    onSelect = () => { },
 }) => {
 
     const [inputRef, setInputFocus] = useFocus();
@@ -65,17 +64,18 @@ export const Search = ({
     };
 
     const color = (str) => {
-        return { 'backgroundColor': stringToColour(str, '11') };
+        return { 'backgroundColor': stringToColour(str, '33') };
     };
 
-    const onEnter = async () => {
-        setState({ ...state, loading: true });
-        await fetch('/api/oemsecret/' + state.searchTerm)
+    const onEnter = async (term) => {
+        setState({ ...state, loading: true, searchTerm: term || state.searchTerm });
+        await fetch('/api/oemsecret/' + (term || state.searchTerm))
             .then(response => response.json())
             .then(data => {
                 setState({
                     ...state,
                     loading: false,
+                    searchTerm: term || state.searchTerm,
                     searchLatest: (!state.searchLatest.includes(state.searchTerm))
                         ? [state.searchTerm]
                             .concat(state.searchLatest)
@@ -94,21 +94,15 @@ export const Search = ({
     return (
         <>
             <h4>Find part by manufacturer-nr or supplier-nr</h4>
-            {/* <button
-                type="button"
-                onClick={() => {
-                    onSelect(mock);
-                    setState({ ...state, selected: mock });
-                }}
-            >
-                MOCK SELECT
-
-            </button> */}
             <div className="uk-inline uk-width-expand">
                 <button
+                    disabled={state.loading}
                     type="button"
-                    className="uk-form-icon uk-form-icon-flip"
-                    uk-icon="icon: search"
+                    className={state.loading
+                        ? "uk-form-icon uk-form-icon-flip uk-spinner"
+                        : "uk-form-icon uk-form-icon-flip"
+                    }
+                    uk-icon={state.loading ? "icon: spinner; ratio: 0.8" : "icon: search"}
                     onClick={() => {
                         if (state.searchTerm.length >= 4) {
                             onEnter();
@@ -139,7 +133,7 @@ export const Search = ({
                             aria-hidden="true"
                             role="button"
                             onClick={() => {
-                                setState({ ...state, searchTerm: entry });
+                                onEnter(entry);
                             }}
                         >
                             {`${entry} `}
@@ -147,8 +141,6 @@ export const Search = ({
                     );
                 })}
             </div>
-
-            <Loader loading={state.loading} />
 
             <div className="distributor uk-nav uk-dropdown-nav" uk-filter="target: .js-filter">
 
@@ -167,7 +159,7 @@ export const Search = ({
                                 {
                                     state.result.distributors.map((distributor) => {
                                         return (
-                                            <li>
+                                            <li key={cuid()}>
                                                 <span
                                                     uk-filter-control={`[data-distributor='${distributor}']`}
                                                     className="uk-label uk-label-hollow uk-border-rounded"
@@ -190,7 +182,7 @@ export const Search = ({
                                     // if (!item.description) return false;
                                     // if (reg.test(item.description)) return false;
                                     return (
-                                        <ul className="distributor--item" data-distributor={item.supplier}>
+                                        <ul key={cuid()} className="distributor--item" data-distributor={item.supplier}>
                                             <li className="distributor--image">
                                                 <img
                                                     src={item.image}
@@ -206,7 +198,6 @@ export const Search = ({
                                                 <ul className="uk-iconnav">
                                                     <li>
                                                         <span
-                                                            // eslint-disable-next-line max-len
                                                             className="uk-label uk-label-hollow uk-border-rounded"
                                                             style={color(item.supplier)}
                                                         >
@@ -214,16 +205,19 @@ export const Search = ({
                                                         </span>
                                                     </li>
                                                     <li>
-                                                        <span
-                                                            uk-icon="icon: plus"
+                                                        <a
+                                                            uk-icon="icon: plus-circle"
                                                             role="button"
                                                             tabIndex="0"
                                                             onKeyDown={() => { }}
+                                                            title="Add part"
                                                             onClick={() => {
                                                                 onSelect(item);
                                                                 setState({ ...state, selected: item });
                                                             }}
-                                                        />
+                                                        >
+                                                            {' '}
+                                                        </a>
                                                     </li>
                                                     <li>
                                                         <a
@@ -236,7 +230,7 @@ export const Search = ({
                                                                     : 'Datasheet'
                                                             }
                                                             rel="noreferrer"
-                                                            uk-icon="icon: link"
+                                                            uk-icon="icon: file-pdf"
                                                         >
                                                             {' '}
                                                         </a>

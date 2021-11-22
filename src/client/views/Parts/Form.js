@@ -140,20 +140,15 @@ export const Form = ({
             <div className="form--entry-separator-2" htmlFor="separator_2" />
 
             <div className="form--entry-footer" htmlFor="footer">
-                <div className="uk-button-group uk-border-rounded">
-                    <button
-                        className="uk-button uk-button-primary"
-                        type="reset"
-                        name="cancel"
-                    >
-                        CANCEL
-                    </button>
+                <div className="uk-border-rounded">
                     <button
                         className="uk-button uk-button-primary"
                         onClick={() => onSubmit(state)}
                         type="button"
                         name="submit"
                     >
+                        <span uk-icon="icon: check" />
+                        {' '}
                         {currentButtonName}
                     </button>
                 </div>

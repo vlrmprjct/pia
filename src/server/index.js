@@ -2,7 +2,7 @@ import 'dotenv-flow/config';
 import express from 'express';
 import session from 'express-session';
 import passport from 'passport';
-import { Strategy } from 'passport-github';
+import { Strategy } from 'passport-github2';
 import storageMiddleware from './storageMiddleware';
 import authRouter from './authRouter';
 import apiRouter from './apiRouter';
@@ -38,7 +38,9 @@ app.use(session({
     name: 'pia.sid',
     secret: process.env.SESSION_SECRET,
     resave: true,
-    saveUninitialized: true
+    rolling: true,
+    saveUninitialized: false,
+    cookie: { maxAge: 1000 * 60 * 60 * 24 * 30 },
 }));
 
 app.use(express.urlencoded({ extended: true }));
@@ -56,6 +58,7 @@ app.use((req, res, next) => {
 
 app.use('/api', authRouter);
 app.use('/api', apiRouter);
+
 app.listen(process.env.PORT || 5000, () => {
     console.info(`Listening on port ${process.env.PORT || 5000}! 👾`);
 });
