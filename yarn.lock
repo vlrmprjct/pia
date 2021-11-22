@@ -8022,10 +8022,10 @@ uid2@0.0.x:
   resolved "https://registry.yarnpkg.com/uid2/-/uid2-0.0.4.tgz#033f3b1d5d32505f5ce5f888b9f3b667123c0a44"
   integrity sha512-IevTus0SbGwQzYh3+fRsAMTVVPOoIVufzacXcHPmdlle1jUpq7BRL+mw3dgeLanvGZdwwbWhRV6XrcFNdBmjWA==
 
-uikit@^3.3.1:
-  version "3.5.10"
-  resolved "https://registry.yarnpkg.com/uikit/-/uikit-3.5.10.tgz#d7165a5f045a5f5af4dc9c3c670fbb08c9ae8a6d"
-  integrity sha512-X+OUD02atmks1yYG9C3FSo1EcQ0xfV0+NCHspTShd2uMKYcC5LiMq6o/MyxBxx2bQSeKXh6Kh8TqQ/v4LWI4Tg==
+uikit@^3.9.3:
+  version "3.9.3"
+  resolved "https://registry.yarnpkg.com/uikit/-/uikit-3.9.3.tgz#fe0ec6986dc9769f4cce90fd466b093c450e6e69"
+  integrity sha512-+kL1A3nl+t9yXIrILi+5kGbsZyq8WMZmyZGIZmYbw2RqGzgUe8SRUm3zKUEWfpMTmtBD99nl1oZ5Te2qE2ZHRQ==
 
 undefsafe@^2.0.5:
   version "2.0.5"
