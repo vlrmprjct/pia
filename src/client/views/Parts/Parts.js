@@ -1,33 +1,9 @@
 import React, { useState, useEffect  } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import UIkit from 'uikit';
 import { fetchAPI } from '../../utils/api';
+import { notification } from '../../utils/notification';
 import { prepareForm } from '../../utils/prepareForm';
 import { Table } from './Table';
-
-const setNotification = ({
-    expectedCode = 200,
-    code = null,
-    message = 'Success',
-    timeout = 2000,
-    pos = 'top-right',
-    type = 'success',
-}) => {
-
-    UIkit.notification({
-        message: (code === expectedCode)
-            ? message
-            : 'Oops, something went wrong!',
-        status: (code === expectedCode)
-            ? type
-            : 'danger',
-        pos,
-        timeout,
-    });
-
-    return null;
-
-};
 
 export const Parts = () => {
 
@@ -106,7 +82,7 @@ export const Parts = () => {
             'SAVE': () => {
 
                 fetchAPI('/api/addpart', (result) => {
-                    setNotification({
+                    notification({
                         code: result.response.code,
                         expectedCode: 200,
                         message: 'Saved successfully',
@@ -126,7 +102,7 @@ export const Parts = () => {
                 const stateItemID = state.items.findIndex((item) => item.id === formData.id);
 
                 fetchAPI('/api/part', (result) => {
-                    setNotification({
+                    notification({
                         code: result.code,
                         expectedCode: 202,
                         message: 'Updated successfully',
@@ -164,7 +140,7 @@ export const Parts = () => {
                 }),
             });
 
-            setNotification({
+            notification({
                 code: result.code,
                 expectedCode: 204,
                 message: 'Deleted successfully',
