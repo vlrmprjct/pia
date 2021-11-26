@@ -1,0 +1,22 @@
+th,
+td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.parts .data {
+
+    table tr {
+        display: grid;
+        grid-template-columns:
+            minmax(80px, 100px)
+            minmax(15%, 50%)
+            minmax(70px, 100px)
+            minmax(80px, 100px)
+            minmax(80px, 120px)
+            minmax(80px, 100px)
+            minmax(80px, 120px)
+            minmax(100px, 100px);
+    }
+}

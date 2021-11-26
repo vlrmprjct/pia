@@ -93,7 +93,7 @@ main {
             border-width: $global-border-width;
             border-color: $global-border;
             border-style: solid;
-            margin-right: 0.5rem;
+            margin-right: 0.4rem;
 
             & .table {
                 &-row {
@@ -130,12 +130,13 @@ main {
             display: grid;
             grid-gap: 1.5rem;
             grid-template:
-                [row1] "filter pageselector pagesize pagination actions" fit-content(0) [row1]
-                / 1fr auto auto auto auto;
+                [row1] "filter pagesize pagination actions" fit-content(0) [row1]
+                / 1fr auto auto auto;
 
             .filter {
                 grid-area: filter;
             }
+
             .pagination {
                 grid-area: pagination;
             }

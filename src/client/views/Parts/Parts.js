@@ -5,6 +5,30 @@ import { fetchAPI } from '../../utils/api';
 import { prepareForm } from '../../utils/prepareForm';
 import { Table } from './Table';
 
+const setNotification = ({
+    expectedCode = 200,
+    code = null,
+    message = 'Success',
+    timeout = 2000,
+    pos = 'top-right',
+    type = 'success',
+}) => {
+
+    UIkit.notification({
+        message: (code === expectedCode)
+            ? message
+            : 'Oops, something went wrong!',
+        status: (code === expectedCode)
+            ? type
+            : 'danger',
+        pos,
+        timeout,
+    });
+
+    return null;
+
+};
+
 export const Parts = () => {
 
     const { id } = useParams();
@@ -13,7 +37,7 @@ export const Parts = () => {
     const [state, setState] = useState({
         addForm: id === 'new',
         searchForm: id === 'search',
-        index: null,
+        columns: [],
         items: [],
         item: [],
         current: 'SAVE',
@@ -22,29 +46,17 @@ export const Parts = () => {
     useEffect(() => {
         fetchAPI('/api/parts', (data) => {
 
-            if (state.addForm && data.length >= 0) {
-
-                fetchAPI('/api/partcolumns', (columns) => {
-                    setState({
-                        ...state,
-                        items: data,
-                        item: prepareForm(columns),
-                        current: 'SAVE',
-                    });
-                });
-
-            }
-
-            if (!state.addForm && data.length > 0) {
+            fetchAPI('/api/partcolumns', (columns) => {
                 setState({
                     ...state,
-                    current: 'SAVE',
+                    columns,
+                    item: id === 'new' ? prepareForm(columns) : null,
                     items: data,
-                    item: null,
+                    current: 'SAVE',
                 });
-            }
-        });
+            });
 
+        });
     }, []);
 
     useEffect(() => {
@@ -52,120 +64,110 @@ export const Parts = () => {
             setState({
                 ...state,
                 current: 'UPDATE',
-                index: state.items.findIndex((x) => (x.id === id)),
                 item: state.items.filter(e => (e.id === id))[0],
             });
         }
     }, [state.items]);
 
-    const onEdit = (index) => {
-        const currentItem = state.items[index];
+    const onEdit = (part) => {
         setState({
             ...state,
             searchForm: false,
-            item: currentItem,
+            item: part,
             current: 'UPDATE',
-            index,
         });
-        history.push(`/parts/${state.items[index].id}`);
+        history.push(`/parts/${part.id}`);
     };
 
     const onAdd = (oempart) => {
+        if (oempart) {
+            delete oempart.logo;
+            delete oempart.datasheet;
+        }
 
-        fetchAPI('/api/partcolumns', (columns) => {
-
-            if (oempart) {
-                delete oempart.logo;
-                delete oempart.datasheet;
-            }
-
-            setState({
-                ...state,
-                item: { ...prepareForm(columns), ...oempart},
-                current: 'SAVE',
-                searchForm: false,
-            });
-
-            history.push('/parts/new');
+        setState({
+            ...state,
+            item: { ...prepareForm(state.columns), ...oempart},
+            current: 'SAVE',
+            searchForm: false,
         });
+
+        history.push('/parts/new');
     };
 
     const onSubmit = (formData) => {
 
         const options = {
             method: 'POST',
-            body: JSON.stringify(formData),
+            body: JSON.stringify(formData)
         };
 
-        if (state.current === 'SAVE') {
+        const saveItem = {
+            'SAVE': () => {
 
-            fetchAPI('/api/addpart', (result) => {
-                UIkit.notification({
-                    message: (result.response.code === 200) ? 'Saved successfully' : 'Oops, something went wrong!',
-                    status: (result.response.code === 200) ? 'success' : 'danger',
-                    pos: 'top-right',
-                    timeout: 2000,
-                });
-                setState({
-                    ...state,
-                    item: result.data,
-                    items: [result.data, ...state.items],
-                    current: 'UPDATE',
-                });
-                history.push(`/parts/${result.data.id}`);
-            }, options);
+                fetchAPI('/api/addpart', (result) => {
+                    setNotification({
+                        code: result.response.code,
+                        expectedCode: 200,
+                        message: 'Saved successfully',
+                    });
+                    setState({
+                        ...state,
+                        item: result.data,
+                        items: [result.data, ...state.items],
+                        current: 'UPDATE',
+                    });
+                    history.push(`/parts/${result.data.id}`);
 
-        }
-        else if (state.current === 'UPDATE') {
+                }, options);
+            },
+            'UPDATE': () => {
 
-            fetchAPI('/api/part', (data) => {
-                UIkit.notification({
-                    message: (data.code === 202) ? 'Updated successfully' : 'Oops, something went wrong!',
-                    status: (data.code === 202) ? 'success' : 'danger',
-                    pos: 'top-right',
-                    timeout: 2000,
-                });
-                setState({
-                    ...state,
-                    items: state.items.map((item, i) => i === parseInt(state.index)
-                        ? { ...state.items[state.index], ...formData }
-                        : item
-                    ),
-                });
-            }, options);
+                const stateItemID = state.items.findIndex((item) => item.id === formData.id);
 
-        }
-        else {
-            setState({
-                ...state,
-                item: formData,
-                current: 'SAVE',
-            });
-        }
+                fetchAPI('/api/part', (result) => {
+                    setNotification({
+                        code: result.code,
+                        expectedCode: 202,
+                        message: 'Updated successfully',
+                    });
+                    setState({
+                        ...state,
+                        items: state.items.map((item, i) => i === stateItemID
+                            ? { ...state.items[state.index], ...formData }
+                            : item
+                        ),
+                    });
+
+                }, options);
+            },
+        } || null;
+
+        saveItem[state.current]();
+
     };
 
-    const onDelete = (index) => {
+    const onDelete = (part) => {
 
         const options = {
             method: 'POST',
-            body: JSON.stringify({ "id": state.items[index].id }),
+            body: JSON.stringify({ "id": part.id }),
         };
 
         fetchAPI('/api/delete', (result) => {
 
             setState({
                 ...state,
-                item: (result.id === state.item.id) ? [] : state.item,
+                item: (result.id === part.id) ? [] : state.item,
                 items: state.items.filter((item) => {
                     return (result.id !== item.id);
                 }),
             });
 
-            UIkit.notification({
-                message: (result.code === 204) ? 'Deleted successfully' : 'Oops, something went wrong!',
-                status: (result.code === 204) ? 'success' : 'danger',
-                pos: 'top-right',
-                timeout: 2000,
+            setNotification({
+                code: result.code,
+                expectedCode: 204,
+                message: 'Deleted successfully',
             });
 
         }, options);
@@ -182,9 +184,12 @@ export const Parts = () => {
         return true;
     };
 
+    if (state.columns.length === 0) return null;
+
     return (
         <div className="parts">
             <Table
+                columns={state.columns}
                 items={state.items}
                 selectedItem={state.item}
                 currentButtonName={state.current}

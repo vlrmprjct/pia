@@ -1,21 +1,25 @@
 import React from 'react';
 import { setLocalStorage } from './../utils/localstorage';
 
-export const Pagesize = (props) => {
+export const Pagesize = ({
+    pageSize,
+    setPageSize,
+}) => {
 
     return (
         <div className="pagesize">
             <div uk-form-custom="target: > * > span:first-child">
                 <select
-                    value={props.pageSize}
+                    value={pageSize}
                     onChange={e => {
-                        props.setPageSize(Number(e.target.value));
+                        setPageSize(Number(e.target.value));
                         setLocalStorage({ 'pagesize': Number(e.target.value) });
                     }}
                 >
-                    {[10, 20, 30, 40, 50].map(size => (
+                    {[10, 20, 30, 40, 50, 100].map(size => (
                         <option key={size} value={size}>
                             {size}
+                            {' '}
                         </option>
                     ))}
                 </select>

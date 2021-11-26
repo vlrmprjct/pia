@@ -30,6 +30,7 @@
         "react": "^16.12.0",
         "react-dom": "^16.12.0",
         "react-router-dom": "^5.1.2",
+        "react-smart-data-table": "^0.13.1",
         "react-splitter-layout": "^4.0.0",
         "react-table": "^7.0.0",
         "uikit": "^3.3.1",
