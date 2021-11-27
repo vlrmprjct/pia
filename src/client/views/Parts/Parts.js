@@ -1,8 +1,10 @@
 import React, { useState, useEffect  } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import UIkit from 'uikit';
-import { fetchAPI } from '../../utils/api';
-import { prepareForm } from '../../utils/prepareForm';
+import {
+    fetchAPI,
+    notification,
+    prepareForm,
+} from '../../utils';
 import { Table } from './Table';
 
 export const Parts = () => {
@@ -100,11 +102,10 @@ export const Parts = () => {
         if (state.current === 'SAVE') {
 
             fetchAPI('/api/addpart', (result) => {
-                UIkit.notification({
-                    message: (result.response.code === 200) ? 'Saved successfully' : 'Oops, something went wrong!',
-                    status: (result.response.code === 200) ? 'success' : 'danger',
-                    pos: 'top-right',
-                    timeout: 2000,
+                notification({
+                    code: result.response.code,
+                    expectedCode: 200,
+                    message: 'Saved successfully',
                 });
                 setState({
                     ...state,
@@ -118,12 +119,11 @@ export const Parts = () => {
         }
         else if (state.current === 'UPDATE') {
 
-            fetchAPI('/api/part', (data) => {
-                UIkit.notification({
-                    message: (data.code === 202) ? 'Updated successfully' : 'Oops, something went wrong!',
-                    status: (data.code === 202) ? 'success' : 'danger',
-                    pos: 'top-right',
-                    timeout: 2000,
+            fetchAPI('/api/part', (result) => {
+                notification({
+                    code: result.code,
+                    expectedCode: 202,
+                    message: 'Updated successfully',
                 });
                 setState({
                     ...state,
@@ -160,12 +160,10 @@ export const Parts = () => {
                     return (result.id !== item.id);
                 }),
             });
-
-            UIkit.notification({
-                message: (result.code === 204) ? 'Deleted successfully' : 'Oops, something went wrong!',
-                status: (result.code === 204) ? 'success' : 'danger',
-                pos: 'top-right',
-                timeout: 2000,
+            notification({
+                code: result.code,
+                expectedCode: 204,
+                message: 'Deleted successfully',
             });
 
         }, options);
