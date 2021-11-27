@@ -119,9 +119,9 @@ export const Table = ({
                             ...{
                                 actions: {
                                     text: 'Actions',
-                                    invisible: false,
-                                    sortable: false,
-                                    filterable: false,
+                                    // invisible: false,
+                                    // sortable: false,
+                                    // filterable: false,
                                     transform: (value, index, row) => {
                                         return (
                                             <>
@@ -141,13 +141,14 @@ export const Table = ({
                                                     {' '}
                                                 </a>
                                                 {' '}
-                                                <a
+                                                {/* <a
                                                     role="button"
                                                     tabIndex={0}
                                                     type="button"
                                                     onClick={(e) => {
                                                         e.preventDefault();
                                                         e.stopPropagation();
+                                                        console.log('DELETE');
                                                         onDelete(row);
                                                     }}
                                                     onKeyPress={null}
@@ -155,7 +156,7 @@ export const Table = ({
                                                     title="Delete"
                                                 >
                                                     {' '}
-                                                </a>
+                                                </a> */}
                                             </>
                                         );
                                     },
@@ -236,29 +237,29 @@ export const Table = ({
                             'actions',
                         ]}
                         paginator={() => null}
-                        onRowClick={(e, { rowData }) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            state.clicks++;
-                            setTimeout(() => {
-                                setState({
-                                    ...state,
-                                    clicks: 0,
-                                });
-                            }, 400);
+                        // onRowClick={(e, { rowData }) => {
+                        //     e.preventDefault();
+                        //     e.stopPropagation();
+                        //     state.clicks++;
+                        //     setTimeout(() => {
+                        //         setState({
+                        //             ...state,
+                        //             clicks: 0,
+                        //         });
+                        //     }, 400);
 
-                            if (state.clicks === 2) {
-                                // Array.from(e.currentTarget.parentNode.children).forEach((row) => {
-                                //     row.classList.remove('table-row--selected');
-                                // });
-                                // e.currentTarget.classList.add('table-row--selected');
-                                setState({
-                                    ...state,
-                                    clicks: 0,
-                                });
-                                onEdit(rowData);
-                            }
-                        }}
+                        //     if (state.clicks === 2) {
+                        //         // Array.from(e.currentTarget.parentNode.children).forEach((row) => {
+                        //         //     row.classList.remove('table-row--selected');
+                        //         // });
+                        //         // e.currentTarget.classList.add('table-row--selected');
+                        //         setState({
+                        //             ...state,
+                        //             clicks: 0,
+                        //         });
+                        //         onEdit(rowData);
+                        //     }
+                        // }}
                         filterValue={state.filter}
                     />
                 </section>

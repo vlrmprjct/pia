@@ -1,5 +1,5 @@
 import React, { useState, useEffect  } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams, useLocation } from 'react-router-dom';
 import { fetchAPI } from '../../utils/api';
 import { notification } from '../../utils/notification';
 import { prepareForm } from '../../utils/prepareForm';
@@ -9,6 +9,7 @@ export const Parts = () => {
 
     const { id } = useParams();
     const history = useHistory();
+    const query = useLocation();
 
     const [state, setState] = useState({
         addForm: id === 'new',
@@ -20,34 +21,47 @@ export const Parts = () => {
     });
 
     useEffect(() => {
+
         fetchAPI('/api/parts', (data) => {
+
+            const currentItem = data.filter(e => (e.id === id))[0] || [];
 
             fetchAPI('/api/partcolumns', (columns) => {
                 setState({
                     ...state,
                     columns,
-                    item: id === 'new' ? prepareForm(columns) : null,
+                    item: (id === 'new') ? prepareForm(columns) : currentItem,
                     items: data,
-                    current: 'SAVE',
+                    current: (id === 'new') ? 'SAVE' : 'UPDATE',
                 });
             });
 
         });
     }, []);
 
-    useEffect(() => {
-        if (id && id.length > 0 && id !== 'new' && state.current !== 'UPDATE') {
-            setState({
-                ...state,
-                current: 'UPDATE',
-                item: state.items.filter(e => (e.id === id))[0],
-            });
-        }
-    }, [state.items]);
+    // useEffect(() => {
+        // console.log('CHANGE');
+        // if (id && id.length > 0 && id !== 'new' && state.current !== 'UPDATE') {
+        //     setState({
+        //         ...state,
+        //         current: 'UPDATE',
+        //         item: state.items.filter(e => (e.id === id))[0],
+        //     });
+        // }
+        // if (id && id.length > 0 && id !== 'new' && state.current !== 'UPDATE') {
+        //     setState({
+        //         ...state,
+        //         current: 'UPDATE',
+        //         item: state.items.filter(e => (e.id === id))[0],
+        //     });
+        // }
+    // }, [state.items]);
 
     const onEdit = (part) => {
+        console.log(state.items);
         setState({
             ...state,
+            items: state.items,
             searchForm: false,
             item: part,
             current: 'UPDATE',
@@ -110,7 +124,7 @@ export const Parts = () => {
                     setState({
                         ...state,
                         items: state.items.map((item, i) => i === stateItemID
-                            ? { ...state.items[state.index], ...formData }
+                            ? { ...state.items[stateItemID], ...formData }
                             : item
                         ),
                     });
@@ -120,7 +134,7 @@ export const Parts = () => {
         } || null;
 
         saveItem[state.current]();
-
+        console.log(state.items);
     };
 
     const onDelete = (part) => {
@@ -130,23 +144,38 @@ export const Parts = () => {
             body: JSON.stringify({ "id": part.id }),
         };
 
-        fetchAPI('/api/delete', (result) => {
+        // fetchAPI('/api/delete', (result) => {
 
-            setState({
-                ...state,
-                item: (result.id === part.id) ? [] : state.item,
-                items: state.items.filter((item) => {
-                    return (result.id !== item.id);
-                }),
-            });
+        // const ID = state.items.findIndex((item) => item.id === part.id);
+        // state.items.splice(ID, 1);
+        // console.log(state.item);
+        console.log(id);
+        // console.log(part.id);
+        let getParams = () => console.log(query);
+        console.log(getParams());
+        const x = state.items.filter((e) => {
+            return e.id === id;
+        });
 
-            notification({
-                code: result.code,
-                expectedCode: 204,
-                message: 'Deleted successfully',
-            });
+        // console.log(x[0]);
 
-        }, options);
+        // const currentItem = state.items.filter(e => (e.id === id))[0];
+
+        setState({
+            ...state,
+            // item: x[0],
+            items: state.items,
+        });
+
+        //     notification({
+        //         code: result.code,
+        //         expectedCode: 204,
+        //         message: 'Deleted successfully',
+        //     });
+
+        // if(!currentItem) history.push('/parts');
+
+        // }, options);
     };
 
     const onSearch = () => {
@@ -159,6 +188,8 @@ export const Parts = () => {
         history.push('/parts/search');
         return true;
     };
+
+    console.log(state.items);
 
     if (state.columns.length === 0) return null;
 

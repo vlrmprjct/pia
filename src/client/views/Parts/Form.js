@@ -1,4 +1,8 @@
 import React, { useState, useEffect, Fragment } from 'react';
+import UIkit from 'uikit';
+import Icons from 'uikit/dist/js/uikit-icons';
+
+UIkit.use(Icons);
 
 export const Form = ({
     item,
@@ -101,6 +105,20 @@ export const Form = ({
 
     return (
         <form autoComplete="null" className="form--entry">
+
+            <div className="form--entry-toolbar" htmlFor="toolbar">
+                <a
+                    role="button"
+                    tabIndex={0}
+                    type="button"
+                    onClick={() => onSubmit(state)}
+                    onKeyPress={null}
+                >
+                    <span uk-icon="icon: check" />
+                    {currentButtonName}
+                </a>
+            </div>
+
             {
                 Object.keys(state).map(key => {
                     return (

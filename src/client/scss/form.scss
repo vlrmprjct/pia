@@ -1,4 +1,5 @@
 $itemAttributes: (
+    "toolbar",
     "id",
     "name",
     "price",
@@ -31,6 +32,7 @@ $itemAttributes: (
         column-gap: 0.5rem;
         min-width: 30rem;
         grid-template:
+            [row1] "toolbar toolbar toolbar" fit-content(0) [row1]
             [row2] "id null-0 type" fit-content(0) [row2]
             [row3] "name name value" fit-content(0) [row3]
             [row4] "price unit price_total" fit-content(0) [row4]
@@ -45,6 +47,12 @@ $itemAttributes: (
             [row9] "tags tags tags" fit-content(0) [row9]
             [row10] "date_created date_updated footer" fit-content(0) [row10]
             / 1fr 1fr 1fr;
+    }
+
+    &--entry-toolbar {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        text-align: right;
     }
 
     &--entry-separator-1,
