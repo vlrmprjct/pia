@@ -1,5 +1,5 @@
 import React, { useEffect} from 'react';
-import matchSorter from 'match-sorter';
+import { matchSorter } from 'match-sorter';
 import { useFocus } from './usefocus';
 
 export const GlobalFilter = ({
