@@ -1,0 +1,24 @@
+{
+    "background_color": "#16161C",
+    "description": "Electronics Parts/component Inventory Application called PIA",
+    "dir": "ltr",
+    "display": "standalone",
+    "name": "pia-evo.vercel",
+    "orientation": "any",
+    "scope": "/",
+    "short_name": "PIA",
+    "start_url": "/",
+    "theme_color": "#21BFC2",
+    "categories": [],
+    "screenshots": [],
+    "icons": [
+        {
+            "src": "/favicon.svg"
+        },
+        {
+            "src": "/favicon.ico",
+            "type": "image/x-icon"
+        }
+    ],
+    "shortcuts": []
+}

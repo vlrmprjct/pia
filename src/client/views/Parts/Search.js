@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import cuid from 'cuid';
-import { getLocalStorage, setLocalStorage } from './../../utils/localstorage';
-import { sleep } from './../../utils/sleep';
-import { useFocus } from './../../utils/usefocus';
-import { stringToColour } from './../../utils/stringcolor';
+import {
+    getLocalStorage,
+    setLocalStorage,
+    useFocus,
+    sleep,
+    stringToColour,
+} from './../../utils';
 
 export const Search = ({
     onSelect = () => { },
+    show,
 }) => {
 
     const [inputRef, setInputFocus] = useFocus();
@@ -90,6 +94,8 @@ export const Search = ({
                 });
             });
     };
+
+    if (!show) return null;
 
     return (
         <>
