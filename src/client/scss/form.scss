@@ -76,6 +76,16 @@ $itemAttributes: (
     @each $itemAttribute in $itemAttributes {
         [for='#{$itemAttribute}'] {
             grid-area: unquote($itemAttribute);
+
+            > button,
+            > a {
+                top: 1.8rem;
+
+                :hover {
+                    color: $global-link-color;
+                }
+            }
+
         }
     }
 }

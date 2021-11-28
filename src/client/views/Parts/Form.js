@@ -1,12 +1,14 @@
 import React, { useState, useEffect, Fragment } from 'react';
 
 export const Form = ({
+    currentButtonName,
     item,
     onSubmit,
-    currentButtonName,
+    show,
 }) => {
 
     const [state, setState] = useState(item);
+
     useEffect(() => setState(item), [item]);
 
     const onChange = (event) => {
@@ -22,6 +24,7 @@ export const Form = ({
             disabled: false,
             tabIndex: 99,
             type: 'text',
+            suffix: null,
         },
         id: {
             disabled: true,
@@ -41,6 +44,10 @@ export const Form = ({
             type: 'url',
             placeholder: 'URL http(s):// ...',
             tabIndex: 15,
+            suffix: {
+                type: 'link',
+                icon: 'cart'
+            },
         },
         manufacturer: {
             tabIndex: 12,
@@ -97,7 +104,7 @@ export const Form = ({
         }
     };
 
-    if (item.length === 0) return null;
+    if (item.length === 0 || !show ) return null;
 
     return (
         <form autoComplete="null" className="form--entry">
@@ -118,8 +125,34 @@ export const Form = ({
                                     />
                                 )
                             }
-                            <label className="uk-form-label" htmlFor={key}>
+                            <label className="uk-form-label uk-inline" htmlFor={key}>
+
                                 {key.replace('_', ' ')}
+
+                                {config[key].suffix && config[key].suffix.type === 'button' && (
+                                    <button
+                                        type="button"
+                                        className="uk-form-icon uk-form-icon-flip"
+                                        uk-icon={`icon: ${config[key].suffix.icon}`}
+                                        onClick={() => { }}
+                                    />
+                                )}
+
+                                {config[key].suffix
+                                    && config[key].suffix.type === 'link'
+                                    && state[key] !== ''
+                                    && (
+                                        <a
+                                            role="button"
+                                            className="uk-form-icon uk-form-icon-flip"
+                                            rel="noreferrer"
+                                            target="_blank"
+                                            href={state[key]}
+                                        >
+                                            <span uk-icon={`icon: ${config[key].suffix.icon}`} />
+                                        </a>
+                                    )}
+
                                 <input
                                     {...config.default}
                                     {...config[key]}
@@ -130,6 +163,7 @@ export const Form = ({
                                     }
                                     name={key}
                                 />
+
                             </label>
                         </Fragment>
                     );

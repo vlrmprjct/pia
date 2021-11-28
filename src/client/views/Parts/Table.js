@@ -1,4 +1,4 @@
-import React, { Fragment, useMemo, useRef } from 'react';
+import React, { useMemo, useRef } from 'react';
 import cuid from 'cuid';
 import UIkit from 'uikit';
 import Icons from 'uikit/dist/js/uikit-icons';
@@ -12,11 +12,11 @@ import {
     useGlobalFilter
 } from 'react-table';
 import SplitterLayout from 'react-splitter-layout';
-import { getLocalStorage, setLocalStorage } from './../../utils/localstorage';
-import { GlobalFilter, DefaultColumnFilter, fuzzyTextFilter } from './../../utils/filter';
+import { getLocalStorage, fuzzyTextFilter, setLocalStorage } from './../../utils';
 import { Pagination } from './../../components/Pagination';
 import { Pageselector } from './../../components/Pageselector';
 import { Pagesize } from './../../components/Pagesize';
+import { Filter } from './Toolbar/Filter';
 import { Form } from './Form';
 import { Search } from './Search';
 import { Add } from './Toolbar/Add';
@@ -63,7 +63,6 @@ export const Table = ({
             minWidth: 50,
             width: 80,
             maxWidth: 150,
-            Filter: DefaultColumnFilter,
         }),
         []
     );
@@ -73,12 +72,12 @@ export const Table = ({
             {
                 Header: 'Name',
                 accessor: 'name',
-                width: 130,
+                width: 120,
             },
             {
                 Header: 'Value',
                 accessor: 'value',
-                width: 50,
+                width: 70,
             },
             {
                 Header: 'Type',
@@ -158,7 +157,7 @@ export const Table = ({
     return (
         <>
             <section className="toolbar">
-                <GlobalFilter
+                <Filter
                     preGlobalFilteredRows={preGlobalFilteredRows}
                     globalFilter={state.globalFilter}
                     setGlobalFilter={setGlobalFilter}
@@ -192,9 +191,9 @@ export const Table = ({
 
             <SplitterLayout
                 customClassName="pane"
-                secondaryInitialSize={getLocalStorage('datapanesize') || 550}
+                secondaryInitialSize={getLocalStorage('datapanesize') || 592}
                 secondaryMinSize={480}
-                primaryMinSize={550}
+                primaryMinSize={750}
                 onDragEnd={() => {
                     setLocalStorage({ 'datapanesize': formPane.current.offsetWidth });
                 }}
@@ -245,7 +244,9 @@ export const Table = ({
                                             return (
                                                 <td
                                                     {...cell.getCellProps({
-                                                        className: cell.column.className
+                                                        className: cell.column.className,
+                                                        // contentEditable: true,
+                                                        // suppressContentEditableWarning: true,
                                                     })}
                                                 >
                                                     {cell.render('Cell')}
@@ -286,19 +287,21 @@ export const Table = ({
                 </section>
 
                 <section ref={formPane} className="form uk-background-secondary">
-                    {searchForm && (
-                        <Search onSelect={(oemSelected) => {
+
+                    <Search
+                        onSelect={(oemSelected) => {
                             onAdd(oemSelected);
                         }}
-                        />
-                    )}
-                    {!searchForm && (
-                        <Form
-                            item={selectedItem || []}
-                            onSubmit={onSubmit}
-                            currentButtonName={currentButtonName}
-                        />
-                    )}
+                        show={searchForm}
+                    />
+
+                    <Form
+                        currentButtonName={currentButtonName}
+                        item={selectedItem || []}
+                        onSubmit={onSubmit}
+                        show={!searchForm}
+                    />
+
                 </section>
 
             </SplitterLayout>

@@ -237,21 +237,3 @@ main {
         height: 2rem;
     }
 }
-
-
-.sort {
-    position: absolute;
-    right: 1px;
-    top: 4px;
-
-    &-icon {
-        display: block;
-        height: 0.8rem;
-        color: $global-color-disabled;
-
-        &--active {
-            color: $global-link-color;
-        }
-    }
-
-}

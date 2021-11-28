@@ -29,6 +29,13 @@
     border-style: solid;
 }
 
+@mixin hook-button-default-hover() {
+    color: $inverse-global-color;
+}
+@mixin hook-button-default-active() {
+    color: $inverse-global-color;
+}
+
 @mixin hook-button() {
     border-radius: $base-pre-border-radius;
     line-height: 2.75rem;
@@ -93,7 +100,7 @@
 @mixin hook-form-label() {
     text-transform: uppercase;
     font-size: 11px;
-    font-weight: bold;
+    font-weight: normal;
     line-height: 2rem;
 }
 
@@ -108,8 +115,10 @@
 }
 
 @mixin hook-table-header-cell() {
+    font-weight: normal;
     position: relative;
     text-overflow: ellipsis;
+    text-transform: uppercase;
     overflow: hidden;
 }
 

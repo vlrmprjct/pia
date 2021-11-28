@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { fetchAPI } from '../../utils/api';
+import { fetchAPI } from '../../utils';
 
 export const Welcome = () => {
 

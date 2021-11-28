@@ -4,8 +4,6 @@ const DotenvFlow = require('dotenv-flow-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const StylishReporter = require('webpack-stylish');
-
 const buildDir = '../dist';
 
 module.exports = env => {
@@ -37,7 +35,7 @@ module.exports = env => {
             mode: (env.production) ? 'production' : 'development',
             devtool: (env.production) ? 'none' : 'inline-source-map',
             entry: ['babel-polyfill', './src/client/index.js'],
-            stats: 'none',
+            stats: 'minimal',
             module: {
                 rules: [
                     {
@@ -106,7 +104,7 @@ module.exports = env => {
                     template: './public/index.html',
                     favicon: './public/favicon.svg'
                 }),
-                new StylishReporter(),
+                // new StylishReporter(),
             ],
             output: {
                 publicPath: '/',
