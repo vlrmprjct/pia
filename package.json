@@ -20,7 +20,7 @@
         "cuid": "^2.1.8",
         "date-and-time": "^2.0.1",
         "express": "^4.17.1",
-        "express-session": "^1.17.1",
+        "express-session": "^1.17.2",
         "gitrows": "^0.8.0",
         "match-sorter": "^6.3.1",
         "node-sass": "^4.13.0",
