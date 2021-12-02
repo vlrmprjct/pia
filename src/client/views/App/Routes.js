@@ -22,8 +22,7 @@ const Routes = ({ loggedIn }, ...props) => {
                 <Route exact path='/welcome' render={() => <Welcome {...props} />} />
                 <Route exact path='/login' render={() => <Login {...props} />} />
                 <Route exact path='/' render={() => <Redirect to="/welcome" />} />
-                {/* <Route exact path="/manifest.webmanifest" />
-                <Route path="*" component={Error} /> */}
+                <Route path="/*" component={Error} />
             </Switch>
         )
     );
