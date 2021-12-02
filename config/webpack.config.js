@@ -102,9 +102,7 @@ module.exports = env => {
                 }),
                 new HtmlWebpackPlugin({
                     template: './public/index.html',
-                    favicon: './public/favicon.svg'
                 }),
-                // new StylishReporter(),
             ],
             output: {
                 publicPath: '/',

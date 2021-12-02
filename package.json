@@ -1,8 +1,9 @@
 {
     "name": "pia",
-    "version": "0.4.6",
+    "version": "0.4.7",
     "description": "PIA, (Electronic) Parts Inventory Assistant",
     "main": "src/server/index.js",
+    "homepage": "https://pia-evo.vercel.app",
     "scripts": {
         "build": "rm -rf dist && webpack --config config/webpack.config.js --env production",
         "build:server": "webpack --config config/webpack.config.js --config-name server --env production",
