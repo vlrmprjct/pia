@@ -40,7 +40,6 @@ app.use(session({
     resave: true,
     rolling: true,
     saveUninitialized: false,
-    cookie: { maxAge: 1000 * 60 * 60 * 24 * 30 },
 }));
 
 app.use(express.urlencoded({ extended: true }));
