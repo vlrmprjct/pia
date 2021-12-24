@@ -34,17 +34,21 @@ app.use(function (req, res, next) {
     next();
 });
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.static('dist'));
+
 app.use(session({
     name: 'pia.sid',
     secret: process.env.SESSION_SECRET,
     resave: true,
     rolling: true,
     saveUninitialized: false,
+    cookie: {
+        path: '/',
+        maxAge: 1000 * 60 * 60 * 24 * 30,
+    },
 }));
-
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(express.static('dist'));
 
 app.use(passport.initialize());
 app.use(passport.session());

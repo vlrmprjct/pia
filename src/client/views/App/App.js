@@ -47,9 +47,6 @@ export const App = withRouter((props) => {
             setLocalStorage({ 'theme': 'dark' });
         }
 
-    }, []);
-
-    useEffect(() => {
         fetchAPI('/api/success/', (data, response) => {
             setState({
                 ...state,
@@ -57,15 +54,28 @@ export const App = withRouter((props) => {
                 loggedIn: response.ok,
             });
         });
+
     }, []);
+
+    useEffect(() => {
+        const keepAlive = setInterval(() => {
+            state.loggedIn && fetchAPI('/api/ping/', (data, response) => {
+                setState({
+                    ...state,
+                    user: data,
+                    loggedIn: response.ok,
+                });
+            });
+        }, 60000);
+
+        return () => clearInterval(keepAlive);
+    }, [state.loggedIn]);
 
     const onChangeTheme = () => {
         const e = document.documentElement;
         e.setAttribute('data-theme', (e.getAttribute("data-theme") !== 'dark') ? 'dark' : 'light');
         setLocalStorage({ 'theme': e.getAttribute("data-theme") });
     };
-
-    if (state.user === null) return null;
 
     return (
         <>

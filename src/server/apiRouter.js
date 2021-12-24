@@ -33,6 +33,10 @@ const defaultRoute = (req, res, next) => {
 
 apiRouter.get("/*", defaultRoute);
 
+apiRouter.get('/ping', (req, res) => {
+    res.redirect('/api/success');
+});
+
 apiRouter.get('/success', (req, res) => {
     request({
         method: 'get',
