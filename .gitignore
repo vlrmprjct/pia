@@ -6,6 +6,7 @@ dist
 build
 db/*.db
 !db/pia.db
+.data
 *.log
 *.bck
 *.local
