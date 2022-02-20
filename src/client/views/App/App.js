@@ -57,19 +57,19 @@ export const App = withRouter((props) => {
 
     }, []);
 
-    // useEffect(() => {
-    //     const keepAlive = setInterval(() => {
-    //         state.loggedIn && fetchAPI('/api/ping/', (data, response) => {
-    //             setState({
-    //                 ...state,
-    //                 user: data,
-    //                 loggedIn: response.ok,
-    //             });
-    //         });
-    //     }, 60000);
+    useEffect(() => {
+        const keepAlive = setInterval(() => {
+            state.loggedIn && fetchAPI('/api/ping/', (data, response) => {
+                setState({
+                    ...state,
+                    user: data,
+                    loggedIn: response.ok,
+                });
+            });
+        }, 30000);
 
-    //     return () => clearInterval(keepAlive);
-    // }, [state.loggedIn]);
+        return () => clearInterval(keepAlive);
+    }, [state.loggedIn]);
 
     const onChangeTheme = () => {
         const e = document.documentElement;
