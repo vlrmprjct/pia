@@ -38,7 +38,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('dist'));
 
-app.use(session({
+var sess = {
     name: 'pia.sid',
     secret: process.env.SESSION_SECRET,
     resave: true,
@@ -47,8 +47,15 @@ app.use(session({
     cookie: {
         path: '/',
         maxAge: 1000 * 60 * 60 * 24 * 30,
-    },
-}));
+    }
+};
+
+if (app.get('env') === 'production') {
+    app.set('trust proxy', 1);
+    sess.cookie.secure = true;
+}
+
+app.use(session(sess));
 
 app.use(passport.initialize());
 app.use(passport.session());
