@@ -66,7 +66,7 @@ export const App = withRouter((props) => {
                     loggedIn: response.ok,
                 });
             });
-        }, 60000);
+        }, 45000);
 
         return () => clearInterval(keepAlive);
     }, [state.loggedIn]);
