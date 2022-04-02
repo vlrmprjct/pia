@@ -12,10 +12,10 @@ export const fetchAPI = async (apiUrl, callback, options = {}) => {
         const response = await fetch(apiUrl, mapOptions);
         const data = await response.json();
 
-        if (response.status === 401 && !response.url.includes('success')) {
-            window.location.replace("/login");
-            return false;
-        }
+        // if (response.status === 401 && !response.url.includes('success')) {
+        //     window.location.replace("/login");
+        //     return false;
+        // }
         return callback(data, response);
     } catch (error) {
         throw error;
