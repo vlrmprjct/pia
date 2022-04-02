@@ -21,7 +21,12 @@ const gitrows = new Gitrows({
 });
 
 const defaultRoute = (req, res, next) => {
-    if (!req.isAuthenticated()) {
+    console.log('LOG SESSION: ');
+    console.log(req.session);
+    console.log(req.session.token);
+    console.log(req.isAuthenticated());
+    console.log('----');
+    if (!req.session.token) {
         res.status(401).send({
             'status': 'unauthorized',
             'message': 'authentication is required',
