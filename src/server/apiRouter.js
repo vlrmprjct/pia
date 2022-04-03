@@ -25,7 +25,7 @@ const defaultRoute = (req, res, next) => {
     console.log('TOKEN:', req.session.token);
     console.log('AUTH:', req.isAuthenticated());
     console.log('----');
-    if (!req.isAuthenticated()) {
+    if (!req.session.token || req.session.token === '') {
         res.status(401).send({
             'status': 'unauthorized',
             'message': 'authentication is required',
