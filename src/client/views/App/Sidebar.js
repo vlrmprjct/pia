@@ -10,14 +10,14 @@ const Sidebar = ({
         user: null,
     });
 
-    useEffect(() => {
-        fetchAPI('/api/success/', (data) => {
-            setState({
-                ...state,
-                user: data.user,
-            });
-        });
-    }, []);
+    // useEffect(() => {
+    //     fetchAPI('/api/success/', (data) => {
+    //         setState({
+    //             ...state,
+    //             user: data.user,
+    //         });
+    //     });
+    // }, []);
 
     return (
         <nav className="uk-background-secondary">
