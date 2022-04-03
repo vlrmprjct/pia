@@ -1,16 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState} from 'react';
 import { NavLink } from "react-router-dom";
+import { fetchAPI } from '../../utils/api';
 
 const Sidebar = ({
     onChangeTheme,
-    ...props
 }) => {
+
+    const [state, setState] = useState({
+        user: null,
+    });
+
+    useEffect(() => {
+        fetchAPI('/api/success/', (data) => {
+            setState({
+                ...state,
+                user: data.user,
+            });
+        });
+    }, []);
+
     return (
         <nav className="uk-background-secondary">
             <div>
                 <ul className="uk-nav uk-nav-default uk-nav-parent-icon uk-margin" data-uk-nav>
                     <li className="uk-text-center">
-                        <img className="uk-icon-button" src={props.user && props.user.photos[0].value} alt="" />
+                        <img className="uk-icon-button" src={state.user && state.user.photos[0].value} alt="" />
                     </li>
                 </ul>
                 <ul className="uk-nav uk-nav-default uk-nav-parent-icon" data-uk-nav>

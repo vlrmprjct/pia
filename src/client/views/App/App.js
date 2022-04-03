@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import UIkit from 'uikit';
 import Icons from 'uikit/dist/js/uikit-icons';
 import { withRouter } from 'react-router';
-import { fetchAPI } from '../../utils/api';
 import { scroll } from '../../utils/scrollbar';
 import { setLocalStorage, initLocalStorage } from '../../utils/localstorage';
 
@@ -24,11 +23,6 @@ export const App = withRouter((props) => {
         }
     }, false);
 
-    const [state, setState] = useState({
-        user: null,
-        loggedIn: null,
-    });
-
     if (localStorage.getItem('pia') === null) {
         initLocalStorage();
     }
@@ -47,14 +41,6 @@ export const App = withRouter((props) => {
             setLocalStorage({ 'theme': 'dark' });
         }
 
-        // fetchAPI('/api/success/', (data, response) => {
-        //     setState({
-        //         ...state,
-        //         user: data.user,
-        //         loggedIn: response.ok,
-        //     });
-        // });
-
     }, []);
 
     const onChangeTheme = () => {
@@ -66,9 +52,9 @@ export const App = withRouter((props) => {
     return (
         <>
             <Header />
-            <Sidebar {...props} {...state} onChangeTheme={onChangeTheme} />
+            <Sidebar {...props} onChangeTheme={onChangeTheme} />
             <main>
-                <Routes {...props} {...state} />
+                <Routes {...props} />
             </main>
             <Footer />
         </>
