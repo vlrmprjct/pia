@@ -21,12 +21,11 @@ const gitrows = new Gitrows({
 });
 
 const defaultRoute = (req, res, next) => {
-    console.log('LOG SESSION: ');
-    console.log(req.session);
-    console.log(req.session.token);
-    console.log(req.isAuthenticated());
+    console.log('SESSION: ', req.session);
+    console.log('TOKEN:', req.session.token);
+    console.log('AUTH:', req.isAuthenticated());
     console.log('----');
-    if (!req.session.token) {
+    if (!req.isAuthenticated()) {
         res.status(401).send({
             'status': 'unauthorized',
             'message': 'authentication is required',
@@ -38,11 +37,16 @@ const defaultRoute = (req, res, next) => {
 
 apiRouter.get("/*", defaultRoute);
 
-apiRouter.get('/ping', (req, res) => {
-    res.redirect('/api/success');
+apiRouter.get('/success', (req, res) => {
+    res.status(200).send({
+        'status': 'authorized',
+        'message': 'user is authenticated',
+        'token': req.session.token,
+        'user': req.session.passport.user,
+    });
 });
 
-apiRouter.get('/success', (req, res) => {
+apiRouter.get('/getuser', (req, res) => {
     request({
         method: 'get',
         uri: `https://api.github.com/user`,

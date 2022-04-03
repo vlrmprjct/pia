@@ -50,26 +50,12 @@ export const App = withRouter((props) => {
         fetchAPI('/api/success/', (data, response) => {
             setState({
                 ...state,
-                user: data,
+                user: data.user,
                 loggedIn: response.ok,
             });
         });
 
     }, []);
-
-    // useEffect(() => {
-    //     const keepAlive = setInterval(() => {
-    //         state.loggedIn && fetchAPI('/api/ping/', (data, response) => {
-    //             setState({
-    //                 ...state,
-    //                 user: data,
-    //                 loggedIn: response.ok,
-    //             });
-    //         });
-    //     }, 45000);
-
-    //     return () => clearInterval(keepAlive);
-    // }, [state.loggedIn]);
 
     const onChangeTheme = () => {
         const e = document.documentElement;
@@ -79,12 +65,12 @@ export const App = withRouter((props) => {
 
     return (
         <>
-            {state.loggedIn && <Header />}
-            {state.loggedIn && <Sidebar {...props} {...state} onChangeTheme={onChangeTheme} />}
+            <Header />
+            <Sidebar {...props} {...state} onChangeTheme={onChangeTheme} />
             <main>
                 <Routes {...props} {...state} />
             </main>
-            {state.loggedIn && <Footer />}
+            <Footer />
         </>
     );
 });
