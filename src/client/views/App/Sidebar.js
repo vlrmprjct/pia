@@ -10,7 +10,7 @@ const Sidebar = ({
             <div>
                 <ul className="uk-nav uk-nav-default uk-nav-parent-icon uk-margin" data-uk-nav>
                     <li className="uk-text-center">
-                        <img className="uk-icon-button" src={props.user && props.user.avatar_url} alt="" />
+                        <img className="uk-icon-button" src={props.user && props.user.photos[0].value} alt="" />
                     </li>
                 </ul>
                 <ul className="uk-nav uk-nav-default uk-nav-parent-icon" data-uk-nav>
