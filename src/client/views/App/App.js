@@ -47,13 +47,13 @@ export const App = withRouter((props) => {
             setLocalStorage({ 'theme': 'dark' });
         }
 
-        fetchAPI('/api/success/', (data, response) => {
-            setState({
-                ...state,
-                user: data.user,
-                loggedIn: response.ok,
-            });
-        });
+        // fetchAPI('/api/success/', (data, response) => {
+        //     setState({
+        //         ...state,
+        //         user: data.user,
+        //         loggedIn: response.ok,
+        //     });
+        // });
 
     }, []);
 
