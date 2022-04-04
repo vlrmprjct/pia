@@ -1,6 +1,7 @@
 import 'dotenv-flow/config';
 import express from 'express';
 import session from 'express-session';
+import createMemoryStore from 'memorystore';
 import passport from 'passport';
 import { Strategy } from 'passport-github2';
 import storageMiddleware from './storageMiddleware';
@@ -8,6 +9,7 @@ import authRouter from './authRouter';
 import apiRouter from './apiRouter';
 
 const app = express();
+const MemoryStore = createMemoryStore(session);
 
 passport.use(new Strategy({
     clientID: process.env.GITHUB_KEY,
@@ -22,11 +24,12 @@ passport.use(new Strategy({
 passport.serializeUser((user, cb) => {
     cb(null, user);
 });
+
 passport.deserializeUser((obj, cb) => {
     cb(null, obj);
 });
 
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
@@ -38,22 +41,26 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('dist'));
 
-var sess = {
+const sess = {
     name: 'pia.sid',
     secret: process.env.SESSION_SECRET,
     resave: true,
     rolling: true,
     saveUninitialized: false,
+    store: new MemoryStore({
+        checkPeriod: 86400000,
+    }),
     cookie: {
         path: '/',
-        maxAge: 1000 * 60 * 60 * 24 * 30,
+        sameSite: 'strict',
+        // maxAge: 86400000,
     }
 };
 
-// if (app.get('env') === 'production') {
-//     app.set('trust proxy', 1);
-//     sess.cookie.secure = true;
-// }
+if (app.get('env') === 'production') {
+    app.set('trust proxy', 1);
+    sess.cookie.secure = true;
+}
 
 app.use(session(sess));
 
