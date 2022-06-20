@@ -36,7 +36,7 @@
         "uikit": "3.6.0"
     },
     "devDependencies": {
-        "@babel/core": "^7.16.0",
+        "@babel/core": "^7.18.5",
         "@babel/plugin-proposal-class-properties": "^7.0.0",
         "@babel/preset-env": "^7.0.0",
         "@babel/preset-react": "^7.16.0",
