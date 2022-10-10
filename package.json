@@ -20,7 +20,7 @@
         "babel-polyfill": "^6.26.0",
         "cuid": "^2.1.8",
         "date-and-time": "^2.0.1",
-        "express": "^4.17.1",
+        "express": "^4.18.2",
         "express-session": "^1.17.1",
         "gitrows": "^0.8.0",
         "match-sorter": "^6.3.1",
