@@ -6,6 +6,9 @@
 
 # **PIA**  ( **P**arts **I**nventory **A**ssistant ) ( evolved )
 
+## ⚠️ Development discontinued due to time constraints. ⚠️
+
+
 🆕 [PIA APP 🌍 https://pia-evo.vercel.app/](https://pia-evo.vercel.app/) ( unlimited access )
 
 
